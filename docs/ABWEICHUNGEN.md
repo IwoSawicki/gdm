@@ -24,6 +24,13 @@ gibt es nicht (Absprache 05.10.2026).
 - **Umgesetzt:** Neutrale Fläche mit der Motivbeschreibung (`Bildflaeche`).
   Sobald ein Foto da ist: Datei nach `src/assets/`, an der Stelle `bild`
   übergeben — Größen (`widths`/`sizes`) sind bereits gesetzt.
+- **05.10.2026, Wunsch Iwo:** Geschäftsbereiche (01) mit gelieferten Fotos
+  statt der Motive aus dem Entwurf: Gebäudereinigung = Edelstahlküche
+  (`gebaeudereinigung-kueche.jpg`), Baureinigung = Fensterreinigung im
+  Neubau (`baureinigung-fensterreinigung.jpg`). Die Originale sind nur
+  1000 px breit; auf Retina-Desktops (Darstellung bis 690 px) wären
+  1380 px ideal — bei Gelegenheit größere Fassungen nachliefern.
+  Alt-Texte als Vorschlag zur Freigabe in `src/data/startseite.ts`.
 
 ### 3. Meta-Texte ergänzt — [Rückfrage]
 - **Vorlage:** keine.

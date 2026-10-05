@@ -4,6 +4,9 @@
  * bis echte Inhalte geliefert sind (siehe docs/ABWEICHUNGEN.md).
  */
 
+import fotoGebaeudereinigung from '../assets/fotos/gebaeudereinigung-kueche.jpg';
+import fotoBaureinigung from '../assets/fotos/baureinigung-fensterreinigung.jpg';
+
 export const meta = {
   title: 'Gebäudereinigung Rhein-Neckar | GDM aus Lorsch',
   description:
@@ -98,6 +101,8 @@ export const bereiche = {
     {
       id: undefined,
       motiv: 'Foto: Büro- oder Praxisflur, gepflegt, Tageslicht',
+      bild: fotoGebaeudereinigung,
+      alt: 'Mitarbeiterin mit Handschuh wischt eine Edelstahl-Arbeitsfläche in einer Großküche mit einem grünen Mikrofasertuch',
       label: 'Schwerpunkt · Rhein-Neckar & darüber hinaus',
       titel: 'Gebäudereinigung & Service',
       text: 'Für Hausverwaltungen, Praxen, Hotels, Büros und Gewerbe. Regelmäßige Reinigung nach Leistungsverzeichnis und Objektbetreuung aus einer Hand.',
@@ -109,6 +114,8 @@ export const bereiche = {
     {
       id: 'baureinigung',
       motiv: 'Foto: Innenraum Neubau nach Baufeinreinigung, Tageslicht',
+      bild: fotoBaureinigung,
+      alt: 'Zwei Reinigungskräfte reinigen auf Leitern die Fensterfront eines hellen Neubaus, davor ein ausgebauter Fensterflügel',
       label: 'Deutschlandweit · Österreich',
       titel: 'Baureinigung bundesweit',
       text: 'Für Bauträger, Generalunternehmer und Bauunternehmen. Wir reinigen in jeder Bauphase und richten uns nach Ihrem Bauzeitenplan.',

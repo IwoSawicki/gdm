@@ -14,7 +14,7 @@ import { bereiche } from '../../../data/startseite';
       {bereiche.karten.map((k, i) => (
         <article id={k.id} data-reveal data-delay={i ? '120' : undefined} class="flex flex-col overflow-hidden rounded-24 bg-paper">
           <div class="relative h-f200-280">
-            <Bildflaeche motiv={k.motiv} sizes="(min-width: 1440px) 690px, (min-width: 1000px) 48vw, 100vw" widths={[480, 720, 1000, 1380]} />
+            <Bildflaeche bild={k.bild} alt={k.alt} motiv={k.motiv} sizes="(min-width: 1440px) 690px, (min-width: 1000px) 48vw, 100vw" widths={[480, 720, 1000]} />
           </div>
           <div class="flex flex-1 flex-col gap-18 p-f24-36-karte">
             <div class="font-mono text-12 tracking-p008 uppercase text-label">{k.label}</div>
