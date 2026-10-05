@@ -1,0 +1,145 @@
+---
+/**
+ * Formular-Mechanik: Felder per Prop, Honeypot, Versand über Web3Forms,
+ * Danke-Zustand (Slot „danke") und Fehlermeldung.
+ *
+ * Links mit `data-vorauswahl="<Wert>"` irgendwo auf der Seite belegen beim
+ * Klick das Auswahlfeld `vorauswahlFeld` vor (Entwurf: go('Baureinigung')).
+ */
+import { dienste } from '../../data/dienste';
+import { firma, telHref } from '../../data/firma';
+import KachelButton from '../ui/KachelButton.astro';
+
+interface FeldBasis {
+  name: string;
+  label: string;
+  pflicht?: boolean;
+  /** über die volle Breite (grid-column 1/-1) */
+  breit?: boolean;
+}
+export type Feld =
+  | (FeldBasis & {
+      art: 'text' | 'tel' | 'email' | 'date' | 'zahl';
+      autocomplete?: string;
+      placeholder?: string;
+    })
+  | (FeldBasis & { art: 'auswahl'; optionen: string[] });
+
+interface Props {
+  felder: Feld[];
+  /** Betreff der E-Mail */
+  betreff: string;
+  absendenText: string;
+  /** name des Auswahlfelds, das per data-vorauswahl vorbelegt wird */
+  vorauswahlFeld?: string;
+  datenschutzHref: string;
+}
+const { felder, betreff, absendenText, vorauswahlFeld, datenschutzHref } = Astro.props;
+
+const labelKlasse = 'flex flex-col gap-8 text-13 font-medium text-muted';
+const feldKlasse = 'h-56 rounded-14 border border-line-strong bg-sand-input px-16 text-16 text-ink';
+---
+<div data-formular>
+  <form
+    class="raster-220 grid gap-x-16 gap-y-20"
+    action={dienste.web3forms.endpunkt}
+    method="post"
+    data-formular-form
+    data-schluessel={dienste.web3forms.zugangsschluessel}
+    data-vorauswahl-feld={vorauswahlFeld}
+  >
+    <input type="hidden" name="subject" value={betreff} />
+    <input type="hidden" name="from_name" value={`Website ${firma.domain.replace('https://', '')}`} />
+    <!-- Honeypot: bleibt bei Menschen leer -->
+    <input type="checkbox" name="botcheck" class="hidden" tabindex="-1" autocomplete="off" />
+
+    {felder.map((f) => (
+      <label class:list={[labelKlasse, f.breit && 'col-span-full']}>
+        {f.label}
+        {f.art === 'auswahl' ? (
+          <select name={f.name} required={f.pflicht} class={feldKlasse}>
+            <option value="">Bitte wählen</option>
+            {f.optionen.map((o) => <option value={o}>{o}</option>)}
+          </select>
+        ) : (
+          <input
+            name={f.name}
+            type={f.art === 'zahl' ? 'text' : f.art}
+            inputmode={f.art === 'zahl' ? 'numeric' : undefined}
+            autocomplete={f.autocomplete}
+            placeholder={f.placeholder}
+            required={f.pflicht}
+            class={feldKlasse}
+          />
+        )}
+      </label>
+    ))}
+
+    <label class="col-span-full flex items-start gap-10 text-13 leading-145 text-label">
+      <input required name="datenschutz" value="zugestimmt" type="checkbox" class="mt-2 size-18 shrink-0 accent-ink" />
+      <span>Ich stimme zu, dass meine Angaben zur Bearbeitung der Anfrage verwendet werden. Hinweise in der <a href={datenschutzHref} class="text-ink underline underline-offset-3">Datenschutzerklärung</a>.</span>
+    </label>
+
+    <p class="col-span-full m-0 text-15 text-ink" role="alert" hidden data-formular-fehler>
+      Das hat leider nicht geklappt. Bitte versuchen Sie es noch einmal oder rufen Sie uns an: <a href={telHref} class="font-medium underline underline-offset-3">{firma.telefon}</a>
+    </p>
+
+    <KachelButton variante="gold" type="submit" class="col-span-full disabled:opacity-60" data-formular-absenden>{absendenText}</KachelButton>
+  </form>
+
+  <div hidden data-formular-danke>
+    <slot name="danke" />
+  </div>
+</div>
+
+<script>
+  document.querySelectorAll<HTMLElement>('[data-formular]').forEach((huelle) => {
+    const form = huelle.querySelector<HTMLFormElement>('[data-formular-form]');
+    const danke = huelle.querySelector<HTMLElement>('[data-formular-danke]');
+    const fehler = huelle.querySelector<HTMLElement>('[data-formular-fehler]');
+    const absenden = huelle.querySelector<HTMLButtonElement>('[data-formular-absenden]');
+    if (!form || !danke || !fehler || !absenden) return;
+
+    // Vorauswahl über CTAs der Seite
+    const feldName = form.dataset.vorauswahlFeld;
+    if (feldName) {
+      document.addEventListener('click', (e) => {
+        const ausloeser = (e.target as Element | null)?.closest<HTMLElement>('[data-vorauswahl]');
+        const wert = ausloeser?.dataset.vorauswahl;
+        const feld = form.elements.namedItem(feldName);
+        if (wert && feld instanceof HTMLSelectElement) feld.value = wert;
+      });
+    }
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      fehler.hidden = true;
+      absenden.disabled = true;
+      const daten = Object.fromEntries(new FormData(form).entries());
+      try {
+        const antwort = await fetch(form.action, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+          body: JSON.stringify({ ...daten, access_key: form.dataset.schluessel }),
+        });
+        const ergebnis = await antwort.json().catch(() => ({}));
+        if (!antwort.ok || !ergebnis.success) throw new Error(ergebnis.message ?? 'Versand fehlgeschlagen');
+        form.hidden = true;
+        danke.hidden = false;
+      } catch {
+        fehler.hidden = false;
+      } finally {
+        absenden.disabled = false;
+      }
+    });
+
+    // „Weitere Anfrage" setzt das Formular zurück
+    danke.querySelectorAll('[data-formular-neu]').forEach((knopf) => {
+      knopf.addEventListener('click', () => {
+        form.reset();
+        danke.hidden = true;
+        form.hidden = false;
+      });
+    });
+  });
+</script>

@@ -1,0 +1,45 @@
+---
+/**
+ * CTA mit Pfeilkachel („arrow_outward") rechts — Hero, Bento, Formular.
+ */
+import Icon from './Icon.astro';
+
+type Variante = 'hero' | 'dunkel' | 'gold';
+interface Props {
+  variante: Variante;
+  href?: string;
+  type?: 'button' | 'submit';
+  vorauswahl?: string;
+  class?: string;
+  tabindex?: string;
+  [key: `data-${string}`]: string | boolean | undefined;
+}
+const { variante, href, type = 'button', vorauswahl, class: klasse, ...rest } = Astro.props;
+
+const huelle: Record<Variante, string> = {
+  // Hero: weiß, Text klein-fluide, Kachel dunkel
+  hero: 'bg-white text-ink py-6 pr-6 pl-f18-26 gap-f12-20 text-left hover:bg-sand-hover',
+  // Bento A: dunkel, Kachel weiß
+  dunkel: 'bg-ink text-white py-6 pr-6 pl-22 gap-16 text-15 font-medium hover:bg-ink-hover',
+  // Formular: gold, Kachel dunkel, über die volle Breite
+  gold: 'bg-gold text-ink py-8 pr-8 pl-28 gap-8 justify-between text-17 font-semibold hover:bg-gold-hover',
+};
+const kachel: Record<Variante, string> = {
+  hero: 'size-f38-48 bg-ink text-white text-20',
+  dunkel: 'size-40 bg-white text-ink text-20',
+  gold: 'size-52 bg-ink text-white text-24',
+};
+// leading-normal: im Entwurf <button> — der Browser setzt dort „normal“, Links erben sonst 1.55
+const klassen = ['flex items-center rounded-10 leading-normal', huelle[variante], klasse];
+---
+{href ? (
+  <a href={href} class:list={klassen} data-vorauswahl={vorauswahl} {...rest}>
+    <span class:list={[variante === 'hero' && 'text-hero-cta font-medium']}><slot /></span>
+    <Icon name="arrow_outward" class:list={['flex shrink-0 items-center justify-center rounded-8', kachel[variante]]} />
+  </a>
+) : (
+  <button type={type} class:list={klassen} data-vorauswahl={vorauswahl} {...rest}>
+    <span class:list={[variante === 'hero' && 'text-hero-cta font-medium']}><slot /></span>
+    <Icon name="arrow_outward" class:list={['flex shrink-0 items-center justify-center rounded-8', kachel[variante]]} />
+  </button>
+)}

@@ -1,0 +1,46 @@
+---
+/**
+ * Einfacher Button oder Link (ohne Pfeilkachel).
+ * Mit `href` als <a>, sonst als <button>.
+ */
+type Variante = 'dunkel' | 'hell' | 'kontur' | 'gold';
+type Groesse = 'm' | 'l' | 'xl' | 'leiste';
+interface Props {
+  variante?: Variante;
+  /** m = Kopfzeile (46), l = Karten (48), xl = Ablauf (56), leiste = Mobil-Leiste (54) */
+  groesse?: Groesse;
+  href?: string;
+  type?: 'button' | 'submit';
+  /** belegt das Feld „Leistung" im Anfrageformular vor */
+  vorauswahl?: string;
+  class?: string;
+  [key: `data-${string}`]: string | boolean | undefined;
+  [key: `aria-${string}`]: string | undefined;
+}
+const { variante = 'dunkel', groesse = 'l', href, type = 'button', vorauswahl, class: klasse, ...rest } = Astro.props;
+
+const varianten: Record<Variante, string> = {
+  dunkel: 'bg-ink text-white hover:bg-ink-hover',
+  hell: 'bg-white text-ink',
+  kontur: 'border border-line-strong hover:border-ink',
+  gold: 'bg-gold text-ink hover:bg-gold-hover',
+};
+const groessen: Record<Groesse, string> = {
+  m: 'h-46 px-22 text-15 font-medium',
+  l: 'h-48 px-24 text-15 font-medium',
+  xl: 'h-56 px-28 text-16 font-medium',
+  leiste: 'h-54 text-16 font-medium',
+};
+const klassen = [
+  // leading-normal: im Entwurf <button> — Links erben sonst 1.55
+  'inline-flex items-center justify-center rounded-10 whitespace-nowrap leading-normal',
+  varianten[variante],
+  groessen[groesse],
+  klasse,
+];
+---
+{href ? (
+  <a href={href} class:list={klassen} data-vorauswahl={vorauswahl} {...rest}><slot /></a>
+) : (
+  <button type={type} class:list={klassen} data-vorauswahl={vorauswahl} {...rest}><slot /></button>
+)}

@@ -1,0 +1,123 @@
+---
+/**
+ * Interner Styleguide: alle Tokens und Blöcke. noindex, nicht in der
+ * Sitemap, nirgends verlinkt. Mit jedem neuen Block ergänzen.
+ */
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Akkordeon from '../components/blocks/Akkordeon.astro';
+import GoogleBewertung from '../components/blocks/GoogleBewertung.astro';
+import Laufband from '../components/blocks/Laufband.astro';
+import SektionsKopf from '../components/blocks/SektionsKopf.astro';
+import Button from '../components/ui/Button.astro';
+import Eyebrow from '../components/ui/Eyebrow.astro';
+import Icon, { type IconName } from '../components/ui/Icon.astro';
+import KachelButton from '../components/ui/KachelButton.astro';
+import Logo from '../components/ui/Logo.astro';
+import css from '../styles/global.css?raw';
+
+// Tokens direkt aus global.css lesen — der Styleguide kann nie veralten
+const tokens = (praefix: string) =>
+  [...css.matchAll(new RegExp(`--${praefix}-([a-z0-9-]+):\\s*([^;]+);`, 'g'))].map((m) => ({ name: m[1], wert: m[2].trim() }));
+const farben = tokens('color').filter((f) => !['transparent', 'current'].includes(f.name));
+const schriften = tokens('text');
+const abstaende = tokens('spacing').filter((a) => a.name.startsWith('f') || ['page-x', 'section-y'].includes(a.name));
+const radien = tokens('radius');
+const icons: IconName[] = ['add', 'apartment', 'arrow_back', 'arrow_forward', 'arrow_outward', 'call', 'check', 'close', 'home_work', 'location_on', 'medical_services', 'menu', 'north_east', 'pause', 'play_arrow', 'remove', 'star'];
+const ueberschrift = 'mt-64 mb-24 border-t border-line pt-24 text-24 font-medium';
+---
+<BaseLayout title="Styleguide (intern)" description="Interner Styleguide" noindex kopf="hell">
+  <div class="mx-auto max-w-content overflow-hidden px-page-x pt-150 pb-section-y">
+    <Eyebrow>Intern · noindex</Eyebrow>
+    <h1 class="m-0 text-h2 leading-100 font-medium tracking-n040">Styleguide</h1>
+
+    <h2 class={ueberschrift}>Farben</h2>
+    <div class="raster-180 grid gap-16">
+      {farben.map((f) => (
+        <div class="overflow-hidden rounded-14 border border-line">
+          <div class="h-64" style={`background: var(--color-${f.name})`}></div>
+          <div class="p-12 font-mono text-12"><div class="text-ink">{f.name}</div><div class="text-label">{f.wert}</div></div>
+        </div>
+      ))}
+    </div>
+
+    <h2 class={ueberschrift}>Schriftgrößen</h2>
+    <div class="flex flex-col gap-12">
+      {schriften.map((s) => (
+        <div class="flex items-baseline gap-24 border-b border-line pb-12">
+          <span class="w-200 shrink-0 font-mono text-12 text-label">text-{s.name}<br />{s.wert}</span>
+          <span class="leading-110 font-medium tracking-n030" style={`font-size: var(--text-${s.name})`}>Sauberkeit</span>
+        </div>
+      ))}
+    </div>
+
+    <h2 class={ueberschrift}>Fluide Abstände</h2>
+    <div class="flex flex-col gap-8">
+      {abstaende.map((a) => (
+        <div class="flex items-center gap-24">
+          <span class="w-200 shrink-0 font-mono text-12 text-label">{a.name}</span>
+          <span class="h-12 max-w-full bg-gold" style={`width: var(--spacing-${a.name})`}></span>
+          <span class="font-mono text-12 text-label">{a.wert}</span>
+        </div>
+      ))}
+    </div>
+
+    <h2 class={ueberschrift}>Radien</h2>
+    <div class="flex flex-wrap gap-16">
+      {radien.map((r) => (
+        <div class="flex size-96 items-end bg-sand-card p-8 font-mono text-12" style={`border-radius: var(--radius-${r.name})`}>{r.name}</div>
+      ))}
+    </div>
+
+    <h2 class={ueberschrift}>Icons</h2>
+    <div class="flex flex-wrap gap-16">
+      {icons.map((i) => (
+        <div class="flex w-120 flex-col items-center gap-8 rounded-14 border border-line p-12">
+          <Icon name={i} class="text-24" /><span class="font-mono text-11 text-label">{i}</span>
+        </div>
+      ))}
+    </div>
+
+    <h2 class={ueberschrift}>Logos</h2>
+    <div class="flex flex-wrap gap-16">
+      <div class="rounded-14 bg-ink p-24"><Logo variante="hell" hoehe={64} /></div>
+      <div class="rounded-14 bg-sand p-24"><Logo variante="dunkel" hoehe={64} /></div>
+    </div>
+
+    <h2 class={ueberschrift}>Buttons</h2>
+    <div class="flex flex-wrap items-center gap-12">
+      <Button>dunkel · l</Button>
+      <Button variante="kontur">kontur · l</Button>
+      <Button variante="gold">gold · l</Button>
+      <Button groesse="xl">dunkel · xl</Button>
+      <Button groesse="m">dunkel · m</Button>
+    </div>
+    <div class="mt-16 flex flex-wrap items-center gap-12 rounded-20 bg-ink p-24">
+      <KachelButton variante="hero">Kachel hero</KachelButton>
+      <Button variante="hell" groesse="m">hell · m</Button>
+    </div>
+    <div class="mt-16 flex flex-wrap items-center gap-12">
+      <KachelButton variante="dunkel">Kachel dunkel</KachelButton>
+      <KachelButton variante="gold" class="w-400 max-w-full">Kachel gold</KachelButton>
+    </div>
+  </div>
+
+  <section class="bg-paper"><div class="mx-auto max-w-content px-page-x pb-48">
+    <SektionsKopf eyebrow="00 — SektionsKopf hell" titel="Überschrift H2" lead="Lead-Text rechts, max. 400px breit, 17px." />
+  </div></section>
+  <section class="bg-ink text-white"><div class="mx-auto max-w-content px-page-x py-48">
+    <SektionsKopf eyebrow="00 — SektionsKopf dunkel" titel="Überschrift H2" lead="Lead-Text rechts auf dunklem Grund." variante="dunkel" />
+  </div></section>
+
+  <Laufband eintraege={['Laufband', 'mit', 'Rauten']} />
+
+  <div class="mx-auto grid max-w-content gap-16 px-page-x py-48 nav:grid-cols-2">
+    <GoogleBewertung variante="bento" />
+    <div class="flex"><GoogleBewertung variante="karussell" /></div>
+  </div>
+
+  <div class="mx-auto max-w-content px-page-x pb-section-y">
+    <div class="border-t border-ink">
+      <Akkordeon id="styleguide" eintraege={[{ frage: 'Akkordeon-Frage (offen)', antwort: 'Antwort in 17px, muted.' }, { frage: 'Zweite Frage', antwort: 'Zweite Antwort.' }]} />
+    </div>
+  </div>
+</BaseLayout>

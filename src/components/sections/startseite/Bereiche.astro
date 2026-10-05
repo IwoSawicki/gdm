@@ -1,0 +1,39 @@
+---
+/** 01 — Geschäftsbereiche: zwei Karten (Gebäudereinigung, Baureinigung) */
+import Bildflaeche from '../../ui/Bildflaeche.astro';
+import Button from '../../ui/Button.astro';
+import Icon from '../../ui/Icon.astro';
+import SektionsKopf from '../../blocks/SektionsKopf.astro';
+import { anfrageZiel } from '../../../data/navigation';
+import { bereiche } from '../../../data/startseite';
+---
+<section id="bereiche" class="bg-sand">
+  <div class="mx-auto max-w-content px-page-x py-section-y">
+    <SektionsKopf eyebrow={bereiche.eyebrow} titel={bereiche.titel} lead={bereiche.lead} />
+    <div class="raster-440 grid gap-20">
+      {bereiche.karten.map((k, i) => (
+        <article id={k.id} data-reveal data-delay={i ? '120' : undefined} class="flex flex-col overflow-hidden rounded-24 bg-paper">
+          <div class="relative h-f200-280">
+            <Bildflaeche motiv={k.motiv} sizes="(min-width: 1440px) 690px, (min-width: 1000px) 48vw, 100vw" widths={[480, 720, 1000, 1380]} />
+          </div>
+          <div class="flex flex-1 flex-col gap-18 p-f24-36-karte">
+            <div class="font-mono text-12 tracking-p008 uppercase text-label">{k.label}</div>
+            <h3 class="m-0 text-h3-karte leading-110 font-medium tracking-n030">{k.titel}</h3>
+            <p class="m-0 text-16 text-pretty text-muted">{k.text}</p>
+            <ul class="raster-200 m-0 grid list-none gap-x-24 gap-y-10 p-0">
+              {k.liste.map((l) => (
+                <li class="flex items-center gap-10 text-15"><Icon name="check" class="text-20 text-ink" />{l}</li>
+              ))}
+            </ul>
+            <div class="mt-auto flex flex-wrap items-center gap-12 pt-12">
+              <Button href={anfrageZiel} vorauswahl={k.vorauswahl}>{k.cta}</Button>
+              <a href={k.link.href} class="flex h-48 items-center gap-6 rounded-10 border border-line-strong px-20 text-15 font-medium hover:border-ink">
+                {k.link.text}<Icon name="arrow_forward" class="text-18" />
+              </a>
+            </div>
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>

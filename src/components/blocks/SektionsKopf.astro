@@ -1,0 +1,34 @@
+---
+/**
+ * Kopf einer Sektion: Eyebrow + H2 links, rechts Lead-Text oder Aktionen
+ * (Slot „rechts"). Umbruch über flex-wrap wie im Entwurf.
+ */
+import Eyebrow from '../ui/Eyebrow.astro';
+
+type Variante = 'hell' | 'dunkel';
+type Abstand = 'standard' | 'gross';
+interface Props {
+  eyebrow: string;
+  titel: string;
+  /** Lead-Text rechts (alternativ Slot „rechts") */
+  lead?: string;
+  variante?: Variante;
+  /** Abstand nach unten: standard = Sektionen, gross = Ablauf */
+  abstand?: Abstand;
+  /** text-wrap: balance auf der H2 (im Entwurf nicht überall gesetzt) */
+  ausgleichen?: boolean;
+}
+const { eyebrow, titel, lead, variante = 'hell', abstand = 'standard', ausgleichen = true } = Astro.props;
+const leadFarbe: Record<Variante, string> = { hell: 'text-muted', dunkel: 'text-mute-on-dark-2' };
+const abstaende: Record<Abstand, string> = { standard: 'mb-f36-56', gross: 'mb-f48-88' };
+---
+<div class:list={['flex flex-wrap items-end justify-between gap-24', abstaende[abstand]]}>
+  <div data-reveal class="max-w-780">
+    <Eyebrow variante={variante} class="mb-16">{eyebrow}</Eyebrow>
+    <h2 class:list={['m-0 text-h2 leading-100 font-medium tracking-n040', ausgleichen && 'text-balance']}>{titel}</h2>
+  </div>
+  {lead && (
+    <p data-reveal data-delay="100" class:list={['m-0 max-w-400 text-17 text-pretty', leadFarbe[variante]]}>{lead}</p>
+  )}
+  <slot name="rechts" />
+</div>

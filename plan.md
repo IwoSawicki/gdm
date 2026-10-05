@@ -1,5 +1,13 @@
 # Plan: Nachbau GDM Startseite v4
 
+> **Stand 05.10.2026:** Startseite nachgebaut (Branch `dev`), dazu Impressum,
+> Datenschutz (Entwürfe), 404, `/styleguide`, Doku in `docs/`. Geklärt:
+> Domain `service-gdm.de`, Staging `gdm.stolz-marketing.de` (noindex),
+> Formular über Web3Forms (Test an iwo@stolz-marketing.de), Umami ja,
+> GA später, kein Handoff-Dokument. Logos, Porträt, Google-G geliefert.
+> Offen: Fotos, Platzhalter-Inhalte, Web3Forms-Schlüssel, Umami-URL/ID,
+> Rechtstext-Angaben, Rückfragen in `docs/ABWEICHUNGEN.md`.
+
 Grundlage: `design/GDM_Startseite_v4.dc.html` (Prototyp) und `CLAUDE.md`
 (Stack und Regeln). Ziel ist ein 1:1-Nachbau als statische Astro-Seite,
 der von Anfang an aus wiederverwendbaren Blöcken besteht.

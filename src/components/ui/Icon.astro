@@ -1,0 +1,22 @@
+---
+/**
+ * Material-Symbols-Icon als Ligatur. Die Schriftdatei enthält NUR diese
+ * Icons (public/fonts/material-symbols-gdm.woff2). Neues Icon → Liste hier
+ * erweitern UND die Schrift neu herunterladen (siehe docs/DESIGN-SYSTEM.md).
+ */
+export type IconName =
+  | 'add' | 'apartment' | 'arrow_back' | 'arrow_forward' | 'arrow_outward'
+  | 'call' | 'check' | 'close' | 'home_work' | 'location_on'
+  | 'medical_services' | 'menu' | 'north_east' | 'pause' | 'play_arrow'
+  | 'remove' | 'star';
+
+interface Props {
+  name: IconName;
+  /** gefüllte Variante (FILL 1) */
+  gefuellt?: boolean;
+  class?: string;
+  [key: `data-${string}`]: string | boolean | undefined;
+}
+const { name, gefuellt = false, class: klasse, ...rest } = Astro.props;
+---
+<span class:list={['icon', gefuellt && 'icon-fill', klasse]} aria-hidden="true" {...rest}>{name}</span>

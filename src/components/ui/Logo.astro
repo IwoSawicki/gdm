@@ -1,0 +1,27 @@
+---
+/** GDM-Logo. hell = weiße Schrift (auf Dunkel), dunkel = dunkle Schrift (auf Hell). */
+import { Image } from 'astro:assets';
+import logoDunkel from '../../assets/gdm-logo-dark.png';
+import logoHell from '../../assets/gdm-logo-light.png';
+import { firma } from '../../data/firma';
+
+type Variante = 'hell' | 'dunkel';
+interface Props {
+  variante: Variante;
+  /** Darstellungshöhe in px (Kopfzeile 52, Footer 64) */
+  hoehe: 52 | 64;
+  alt?: string;
+  class?: string;
+}
+const { variante, hoehe, alt = firma.name, class: klasse } = Astro.props;
+const quelle: Record<Variante, ImageMetadata> = { hell: logoHell, dunkel: logoDunkel };
+const hoehen: Record<52 | 64, string> = { 52: 'h-52', 64: 'h-64' };
+---
+<Image
+  src={quelle[variante]}
+  alt={alt}
+  height={hoehe}
+  densities={[1, 2]}
+  loading="eager"
+  class:list={['block w-auto', hoehen[hoehe], klasse]}
+/>

@@ -1,7 +1,7 @@
 # GDM Gebäude Dienstleistung Management – Website
 
 ## Stand
-`Neuaufbau` (Relaunch-Frage offen, siehe `plan.md`). Der Entwurf kommt aus
+`Neuaufbau`. Der Entwurf kommt aus
 **Claude Design** (Startseite v4) und liegt unter `design/`. Die Seite wird laufend erweitert (Leistungsseiten mit
 SEO-Fokus, Ratgeber, Ortsseiten, Tools). Deshalb gilt von Tag eins an:
 alles als wiederverwendbarer Block, alle Werte als Token, alle Texte als
@@ -10,7 +10,8 @@ Daten.
 | Adresse | |
 |---|---|
 | `/` | Startseite |
-| `/impressum`, `/datenschutz`, `/404` | geplant (nicht im Entwurf) |
+| `/impressum`, `/datenschutz` | Rechtstexte (Entwurf, offene Angaben markiert) |
+| `/404` | `noindex` |
 | `/styleguide` | **intern**: `noindex`, nicht in der Sitemap, nirgends verlinkt |
 
 Diese Tabelle wird bei jeder neuen Seite gepflegt.
@@ -82,7 +83,7 @@ andere Clamp-Werte). Nicht still auflösen, sondern als **[Rückfrage]** in
 ### `astro.config.mjs` — bewährte Grundeinstellung
 ```js
 export default defineConfig({
-  site: 'https://[domain]',
+  site: 'https://service-gdm.de',
   output: 'static',
   trailingSlash: 'never',
   devToolbar: { enabled: false },
@@ -96,7 +97,7 @@ export default defineConfig({
   ],
   vite: {
     plugins: [tailwindcss()],
-    preview: { allowedHosts: ['[domain]', 'www.[domain]', 'dev.[domain]'] },
+    preview: { allowedHosts: ['service-gdm.de', 'www.service-gdm.de', 'gdm.stolz-marketing.de'] },
   },
 });
 ```
@@ -384,7 +385,8 @@ verursacht.
 ---
 
 ## Messung und Datenschutz
-- `[Analytics-Setup festlegen]` — bewährt bei Stolz:
+- **Umami** läuft (Konfiguration in `src/data/dienste.ts`), Google Analytics
+  folgt später hinter dem Cookie-Banner. Bewährt bei Stolz:
   - **Umami** (selbst gehostet, cookielos) ohne Einwilligung direkt im
     `BaseLayout`, mit `data-domains` auf die Produktionsdomain begrenzt.
   - **Google Analytics / Microsoft Clarity** nur hinter dem Cookie-Banner.
@@ -402,7 +404,8 @@ verursacht.
 ---
 
 ## Formulare
-- Ein gemeinsamer Formular-Block (`[Web3Forms o. ä.]`) mit Feldern per
+- Ein gemeinsamer Formular-Block (**Web3Forms**, Schlüssel in
+  `src/data/dienste.ts`; zum Testen an iwo@stolz-marketing.de) mit Feldern per
   Prop, Honeypot gegen Spam, Statusmeldung nach dem Absenden.
 - **Pflichtfelder bewusst setzen** — Entwürfe markieren oft keines, dann
   wäre ein leeres Formular absendbar.
@@ -455,7 +458,7 @@ Alles, was bewusst anders ist als in `design/`, steht dort — nummeriert,
 mit **Vorlage**, **Umgesetzt** und **Grund**. Nichts wird still geändert.
 
 - Offene Entscheidungen tragen **[Rückfrage]** und bleiben stehen, bis
-  `[Ansprechpartner]` entschieden hat; danach **Geklärt:** dazuschreiben.
+  Iwo (Stolz Marketing) entschieden hat; danach **Geklärt:** dazuschreiben.
 - Änderungswünsche des Kunden mit Datum und „Wunsch `[Name]`".
 - **Eigene Fehler** als solche benennen („Das war ein Fehler von mir, keine
   bewusste Abweichung") und beschreiben, wie sie künftig auffallen.
@@ -467,13 +470,13 @@ mit **Vorlage**, **Umgesetzt** und **Grund**. Nichts wird still geändert.
 ## Deployment
 - **Dokploy** baut über das `Dockerfile`: Node-Build (`node:22-alpine`,
   `npm ci`, `npm run build`) → `nginx:alpine`, Port 80.
-- `main` = Produktion (`[domain]`)
-- `dev` = Staging (`dev.[domain]`)
+- `main` = Produktion (`service-gdm.de`)
+- `dev` = Staging (`gdm.stolz-marketing.de`, per nginx `noindex`)
 - **Ablauf:** Änderungen entstehen auf `dev`, werden auf Staging angesehen
   und erst danach nach `main` vorgespult. Beide Branches stehen auf
   demselben Commit, jeder Merge ist ein konfliktfreier Fast-Forward.
 - **Nichts ungefragt live nehmen.** Auf `main` wird nur gepusht, wenn
-  `[Ansprechpartner]` es für die konkrete Änderung gesagt hat.
+  Iwo (Stolz Marketing) es für die konkrete Änderung gesagt hat.
 - `.dockerignore`: `node_modules`, `dist`, `.astro`, `.git`, `docs`,
   `design/`.
 
@@ -512,7 +515,7 @@ mit **Vorlage**, **Umgesetzt** und **Grund**. Nichts wird still geändert.
 - E-Mail: info@service-gdm.de
 - Telefon: 06251 / 826619-0 (`tel:+4962518266190`)
 - USt-ID: `[Rückfrage]`
-- Domain: `[Rückfrage – vermutlich service-gdm.de]`, Staging: `dev.[domain]`
+- Domain: `service-gdm.de`, Staging: `gdm.stolz-marketing.de`
 - Social: `[Rückfrage]`
 - Google-Bewertungen: 5,0 aus 14 (Stand Entwurf)
 

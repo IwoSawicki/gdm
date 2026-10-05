@@ -1,0 +1,50 @@
+---
+/**
+ * „Unser Anspruch": Wörter färben sich beim Scrollen ein (Entwurf:
+ * #D4CFC4 → #1A1A19). Ohne JS oder ohne Bewegung ist der Text voll dunkel.
+ */
+import Icon from '../../ui/Icon.astro';
+import Eyebrow from '../../ui/Eyebrow.astro';
+import { manifest } from '../../../data/startseite';
+const woerter = manifest.text.split(' ');
+---
+<section class="bg-paper">
+  <div class="mx-auto max-w-content px-page-x pt-f96-200 pb-f72-120">
+    <Eyebrow class="mb-f28-44" data-reveal>{manifest.eyebrow}</Eyebrow>
+    <p class="manifest m-0 max-w-1240 text-manifest leading-114 font-medium tracking-n040" data-manifest>
+      {woerter.map((w) => <span data-wort>{w} </span>)}
+    </p>
+    <div class="raster-180 mt-f72-140 grid items-start gap-x-32 gap-y-24 border-t border-b border-t-ink border-b-line py-f24-36">
+      {manifest.zielgruppen.map((z, i) => (
+        <div data-reveal data-delay={String((i + 1) * 80)} class="flex flex-col gap-12 text-15 font-medium whitespace-nowrap text-ink">
+          <Icon name={z.icon} class="shrink-0 text-36 text-gold-icon" />{z.text}
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style is:global>
+  .manifest [data-wort] {
+    transition: color 0.25s;
+  }
+  .manifest[data-faerben] [data-wort]:not([data-an]) {
+    color: var(--color-manifest-aus);
+  }
+</style>
+
+<script>
+  const absatz = document.querySelector<HTMLElement>('[data-manifest]');
+  if (absatz && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    const woerter = [...absatz.querySelectorAll<HTMLElement>('[data-wort]')];
+    absatz.setAttribute('data-faerben', '');
+    const faerben = () => {
+      const r = absatz.getBoundingClientRect();
+      const vh = innerHeight;
+      const p = Math.max(0, Math.min(1, (vh * 0.85 - r.top) / (r.height + vh * 0.35)));
+      woerter.forEach((w, i) => w.toggleAttribute('data-an', i < p * woerter.length * 1.05));
+    };
+    window.addEventListener('scroll', faerben, { passive: true });
+    faerben();
+  }
+</script>

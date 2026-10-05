@@ -1,0 +1,48 @@
+---
+/**
+ * Endlos-Laufband mit Rauten. Die Liste steht doppelt in der Spur; die
+ * zweite Hälfte ist für Screenreader verborgen. Bewegung per JS (50 px/s
+ * wie im Entwurf), nicht bei prefers-reduced-motion.
+ */
+interface Props {
+  eintraege: string[];
+}
+const { eintraege } = Astro.props;
+---
+<div class="overflow-hidden border-b border-line bg-paper py-f22-34" data-laufband>
+  <div class="flex w-max will-change-transform" data-laufband-spur>
+    {[false, true].map((doppel) => (
+      <div class="flex" aria-hidden={doppel ? 'true' : undefined}>
+        {eintraege.map((e) => (
+          <span class="flex items-center gap-f24-48 pr-f24-48 text-laufband font-medium tracking-n040 whitespace-nowrap">
+            {e}<span class="size-12 shrink-0 rotate-45 bg-gold" />
+          </span>
+        ))}
+      </div>
+    ))}
+  </div>
+</div>
+
+<script>
+  const bewegung = !matchMedia('(prefers-reduced-motion: reduce)').matches;
+  document.querySelectorAll<HTMLElement>('[data-laufband]').forEach((band) => {
+    const spur = band.querySelector<HTMLElement>('[data-laufband-spur]');
+    if (!spur || !bewegung) return;
+    let x = 0;
+    let zuletzt = performance.now();
+    let sichtbar = true;
+    // Nur laufen, solange das Band im Sichtbereich ist
+    new IntersectionObserver(([e]) => { sichtbar = e.isIntersecting; }).observe(band);
+    const tick = (t: number) => {
+      const haelfte = spur.scrollWidth / 2;
+      if (sichtbar) {
+        x -= (t - zuletzt) * 0.05;
+        if (haelfte && -x >= haelfte) x += haelfte;
+        spur.style.transform = `translateX(${x}px)`;
+      }
+      zuletzt = t;
+      requestAnimationFrame(tick);
+    };
+    requestAnimationFrame(tick);
+  });
+</script>

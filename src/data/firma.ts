@@ -1,0 +1,28 @@
+/**
+ * Eckdaten von GDM — EINE Quelle für Header, Footer, Formular,
+ * Impressum und JSON-LD. Nirgends sonst abtippen.
+ */
+export const firma = {
+  name: 'GDM Gebäude Dienstleistung Management',
+  kurzname: 'GDM',
+  inhaber: 'Taha Ali',
+  rolle: 'Inhaber',
+  strasse: 'Kolpingstr. 44',
+  plz: '64653',
+  ort: 'Lorsch',
+  land: 'DE',
+  email: 'info@service-gdm.de',
+  telefon: '06251 / 826619-0',
+  /** für tel:-Links und JSON-LD */
+  telefonLink: '+4962518266190',
+  domain: 'https://service-gdm.de',
+  google: {
+    /** Stand Entwurf v4 — bei neuen Bewertungen hier pflegen */
+    sterne: '5,0',
+    anzahl: 14,
+  },
+} as const;
+
+export const adresseEinzeilig = `${firma.strasse}, ${firma.plz} ${firma.ort}`;
+export const telHref = `tel:${firma.telefonLink}`;
+export const mailHref = `mailto:${firma.email}`;

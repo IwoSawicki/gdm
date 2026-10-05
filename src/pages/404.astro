@@ -1,0 +1,24 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Button from '../components/ui/Button.astro';
+import Eyebrow from '../components/ui/Eyebrow.astro';
+import { anfrageZiel, hauptnavigation } from '../data/navigation';
+---
+<BaseLayout title="Seite nicht gefunden | GDM" description="Diese Seite gibt es nicht (mehr)." noindex kopf="hell">
+  <section class="bg-paper">
+    <div class="mx-auto max-w-content px-page-x pt-[calc(var(--spacing-kopf)+var(--spacing-section-y))] pb-section-y">
+      <Eyebrow class="mb-16">404</Eyebrow>
+      <h1 class="m-0 text-h2 leading-100 font-medium tracking-n040">Diese Seite gibt es nicht.</h1>
+      <p class="mt-24 mb-0 max-w-560 text-17 text-muted">Vielleicht hilft einer dieser Wege weiter:</p>
+      <ul class="mt-24 mb-0 flex list-none flex-wrap gap-8 p-0">
+        {hauptnavigation.map((l) => (
+          <li><a href={l.href} class="block rounded-pill border border-line-strong px-14 py-8 text-14 hover:border-ink">{l.text}</a></li>
+        ))}
+      </ul>
+      <div class="mt-48 flex flex-wrap gap-12">
+        <Button href="/">Zur Startseite</Button>
+        <Button href={anfrageZiel} variante="kontur">Angebot anfordern</Button>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

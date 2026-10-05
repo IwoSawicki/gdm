@@ -1,0 +1,62 @@
+---
+/**
+ * Horizontal scrollendes Karussell mit Snap und Pfeilen im Sektionskopf
+ * (Referenzen 05, Kundenstimmen 07). Die Karten kommen als Slot und
+ * tragen ihre Breite selbst (basis-karte-*).
+ */
+import SektionsKopf from './SektionsKopf.astro';
+import Icon from '../ui/Icon.astro';
+
+type Abstand = 'referenzen' | 'stimmen';
+interface Props {
+  /** id der Sektion (Anker) */
+  id?: string;
+  /** id der Kartenspur — Ziel der Pfeile (aria-controls) */
+  spurId: string;
+  eyebrow: string;
+  titel: string;
+  ausgleichen?: boolean;
+  /** Kartenabstand: referenzen = fluide 16–24, stimmen = 16 */
+  abstand: Abstand;
+  /** Bezeichnung der Kartenspur für Screenreader */
+  label: string;
+}
+const { id, spurId, eyebrow, titel, ausgleichen = false, abstand, label } = Astro.props;
+const abstaende: Record<Abstand, string> = { referenzen: 'gap-f16-24-karussell', stimmen: 'gap-16' };
+---
+<section id={id} class="overflow-hidden bg-sand" data-karussell>
+  <div class="mx-auto max-w-content px-page-x pt-section-y">
+    <SektionsKopf eyebrow={eyebrow} titel={titel} ausgleichen={ausgleichen}>
+      <div slot="rechts" data-reveal data-delay="100" class="flex gap-8">
+        <button type="button" aria-label="Zurück" aria-controls={spurId} data-karussell-pfeil="-1"
+          class="flex size-56 items-center justify-center rounded-10 border border-ink bg-transparent text-ink hover:bg-ink hover:text-white">
+          <Icon name="arrow_back" class="text-24" />
+        </button>
+        <button type="button" aria-label="Weiter" aria-controls={spurId} data-karussell-pfeil="1"
+          class="flex size-56 items-center justify-center rounded-10 bg-ink text-white hover:bg-ink-hover">
+          <Icon name="arrow_forward" class="text-24" />
+        </button>
+      </div>
+    </SektionsKopf>
+  </div>
+  <div id={spurId} role="region" aria-label={label} tabindex="0" data-karussell-spur
+    class:list={['ohne-scrollleiste flex snap-x snap-mandatory overflow-x-auto px-buehne pb-section-y scroll-pl-buehne', abstaende[abstand]]}>
+    <slot />
+  </div>
+</section>
+
+<script>
+  // Pfeile scrollen um eine Kartenbreite + 24px (Wert aus dem Entwurf,
+  // dort für beide Karussells gleich).
+  document.querySelectorAll<HTMLElement>('[data-karussell]').forEach((karussell) => {
+    const spur = karussell.querySelector<HTMLElement>('[data-karussell-spur]');
+    if (!spur) return;
+    karussell.querySelectorAll<HTMLButtonElement>('[data-karussell-pfeil]').forEach((pfeil) => {
+      pfeil.addEventListener('click', () => {
+        const karte = spur.firstElementChild;
+        const breite = karte ? karte.getBoundingClientRect().width + 24 : 400;
+        spur.scrollBy({ left: Number(pfeil.dataset.karussellPfeil) * breite, behavior: 'smooth' });
+      });
+    });
+  });
+</script>

@@ -1,0 +1,411 @@
+@import 'tailwindcss';
+
+/* ------------------------------------------------------------------
+   Schriften (selbst gehostet, kein Request an Google)
+   ------------------------------------------------------------------ */
+@font-face {
+  font-family: 'Geist';
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url('/fonts/geist-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Geist';
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url('/fonts/geist-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Geist Mono';
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url('/fonts/geist-mono-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Geist Mono';
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url('/fonts/geist-mono-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* Material Symbols, reduziert auf die genutzten Icons (Liste in Icon.astro).
+   font-display: block wie im Entwurf — sonst blitzen die Ligatur-Namen
+   („arrow_outward") als Text auf. */
+@font-face {
+  font-family: 'Material Symbols Outlined';
+  font-style: normal;
+  font-weight: 300;
+  font-display: block;
+  src: url('/fonts/material-symbols-gdm.woff2') format('woff2');
+}
+
+/* ------------------------------------------------------------------
+   Design-Tokens — einzige Quelle aller Werte. Doku: docs/DESIGN-SYSTEM.md
+   ------------------------------------------------------------------ */
+@theme {
+  /* Tailwind-Standardwerte entfernen, damit nur das Design-System gilt */
+  --color-*: initial;
+  --text-*: initial;
+  --radius-*: initial;
+  --shadow-*: initial;
+  --leading-*: initial;
+  --tracking-*: initial;
+  --breakpoint-*: initial;
+  --font-*: initial;
+  --ease-*: initial;
+
+  /* Einziger Breakpoint des Entwurfs (dort JS: innerWidth < 1080 = mobil) */
+  --breakpoint-nav: 1080px;
+
+  /* Schriften — Stack exakt wie im Entwurf */
+  --font-sans: 'Geist', system-ui, sans-serif;
+  --font-mono: 'Geist Mono', monospace;
+  --font-icon: 'Material Symbols Outlined';
+
+  /* Farben nach Rolle */
+  --color-transparent: transparent;
+  --color-current: currentColor;
+  --color-ink: #1a1a19;            /* Text, dunkle Flächen, Primärbutton */
+  --color-ink-hover: #383734;      /* Hover dunkler Buttons */
+  --color-paper: #ffffff;
+  --color-white: #ffffff;          /* Weiß als Text/Linie auf Dunkel (Opazitäten) */
+  --color-sand: #f5f3ee;           /* Sektionsgrund hell, Leistungs-Hoverfläche */
+  --color-sand-card: #efece5;      /* Bento-Karten */
+  --color-sand-menu: #efece6;      /* Trennlinien im mobilen Menü */
+  --color-sand-avatar: #f1eee7;    /* Initialen-Kreis Kundenstimmen */
+  --color-sand-input: #f8f7f3;     /* Formularfelder */
+  --color-sand-hover: #edeae3;     /* Hover heller Hero-Button */
+  --color-sand-quote: #ece9e2;     /* Trennlinie Kundenstimme */
+  --color-sand-schrift: #eae6de;   /* Riesenschriftzug im Footer */
+  --color-line: #e7e3da;           /* Linien auf Hell */
+  --color-line-strong: #ddd8ce;    /* Konturbuttons, FAQ, Felder */
+  --color-stone: #d9d5cc;          /* heller Text auf Dunkel, Kontur Mobil-Leiste */
+  --color-manifest-aus: #d4cfc4;   /* Manifest-Wörter vor dem Einfärben */
+  --color-mute-on-dark: #bdb9b0;   /* Fließtext auf Dunkel */
+  --color-mute-on-dark-2: #a9a59c; /* Labels und Leads auf Dunkel */
+  --color-mute-bento: #9c988f;     /* zweiter Satzteil Bento-Karte D */
+  --color-dim-on-dark: #8a867e;    /* Nummern, Hinweise auf Dunkel */
+  --color-label: #6a665e;          /* Mono-Labels auf Hell */
+  --color-muted: #57534c;          /* Fließtext auf Hell */
+  --color-quote: #3c3a36;          /* Zitattext */
+  --color-line-dark: #3a3936;      /* Linien auf Dunkel */
+  --color-pill-dark: #3e3d39;      /* Pill-Kontur auf Dunkel */
+  --color-arrow-dark: #55534e;     /* Pfeilkachel-Kontur auf Dunkel */
+  --color-gold: #c9a965;           /* Akzent */
+  --color-gold-hover: #bd9c56;
+  --color-gold-icon: #9a7329;      /* Icons Zielgruppen */
+  --color-gold-text: #8c6a28;      /* Link-Hover im Footer */
+
+  /* Schriftgrößen fest, nach px benannt */
+  --text-11: 11px;
+  --text-12: 12px;
+  --text-13: 13px;
+  --text-14: 14px;
+  --text-15: 15px;
+  --text-16: 16px;
+  --text-17: 17px;
+  --text-18: 18px;
+  --text-19: 19px;
+  --text-20: 20px;
+  --text-22: 22px;
+  --text-24: 24px;
+  --text-30: 30px;
+  --text-32: 32px;
+  --text-36: 36px;
+  --text-56: 56px;
+
+  /* Fluide Schriftrollen — exakte Clamp-Kurven aus dem Entwurf */
+  --text-hero: clamp(36px, 5.8vw, 96px);           /* Hero-Zeilen */
+  --text-hero-lead: clamp(17px, 1.4vw, 20px);      /* Hero-Text, Anfrage-Lead */
+  --text-hero-cta: clamp(15px, 1.2vw, 17px);
+  --text-hero-tel: clamp(15px, 1.3vw, 18px);
+  --text-laufband: clamp(28px, 3.6vw, 56px);
+  --text-manifest: clamp(30px, 4.4vw, 72px);
+  --text-h2: clamp(34px, 4.4vw, 64px);             /* Sektionsüberschriften */
+  --text-h3-karte: clamp(26px, 2.4vw, 34px);       /* Geschäftsbereiche */
+  --text-leistung: clamp(24px, 3vw, 46px);         /* Leistungsliste Desktop */
+  --text-bento-a: clamp(24px, 2.2vw, 32px);
+  --text-bento-b: clamp(22px, 1.9vw, 28px);
+  --text-bento-d: clamp(22px, 2.2vw, 32px);
+  --text-bewertung: clamp(56px, 5.6vw, 88px);      /* „5,0" im Bento */
+  --text-bewertung-gross: clamp(64px, 6vw, 96px);  /* „5,0" bei Kundenstimmen */
+  --text-schritt: clamp(72px, 8vw, 136px);
+  --text-referenz: clamp(22px, 2vw, 28px);
+  --text-gebiet: clamp(44px, 9.4vw, 156px);
+  --text-gebiet-lead: clamp(18px, 1.5vw, 22px);
+  --text-gebiet-zeile: clamp(15px, 1.3vw, 18px);
+  --text-faq: clamp(19px, 1.7vw, 24px);
+  --text-anfrage: clamp(52px, 8vw, 136px);
+  --text-kontakt: clamp(17px, 1.5vw, 20px);        /* Footer E-Mail/Telefon */
+  --text-credit: clamp(18px, 1.6vw, 22px);         /* „Stolz Marketing" */
+
+  /* Zeilenhöhen — getrennt von der Schriftgröße */
+  --leading-050: 0.5;
+  --leading-086: 0.86;
+  --leading-088: 0.88;
+  --leading-090: 0.9;
+  --leading-094: 0.94;
+  --leading-096: 0.96;
+  --leading-100: 1;
+  --leading-105: 1.05;
+  --leading-110: 1.1;
+  --leading-112: 1.12;
+  --leading-114: 1.14;
+  --leading-115: 1.15;
+  --leading-145: 1.45;
+  --leading-150: 1.5;
+  --leading-155: 1.55;
+  --leading-normal: normal;  /* wie <button> im Browser */
+
+  /* Laufweiten (n = negativ, p = positiv, Werte in 1/1000 em) */
+  --tracking-n065: -0.065em;
+  --tracking-n060: -0.06em;
+  --tracking-n055: -0.055em;
+  --tracking-n050: -0.05em;
+  --tracking-n040: -0.04em;
+  --tracking-n035: -0.035em;
+  --tracking-n030: -0.03em;
+  --tracking-n025: -0.025em;
+  --tracking-n020: -0.02em;
+  --tracking-n015: -0.015em;
+  --tracking-n010: -0.01em;
+  --tracking-0: 0;
+  --tracking-p006: 0.06em;
+  --tracking-p008: 0.08em;
+  --tracking-p010: 0.1em;
+  --tracking-p012: 0.12em;
+
+  /* Radien */
+  --radius-8: 8px;
+  --radius-10: 10px;
+  --radius-14: 14px;
+  --radius-18: 18px;
+  --radius-20: 20px;
+  --radius-24: 24px;
+  --radius-28: 28px;
+  --radius-pill: 999px;
+
+  /* Easings */
+  --ease-gdm: cubic-bezier(.2, .8, .2, 1);       /* fast alle Übergänge */
+  --ease-kopf: cubic-bezier(.2, .7, .2, 1);      /* Ein-/Ausblenden der Kopfzeile */
+
+  /* Abstände: 1 Einheit = 1px, damit p-40 exakt 40px ist */
+  --spacing: 1px;
+
+  /* Seitenraster */
+  --spacing-content: 1440px;                       /* Contentbreite */
+  --spacing-page-x: clamp(20px, 4vw, 56px);        /* Seitenrand */
+  --spacing-section-y: clamp(80px, 10vw, 144px);   /* Sektionsabstand */
+  /* Karussell-Innenabstand: richtet die erste Karte an der Contentkante aus */
+  --spacing-buehne: max(clamp(20px, 4vw, 56px), calc((100vw - 1440px) / 2 + 56px));
+  --spacing-kopf: 84px;                            /* Höhe Kopfzeile und Mobil-Leiste */
+  --spacing-hero-min: clamp(680px, 100svh, 1000px);
+
+  /* Fluide Abstände, benannt nach Spanne „f<min>-<max>" */
+  --spacing-f8-12: clamp(8px, 1vw, 12px);
+  --spacing-f8-16: clamp(8px, 1vw, 16px);
+  --spacing-f8-20: clamp(8px, 1.4vw, 20px);
+  --spacing-f8-20-leistung: clamp(8px, 1.2vw, 20px);
+  --spacing-f8-24: clamp(8px, 1.6vw, 24px);
+  --spacing-f10-14: clamp(10px, 1.2vw, 14px);
+  --spacing-f12-20: clamp(12px, 1.4vw, 20px);
+  --spacing-f12-32: clamp(12px, 2vw, 32px);
+  --spacing-f16-24: clamp(16px, 1.6vw, 24px);
+  --spacing-f16-24-karussell: clamp(16px, 2vw, 24px);
+  --spacing-f16-32: clamp(16px, 2vw, 32px);
+  --spacing-f18-24: clamp(18px, 1.8vw, 24px);
+  --spacing-f18-26: clamp(18px, 1.8vw, 26px);
+  --spacing-f20-32: clamp(20px, 2.4vw, 32px);
+  --spacing-f22-32: clamp(22px, 2.2vw, 32px);
+  --spacing-f22-34: clamp(22px, 2.4vw, 34px);
+  --spacing-f22-36: clamp(22px, 2.6vw, 36px);
+  --spacing-f24-36: clamp(24px, 2.6vw, 36px);
+  --spacing-f24-36-karte: clamp(24px, 3vw, 36px);
+  --spacing-f24-40: clamp(24px, 3vw, 40px);
+  --spacing-f24-44: clamp(24px, 3vw, 44px);
+  --spacing-f24-48: clamp(24px, 3vw, 48px);
+  --spacing-f28-40: clamp(28px, 4vw, 40px);
+  --spacing-f28-44: clamp(28px, 3vw, 44px);
+  --spacing-f28-56: clamp(28px, 4vw, 56px);
+  --spacing-f32-48: clamp(32px, 3vw, 48px);
+  --spacing-f32-48-mt: clamp(32px, 4vw, 48px);
+  --spacing-f32-80: clamp(32px, 5vw, 80px);
+  --spacing-f32-96: clamp(32px, 6vw, 96px);
+  --spacing-f36-56: clamp(36px, 4vw, 56px);
+  --spacing-f38-48: clamp(38px, 3.4vw, 48px);
+  --spacing-f40-72: clamp(40px, 5vw, 72px);
+  --spacing-f40-96: clamp(40px, 6vw, 96px);
+  --spacing-f48-88: clamp(48px, 6vw, 88px);
+  --spacing-f56-96: clamp(56px, 7vw, 96px);
+  --spacing-f64-112: clamp(64px, 8vw, 112px);
+  --spacing-f72-120: clamp(72px, 8vw, 120px);
+  --spacing-f72-140: clamp(72px, 9vw, 140px);
+  --spacing-f96-200: clamp(96px, 12vw, 200px);
+  --spacing-f200-280: clamp(200px, 20vw, 280px);   /* Bildhöhe Geschäftsbereiche */
+  --spacing-f240-360: clamp(240px, 24vw, 360px);   /* Bild Bento A */
+  --spacing-f240-440: clamp(240px, 30vw, 440px);   /* Bild Referenzen */
+  --spacing-f480-600: clamp(480px, 40vw, 600px);   /* Porträtkarte Footer */
+  --spacing-karte-referenz: min(84vw, 600px);       /* Kartenbreite Referenzen */
+  --spacing-karte-stimme: min(80vw, 340px);         /* Kartenbreite Kundenstimmen */
+
+  /* Mindest-Spaltenbreiten der automatischen Raster (Utility raster-*) */
+  --raster-170: 170px;
+  --raster-180: 180px;
+  --raster-200: 200px;
+  --raster-220: 220px;
+  --raster-260: 260px;
+  --raster-280: 280px;
+  --raster-380: 380px;
+  --raster-420: 420px;
+  --raster-440: 440px;
+}
+
+/* Automatisches Raster wie im Entwurf: repeat(auto-fit, minmax(min(100%, X), 1fr)).
+   min(100%, …) verhindert seitliches Scrollen auf schmalen Geräten. */
+@utility raster-* {
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, --value(--raster-*)), 1fr));
+}
+
+/* ------------------------------------------------------------------
+   Basis
+   ------------------------------------------------------------------ */
+@layer base {
+  /* Preflight setzt 1.5 — der Entwurf erbt „normal" (Fallgrube 2) */
+  html {
+    line-height: normal;
+    scroll-behavior: smooth;
+  }
+  body {
+    margin: 0;
+    background: var(--color-paper);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-size: var(--text-16);
+    /* Im Entwurf am äußeren Wrapper der ganzen Seite gesetzt */
+    line-height: var(--leading-155);
+    -webkit-font-smoothing: antialiased;
+  }
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+  input,
+  select,
+  button {
+    font-family: inherit;
+  }
+  /* Preflight vererbt Zeilenhöhe und Laufweite an Formularelemente; im
+     Browser (und damit im Entwurf) gilt dort „normal" */
+  button,
+  input,
+  select,
+  textarea {
+    line-height: normal;
+    letter-spacing: normal;
+  }
+  /* Tailwind setzt cursor:default auf Buttons, der Entwurf pointer */
+  button {
+    cursor: pointer;
+  }
+  ::selection {
+    background: var(--color-gold);
+    color: var(--color-ink);
+  }
+  /* Sichtbarer Tastaturfokus — im Entwurf nicht vorgesehen, ergänzt */
+  :focus-visible {
+    outline: 2px solid var(--color-gold);
+    outline-offset: 3px;
+  }
+  /* Tailwind-Preflight setzt img auf display:block + max-width:100%;
+     das bleibt, wo der Entwurf es nicht anders vorgibt. */
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      transition-duration: 0.01ms !important;
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+    }
+  }
+}
+
+/* ------------------------------------------------------------------
+   Eigene Utilities
+   ------------------------------------------------------------------ */
+/* Icon-Schrift (Material Symbols) wie im Entwurf: line-height 1 */
+@utility icon {
+  font-family: var(--font-icon);
+  font-weight: 300;
+  font-style: normal;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  white-space: nowrap;
+  direction: ltr;
+  font-feature-settings: 'liga';
+  -webkit-font-smoothing: antialiased;
+  user-select: none;
+}
+/* Gefüllte Variante (Sterne, Telefon im Hero) */
+@utility icon-fill {
+  font-variation-settings: 'FILL' 1;
+}
+/* Nur für Screenreader (H1 im Hero) */
+@utility nur-sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+/* Feste Spaltenraster einzelner Sektionen */
+@utility spalten-leistung {
+  /* Leistungsliste Desktop: Nummer | Titel | Text | Pfeil */
+  grid-template-columns: minmax(48px, 80px) minmax(0, 1.3fr) minmax(0, 1fr) 56px;
+}
+@utility spalten-gebiet {
+  /* Einsatzgebiet-Tabelle: Ort | Region | Luftlinie */
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.6fr) auto;
+}
+@utility spalten-bento {
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr) minmax(0, 1fr);
+}
+@utility spalten-leiste {
+  /* Mobile Leiste: Anrufen | Angebot anfordern */
+  grid-template-columns: 1fr 1.4fr;
+}
+/* Scrollleiste der Karussells ausblenden (Entwurf: scrollbar-width:none) */
+@utility ohne-scrollleiste {
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/* ------------------------------------------------------------------
+   Einblenden beim Scrollen (Entwurf: data-reveal + IntersectionObserver).
+   Die Klasse .bewegung setzt ein Inline-Skript im <head>, nur wenn
+   Bewegung erlaubt ist — ohne JS bleibt alles sichtbar.
+   ------------------------------------------------------------------ */
+.bewegung [data-reveal]:not([data-sichtbar]) {
+  opacity: 0;
+  transform: translateY(var(--reveal-shift, 32px));
+}
+.bewegung [data-reveal][data-sichtbar] {
+  transition:
+    opacity var(--reveal-dauer, 0.8s) var(--ease-gdm) var(--reveal-delay, 0ms),
+    transform var(--reveal-dauer, 0.8s) var(--ease-gdm) var(--reveal-delay, 0ms);
+}

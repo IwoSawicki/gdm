@@ -1,0 +1,5 @@
+geist-*.woff2, geist-mono-*.woff2
+  Geist / Geist Mono, © Vercel — SIL Open Font License 1.1
+material-symbols-gdm.woff2
+  Material Symbols Outlined, © Google — Apache License 2.0
+  Auf die auf der Seite genutzten Icons reduziert.

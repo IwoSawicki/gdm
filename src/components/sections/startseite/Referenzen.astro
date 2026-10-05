@@ -1,0 +1,19 @@
+---
+/** 05 — Referenzen (Karussell). Inhalte sind noch Platzhalter des Entwurfs. */
+import Bildflaeche from '../../ui/Bildflaeche.astro';
+import Karussell from '../../blocks/Karussell.astro';
+import { referenzen } from '../../../data/startseite';
+---
+<Karussell id="referenzen" spurId="referenzen-spur" eyebrow={referenzen.eyebrow} titel={referenzen.titel} abstand="referenzen" label="Referenzen">
+  {referenzen.eintraege.map((r, i) => (
+    <article data-reveal data-delay={String(i * 100)} class="flex shrink-0 grow-0 basis-karte-referenz snap-start flex-col gap-22">
+      <div class="relative h-f240-440 overflow-hidden rounded-24">
+        <Bildflaeche motiv={r.motiv} sizes="(min-width: 720px) 600px, 84vw" widths={[600, 900, 1200]} />
+      </div>
+      <div class="flex flex-wrap justify-between gap-x-12 gap-y-4 font-mono text-12 tracking-p006 uppercase text-label">
+        <span>0{i + 1} · {r.ort}</span><span>{r.leistung}</span>
+      </div>
+      <h3 class="m-0 text-referenz leading-112 font-medium tracking-n025">{r.titel}</h3>
+    </article>
+  ))}
+</Karussell>

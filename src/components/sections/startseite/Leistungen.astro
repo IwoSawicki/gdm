@@ -1,0 +1,98 @@
+---
+/**
+ * 02 — Leistungen (dunkel). Desktop: Zeilen füllen sich beim Hover von
+ * unten mit Sand, Pfeil dreht sich. Mobil: gestapelte Einträge.
+ */
+import Icon from '../../ui/Icon.astro';
+import SektionsKopf from '../../blocks/SektionsKopf.astro';
+import { anfrageZiel } from '../../../data/navigation';
+import { leistungsliste } from '../../../data/startseite';
+const nr = (i: number) => `0${i + 1}`;
+---
+<section id="leistungen" class="bg-ink text-white">
+  <div class="mx-auto max-w-content px-page-x py-section-y">
+    <SektionsKopf eyebrow={leistungsliste.eyebrow} titel={leistungsliste.titel} lead={leistungsliste.lead} variante="dunkel" />
+    <ul class="m-0 list-none border-t border-line-dark p-0">
+      {leistungsliste.eintraege.map((e, i) => (
+        <li data-reveal>
+          <!-- Mobil -->
+          <a href={anfrageZiel} class="flex flex-col gap-10 border-b border-line-dark py-24 text-white nav:hidden">
+            <div class="flex items-center justify-between gap-16">
+              <span class="flex min-w-0 items-baseline gap-14">
+                <span class="shrink-0 font-mono text-12 text-dim-on-dark">{nr(i)}</span>
+                <span class="text-24 leading-110 font-medium tracking-n030">{e.titel}</span>
+              </span>
+              <Icon name="arrow_outward" class="flex size-40 shrink-0 items-center justify-center rounded-8 border border-arrow-dark text-20" />
+            </div>
+            <span class="pl-34 text-15 text-pretty text-mute-on-dark-2">{e.text}</span>
+          </a>
+          <!-- Desktop -->
+          <a href={anfrageZiel} class="leistung group spalten-leistung relative hidden items-center gap-f12-32 overflow-hidden border-b border-line-dark px-f8-20-leistung py-f22-36 nav:grid">
+            <span aria-hidden="true" class="leistung-flaeche pointer-events-none absolute inset-0 origin-bottom bg-sand"></span>
+            <span class="leistung-nr relative font-mono text-13">{nr(i)}</span>
+            <span class="leistung-schub relative text-leistung leading-105 font-medium tracking-n035">{e.titel}</span>
+            <span class="leistung-schub leistung-schub-text relative text-15 text-pretty opacity-75">{e.text}</span>
+            <Icon name="arrow_outward" class="leistung-pfeil relative flex size-48 items-center justify-center justify-self-end rounded-8 border text-22" />
+          </a>
+        </li>
+      ))}
+    </ul>
+    <div data-reveal class="mt-f32-48-mt flex flex-wrap items-center gap-x-28 gap-y-12">
+      <span class="font-mono text-13 tracking-p010 uppercase text-mute-on-dark-2">{leistungsliste.projektLabel}</span>
+      <div class="flex flex-wrap gap-8">
+        {leistungsliste.projekte.map((p) => (
+          <a href={anfrageZiel} class="rounded-pill border border-pill-dark px-14 py-8 text-14 text-stone hover:border-dim-on-dark hover:text-white">{p}</a>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style is:global>
+  /* Hover-Effekt der Desktop-Zeilen (Entwurf: per JS-Zustand, hier :hover/:focus-visible) */
+  .leistung {
+    color: var(--color-white);
+    transition: color 0.45s var(--ease-gdm);
+  }
+  .leistung-flaeche {
+    transform: scaleY(0);
+    transition: transform 0.5s var(--ease-gdm);
+  }
+  .leistung-nr {
+    color: var(--color-dim-on-dark);
+    transition: color 0.45s var(--ease-gdm);
+  }
+  .leistung-schub {
+    transition: transform 0.5s var(--ease-gdm);
+  }
+  .leistung-schub-text {
+    transition-delay: 0.04s;
+  }
+  .leistung-pfeil {
+    border-color: var(--color-arrow-dark);
+    background: transparent;
+    color: var(--color-white);
+    transition:
+      transform 0.5s var(--ease-gdm),
+      background 0.45s var(--ease-gdm),
+      color 0.45s var(--ease-gdm),
+      border-color 0.45s var(--ease-gdm);
+  }
+  .leistung:is(:hover, :focus-visible) {
+    color: var(--color-ink);
+  }
+  .leistung:is(:hover, :focus-visible) .leistung-flaeche {
+    transform: scaleY(1);
+  }
+  .leistung:is(:hover, :focus-visible) .leistung-nr {
+    color: var(--color-label);
+  }
+  .leistung:is(:hover, :focus-visible) .leistung-schub {
+    transform: translateX(16px);
+  }
+  .leistung:is(:hover, :focus-visible) .leistung-pfeil {
+    transform: rotate(45deg);
+    background: var(--color-ink);
+    border-color: var(--color-ink);
+  }
+</style>

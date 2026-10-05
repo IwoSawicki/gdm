@@ -1,0 +1,66 @@
+---
+/**
+ * Akkordeon (FAQ). Frage = <button> in <h3>, Antwort = role="region".
+ * Wie im Entwurf ist immer höchstens eine Frage offen.
+ */
+import Icon from '../ui/Icon.astro';
+
+export interface AkkordeonEintrag {
+  frage: string;
+  antwort: string;
+}
+interface Props {
+  eintraege: AkkordeonEintrag[];
+  /** eindeutiges Präfix für die ids */
+  id: string;
+  /** Index der anfangs offenen Frage, -1 = keine */
+  offen?: number;
+}
+const { eintraege, id, offen = 0 } = Astro.props;
+---
+<div data-akkordeon>
+  {eintraege.map((e, i) => {
+    const istOffen = i === offen;
+    return (
+      <div class="border-b border-line-strong">
+        <h3 class="m-0">
+          <button
+            type="button"
+            id={`${id}-frage-${i}`}
+            aria-expanded={istOffen ? 'true' : 'false'}
+            aria-controls={`${id}-antwort-${i}`}
+            data-akkordeon-frage
+            class="group flex w-full items-center justify-between gap-24 border-0 bg-transparent py-28 text-left text-faq font-medium tracking-n015 text-ink"
+          >
+            {e.frage}
+            <span class="flex size-44 shrink-0 items-center justify-center rounded-8 border border-ink bg-transparent text-ink group-aria-expanded:bg-ink group-aria-expanded:text-white">
+              <Icon name="add" class="text-22 group-aria-expanded:hidden" />
+              <Icon name="remove" class="hidden text-22 group-aria-expanded:inline" />
+            </span>
+          </button>
+        </h3>
+        <div id={`${id}-antwort-${i}`} role="region" aria-labelledby={`${id}-frage-${i}`} hidden={!istOffen} data-akkordeon-antwort>
+          <p class="m-0 pr-68 pb-28 text-17 text-muted text-pretty">{e.antwort}</p>
+        </div>
+      </div>
+    );
+  })}
+</div>
+
+<script>
+  document.querySelectorAll<HTMLElement>('[data-akkordeon]').forEach((akkordeon) => {
+    const fragen = [...akkordeon.querySelectorAll<HTMLButtonElement>('[data-akkordeon-frage]')];
+    const setzen = (frage: HTMLButtonElement, offen: boolean) => {
+      frage.setAttribute('aria-expanded', String(offen));
+      const antwort = document.getElementById(frage.getAttribute('aria-controls') ?? '');
+      if (antwort) antwort.hidden = !offen;
+    };
+    fragen.forEach((frage) => {
+      frage.addEventListener('click', () => {
+        const warOffen = frage.getAttribute('aria-expanded') === 'true';
+        fragen.forEach((f) => setzen(f, false));
+        if (!warOffen) setzen(frage, true);
+      });
+    });
+  });
+</script>

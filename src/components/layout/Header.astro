@@ -1,0 +1,170 @@
+---
+/**
+ * Kopfzeile. Über dem Hero transparent mit heller Schrift; ab 40px Scroll
+ * (oder bei offenem Menü) weiß. Blendet beim Runterscrollen ab 400px aus,
+ * goldene Linie zeigt den Lesefortschritt. Unter 1080px Burger-Menü.
+ */
+import { firma, telHref } from '../../data/firma';
+import { anfrageZiel, hauptnavigation } from '../../data/navigation';
+import Icon from '../ui/Icon.astro';
+import Logo from '../ui/Logo.astro';
+
+type Variante = 'ueber-bild' | 'hell';
+interface Props {
+  /** ueber-bild = Startseite mit dunklem Hero, hell = Unterseiten */
+  variante?: Variante;
+}
+const { variante = 'ueber-bild' } = Astro.props;
+---
+<header
+  class="kopf fixed inset-x-0 top-0 z-50 border-b"
+  data-kopf
+  data-hell={variante === 'hell' ? '' : undefined}
+  data-immer-hell={variante === 'hell' ? '' : undefined}
+>
+  <div class="mx-auto flex h-kopf max-w-content items-center justify-between gap-24 px-page-x">
+    <a href="/" class="flex shrink-0 items-center" aria-label={`${firma.name} – Startseite`}>
+      <Logo variante="hell" hoehe={52} alt="" class="kopf-logo-hell" />
+      <Logo variante="dunkel" hoehe={52} alt="" class="kopf-logo-dunkel" />
+    </a>
+
+    <nav aria-label="Hauptnavigation" class="hidden items-center gap-f16-32 text-15 font-medium nav:flex">
+      {hauptnavigation.map((l) => (
+        <a href={l.href} class="underline-offset-6 hover:underline">{l.text}</a>
+      ))}
+    </nav>
+    <div class="hidden shrink-0 items-center gap-24 nav:flex">
+      <a href={telHref} class="text-15 font-medium whitespace-nowrap tabular-nums">{firma.telefon}</a>
+      <a href={anfrageZiel} class="kopf-knopf flex h-46 items-center rounded-10 px-22 text-15 font-medium whitespace-nowrap">Angebot anfordern</a>
+    </div>
+
+    <div class="flex items-center gap-8 nav:hidden">
+      <a href={telHref} aria-label="Anrufen" class="kopf-kontur flex size-46 items-center justify-center rounded-10 border">
+        <Icon name="call" class="text-22" />
+      </a>
+      <button
+        type="button"
+        aria-label="Menü öffnen"
+        aria-expanded="false"
+        aria-controls="mobilmenue"
+        data-menue-knopf
+        class="kopf-knopf group flex size-46 items-center justify-center rounded-10 border-0"
+      >
+        <Icon name="menu" class="text-24 group-aria-expanded:hidden" />
+        <Icon name="close" class="hidden text-24 group-aria-expanded:inline" />
+      </button>
+    </div>
+  </div>
+
+  <div class="kopf-fortschritt absolute -bottom-1 left-0 h-2 w-full origin-left bg-gold" data-fortschritt></div>
+
+  <nav
+    id="mobilmenue"
+    aria-label="Mobiles Menü"
+    hidden
+    data-menue
+    class="flex flex-col border-t border-line bg-white px-20 pt-8 pb-24 text-30 font-medium tracking-n030 text-ink nav:hidden"
+  >
+    {hauptnavigation.map((l) => (
+      <a href={l.href} class="border-b border-sand-menu py-14" data-menue-link>{l.text}</a>
+    ))}
+    <a href={anfrageZiel} data-menue-link class="mt-20 flex h-56 items-center justify-center rounded-10 bg-ink text-17 font-medium tracking-0 text-white">Angebot anfordern</a>
+  </nav>
+</header>
+
+<style is:global>
+  /* Zustände der Kopfzeile: dunkel (über dem Hero) und hell */
+  .kopf {
+    background: transparent;
+    border-color: color-mix(in srgb, var(--color-white) 14%, transparent);
+    color: var(--color-white);
+    transition:
+      background 0.3s,
+      border-color 0.3s,
+      color 0.3s,
+      transform 0.45s var(--ease-kopf);
+  }
+  .kopf[data-hell] {
+    background: color-mix(in srgb, var(--color-white) 97%, transparent);
+    border-color: var(--color-line);
+    color: var(--color-ink);
+  }
+  .kopf[data-versteckt] {
+    transform: translateY(-100%);
+  }
+  .kopf-knopf {
+    background: var(--color-white);
+    color: var(--color-ink);
+  }
+  .kopf[data-hell] .kopf-knopf {
+    background: var(--color-ink);
+    color: var(--color-white);
+  }
+  .kopf-kontur {
+    border-color: color-mix(in srgb, var(--color-white) 35%, transparent);
+  }
+  .kopf[data-hell] .kopf-kontur {
+    border-color: var(--color-stone);
+  }
+  .kopf-logo-dunkel,
+  .kopf[data-hell] .kopf-logo-hell {
+    display: none;
+  }
+  .kopf[data-hell] .kopf-logo-dunkel {
+    display: block;
+  }
+  .kopf-fortschritt {
+    transform: scaleX(0);
+  }
+</style>
+
+<script>
+  const kopf = document.querySelector<HTMLElement>('[data-kopf]');
+  const knopf = document.querySelector<HTMLButtonElement>('[data-menue-knopf]');
+  const menue = document.querySelector<HTMLElement>('[data-menue]');
+  const fortschritt = document.querySelector<HTMLElement>('[data-fortschritt]');
+
+  if (kopf && knopf && menue && fortschritt) {
+    const immerHell = kopf.hasAttribute('data-immer-hell');
+    let menueOffen = false;
+    let zuletztY = window.scrollY;
+
+    const zustand = () => {
+      const hell = immerHell || menueOffen || window.scrollY > 40;
+      kopf.toggleAttribute('data-hell', hell);
+    };
+
+    const menueSetzen = (offen: boolean) => {
+      menueOffen = offen;
+      menue.hidden = !offen;
+      knopf.setAttribute('aria-expanded', String(offen));
+      knopf.setAttribute('aria-label', offen ? 'Menü schließen' : 'Menü öffnen');
+      if (offen) kopf.removeAttribute('data-versteckt');
+      zustand();
+    };
+
+    knopf.addEventListener('click', () => menueSetzen(!menueOffen));
+    menue.querySelectorAll('[data-menue-link]').forEach((l) => l.addEventListener('click', () => menueSetzen(false)));
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && menueOffen) {
+        menueSetzen(false);
+        knopf.focus();
+      }
+    });
+    // Ab dem Nav-Breakpoint gibt es kein Burger-Menü mehr
+    matchMedia('(min-width: 1080px)').addEventListener('change', (e) => {
+      if (e.matches) menueSetzen(false);
+    });
+
+    const beimScrollen = () => {
+      const y = window.scrollY;
+      zustand();
+      if (!menueOffen) kopf.toggleAttribute('data-versteckt', y > zuletztY && y > 400);
+      zuletztY = y;
+      const max = document.documentElement.scrollHeight - innerHeight;
+      fortschritt.style.transform = `scaleX(${max > 0 ? y / max : 0})`;
+    };
+    window.addEventListener('scroll', beimScrollen, { passive: true });
+    beimScrollen();
+  }
+</script>

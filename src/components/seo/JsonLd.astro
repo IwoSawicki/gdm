@@ -1,0 +1,8 @@
+---
+/** Gibt strukturierte Daten als JSON-LD aus. */
+interface Props {
+  daten: Record<string, unknown>;
+}
+const { daten } = Astro.props;
+---
+<script type="application/ld+json" set:html={JSON.stringify(daten)} />

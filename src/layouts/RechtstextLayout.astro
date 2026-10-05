@@ -1,0 +1,62 @@
+---
+/** Layout für Impressum und Datenschutz: helle Kopfzeile, Textspalte */
+import BaseLayout from './BaseLayout.astro';
+import Eyebrow from '../components/ui/Eyebrow.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  h1: string;
+  /** Rechtstext als HTML (aus src/data/rechtstexte) */
+  html: string;
+}
+const { title, description, h1, html } = Astro.props;
+---
+<BaseLayout title={title} description={description} kopf="hell">
+  <section class="bg-paper">
+    <div class="mx-auto max-w-content px-page-x pt-[calc(var(--spacing-kopf)+var(--spacing-section-y))] pb-section-y">
+      <Eyebrow class="mb-16">Rechtliches</Eyebrow>
+      <h1 class="m-0 text-h2 leading-100 font-medium tracking-n040">{h1}</h1>
+      <div class="rechtstext mt-f48-88 max-w-780" set:html={html} />
+    </div>
+  </section>
+</BaseLayout>
+
+<style is:global>
+  /* Rechtstexte einmal zentral über die Tokens gestaltet */
+  .rechtstext {
+    font-size: var(--text-17);
+    color: var(--color-muted);
+  }
+  .rechtstext h2 {
+    margin: calc(var(--spacing) * 48) 0 calc(var(--spacing) * 16);
+    font-size: var(--text-24);
+    font-weight: 500;
+    letter-spacing: var(--tracking-n015);
+    line-height: var(--leading-115);
+    color: var(--color-ink);
+  }
+  .rechtstext h3 {
+    margin: calc(var(--spacing) * 32) 0 calc(var(--spacing) * 12);
+    font-size: var(--text-19);
+    font-weight: 500;
+    color: var(--color-ink);
+  }
+  .rechtstext p,
+  .rechtstext ul {
+    margin: 0 0 calc(var(--spacing) * 16);
+  }
+  .rechtstext ul {
+    padding-left: calc(var(--spacing) * 20);
+    list-style: disc;
+  }
+  .rechtstext a {
+    color: var(--color-ink);
+    text-decoration: underline;
+    text-underline-offset: calc(var(--spacing) * 3);
+  }
+  .rechtstext mark {
+    background: color-mix(in srgb, var(--color-gold) 25%, transparent);
+    color: var(--color-ink);
+  }
+</style>

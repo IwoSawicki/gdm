@@ -1,0 +1,40 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Laufband from '../components/blocks/Laufband.astro';
+import Hero from '../components/sections/startseite/Hero.astro';
+import Manifest from '../components/sections/startseite/Manifest.astro';
+import Bereiche from '../components/sections/startseite/Bereiche.astro';
+import Leistungen from '../components/sections/startseite/Leistungen.astro';
+import Warum from '../components/sections/startseite/Warum.astro';
+import Ablauf from '../components/sections/startseite/Ablauf.astro';
+import Referenzen from '../components/sections/startseite/Referenzen.astro';
+import Einsatzgebiet from '../components/sections/startseite/Einsatzgebiet.astro';
+import Kundenstimmen from '../components/sections/startseite/Kundenstimmen.astro';
+import Faq from '../components/sections/startseite/Faq.astro';
+import Anfrage from '../components/sections/startseite/Anfrage.astro';
+import { faq, laufband, meta } from '../data/startseite';
+
+const faqLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faq.eintraege.map((e) => ({
+    '@type': 'Question',
+    name: e.frage,
+    acceptedAnswer: { '@type': 'Answer', text: e.antwort },
+  })),
+};
+---
+<BaseLayout title={meta.title} description={meta.description} canonical="/" kopf="ueber-bild" jsonLd={[faqLd]}>
+  <Hero />
+  <Laufband eintraege={laufband} />
+  <Manifest />
+  <Bereiche />
+  <Leistungen />
+  <Warum />
+  <Ablauf />
+  <Referenzen />
+  <Einsatzgebiet />
+  <Kundenstimmen />
+  <Faq />
+  <Anfrage />
+</BaseLayout>

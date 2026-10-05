@@ -1,0 +1,63 @@
+---
+/** 03 — Warum GDM: Bento-Raster (ab 1080px dreispaltig) */
+import { Picture } from 'astro:assets';
+import portrait from '../../../assets/taha-ali-portrait.webp';
+import Bildflaeche from '../../ui/Bildflaeche.astro';
+import KachelButton from '../../ui/KachelButton.astro';
+import GoogleBewertung from '../../blocks/GoogleBewertung.astro';
+import SektionsKopf from '../../blocks/SektionsKopf.astro';
+import { firma } from '../../../data/firma';
+import { anfrageZiel } from '../../../data/navigation';
+import { warum } from '../../../data/startseite';
+---
+<section id="warum" class="bg-paper">
+  <div class="mx-auto max-w-content px-page-x pt-section-y">
+    <SektionsKopf eyebrow={warum.eyebrow} titel={warum.titel} lead={warum.lead} />
+    <div class="grid grid-cols-1 gap-16 nav:spalten-bento">
+      <article data-reveal class="flex flex-col gap-28 rounded-28 bg-sand-card p-f16-24 nav:col-start-1 nav:row-span-2 nav:row-start-1">
+        <div class="relative min-h-f240-360 flex-1 overflow-hidden rounded-20">
+          <!-- Mindesthöhe 3:2 wie der Bildslot im Entwurf (prägt die Höhe auf dem Handy) -->
+          <div class="aspect-3/2 w-full" aria-hidden="true"></div>
+          <Bildflaeche motiv={warum.a.motiv} sizes="(min-width: 1080px) 36vw, 100vw" widths={[480, 720, 1040]} />
+        </div>
+        <div class="flex flex-col gap-24 px-f8-16 pb-f8-16">
+          <h3 class="m-0 text-bento-a leading-112 font-medium tracking-n030 text-balance">{warum.a.titel}</h3>
+          <KachelButton variante="dunkel" href={anfrageZiel} vorauswahl={warum.a.vorauswahl} class="self-start">{warum.a.cta}</KachelButton>
+        </div>
+      </article>
+
+      <article data-reveal data-delay="80" class="relative flex min-h-320 flex-col justify-end overflow-hidden rounded-28 bg-ink text-white nav:col-start-2 nav:row-start-1">
+        <Picture
+          src={portrait}
+          alt={firma.inhaber}
+          widths={[400, 640, 900]}
+          sizes="(min-width: 1080px) 30vw, 100vw"
+          formats={['avif', 'webp']}
+          fallbackFormat="jpg"
+          quality={70}
+          class="absolute inset-0 size-full object-cover object-[50%_15%]"
+        />
+        <div class="absolute inset-0 bg-ink/45"></div>
+        <div class="relative p-f22-32">
+          <p class="m-0 text-bento-b leading-115 font-medium tracking-n025 text-balance">{warum.b.satz} <span class="text-mute-on-dark">{warum.b.zusatz}</span></p>
+          <div class="mt-14 font-mono text-12 tracking-p008 uppercase text-stone">{firma.inhaber} · {firma.rolle}</div>
+        </div>
+      </article>
+
+      <GoogleBewertung variante="bento" data-reveal data-delay="160" class="nav:col-start-3 nav:row-start-1" />
+
+      <article data-reveal data-delay="120" class="raster-280 grid min-h-300 gap-f16-24 overflow-hidden rounded-28 bg-sand-card p-f16-24 nav:col-span-2 nav:col-start-2 nav:row-start-2">
+        <div class="flex flex-col justify-end gap-20 p-f8-20">
+          <div class="flex flex-wrap gap-8">
+            {warum.d.pills.map((p) => <span class="rounded-pill bg-paper px-12 py-6 text-13">{p}</span>)}
+          </div>
+          <p class="m-0 text-bento-d leading-115 font-medium tracking-n030 text-balance">{warum.d.satz} <span class="text-mute-bento">{warum.d.zusatz}</span></p>
+        </div>
+        <div class="relative min-h-240 overflow-hidden rounded-20">
+          <div class="aspect-3/2 w-full" aria-hidden="true"></div>
+          <Bildflaeche motiv={warum.d.motiv} sizes="(min-width: 1080px) 30vw, 100vw" widths={[480, 720, 960]} />
+        </div>
+      </article>
+    </div>
+  </div>
+</section>

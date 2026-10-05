@@ -1,0 +1,16 @@
+---
+/** Mono-Label über Überschriften („01 — Geschäftsbereiche") */
+type Variante = 'hell' | 'dunkel';
+interface Props {
+  /** hell = auf hellem Grund, dunkel = auf dunklem Grund */
+  variante?: Variante;
+  class?: string;
+  [key: `data-${string}`]: string | boolean | undefined;
+}
+const { variante = 'hell', class: klasse, ...rest } = Astro.props;
+const farbe: Record<Variante, string> = {
+  hell: 'text-label',
+  dunkel: 'text-mute-on-dark-2',
+};
+---
+<div class:list={['font-mono text-13 tracking-p010 uppercase', farbe[variante], klasse]} {...rest}><slot /></div>

@@ -1,0 +1,126 @@
+---
+import '../styles/global.css';
+import Header from '../components/layout/Header.astro';
+import Footer from '../components/layout/Footer.astro';
+import MobileLeiste from '../components/layout/MobileLeiste.astro';
+import JsonLd from '../components/seo/JsonLd.astro';
+import { firma } from '../data/firma';
+import { dienste } from '../data/dienste';
+
+interface Props {
+  /** ≤ 60 Zeichen */
+  title: string;
+  /** ≤ 155 Zeichen */
+  description: string;
+  canonical?: string;
+  noindex?: boolean;
+  /** Pfad unter /public, 1200×630 */
+  bild?: string;
+  /** Kopfzeile über dunklem Hero oder hell (Unterseiten) */
+  kopf?: 'ueber-bild' | 'hell';
+  /** zusätzliche JSON-LD-Objekte (z. B. FAQPage) */
+  jsonLd?: Record<string, unknown>[];
+}
+const { title, description, canonical, noindex = false, bild = '/og-bild.jpg', kopf = 'hell', jsonLd = [] } = Astro.props;
+const site = Astro.site ?? new URL(firma.domain);
+const kanonisch = new URL(canonical ?? Astro.url.pathname, site).href;
+const bildUrl = new URL(bild, site).href;
+
+const unternehmen = {
+  '@context': 'https://schema.org',
+  '@type': 'LocalBusiness',
+  '@id': `${site.origin}/#unternehmen`,
+  name: firma.name,
+  url: site.origin,
+  telephone: firma.telefonLink,
+  email: firma.email,
+  image: bildUrl,
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: firma.strasse,
+    postalCode: firma.plz,
+    addressLocality: firma.ort,
+    addressCountry: firma.land,
+  },
+  founder: { '@type': 'Person', name: firma.inhaber },
+};
+const umamiAktiv = Boolean(dienste.umami.skript && dienste.umami.websiteId);
+---
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={kanonisch} />
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
+    <meta name="theme-color" content="#1a1a19" />
+
+    <link rel="preload" href="/fonts/geist-latin.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/material-symbols-gdm.woff2" as="font" type="font/woff2" crossorigin />
+
+    <link rel="icon" href="/favicon.ico" sizes="48x48" />
+    <link rel="icon" href="/favicon-32.png" type="image/png" sizes="32x32" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="de_DE" />
+    <meta property="og:site_name" content={firma.name} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={kanonisch} />
+    <meta property="og:image" content={bildUrl} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:type" content="image/jpeg" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={bildUrl} />
+
+    <JsonLd daten={unternehmen} />
+    {jsonLd.map((d) => <JsonLd daten={d} />)}
+
+    <!-- Einblend-Animationen nur, wenn Bewegung erlaubt ist (vor dem ersten Zeichnen) -->
+    <script is:inline>
+      if (!matchMedia('(prefers-reduced-motion: reduce)').matches) document.documentElement.classList.add('bewegung');
+    </script>
+
+    {umamiAktiv && (
+      <script is:inline defer src={dienste.umami.skript} data-website-id={dienste.umami.websiteId} data-domains={dienste.umami.domains} />
+    )}
+  </head>
+  <body>
+    <Header variante={kopf} />
+    <main>
+      <slot />
+    </main>
+    <Footer />
+    <MobileLeiste />
+
+    <script>
+      // Einblenden beim Scrollen. Werte aus dem Entwurf: mobil (< 1080px)
+      // kürzer, kleiner Versatz, Verzögerungen auf ein Viertel gestaucht.
+      if (document.documentElement.classList.contains('bewegung')) {
+        const mobil = innerWidth < 1080;
+        const wurzel = document.documentElement.style;
+        wurzel.setProperty('--reveal-dauer', mobil ? '0.38s' : '0.8s');
+        wurzel.setProperty('--reveal-shift', mobil ? '14px' : '32px');
+        const faktor = mobil ? 0.25 : 0.8;
+        const beobachter = new IntersectionObserver(
+          (eintraege) =>
+            eintraege.forEach((e) => {
+              if (!e.isIntersecting) return;
+              const el = e.target as HTMLElement;
+              el.style.setProperty('--reveal-delay', `${Math.round(Number(el.dataset.delay ?? 0) * faktor)}ms`);
+              el.setAttribute('data-sichtbar', '');
+              beobachter.unobserve(el);
+            }),
+          { threshold: mobil ? 0.01 : 0.12, rootMargin: mobil ? '0px 0px 8% 0px' : '0px' },
+        );
+        document.querySelectorAll('[data-reveal]').forEach((el) => beobachter.observe(el));
+      }
+    </script>
+  </body>
+</html>

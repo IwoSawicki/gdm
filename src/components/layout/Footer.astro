@@ -1,0 +1,95 @@
+---
+import { Picture } from 'astro:assets';
+import portrait from '../../assets/taha-ali-portrait.webp';
+import { adresseEinzeilig, firma, mailHref, telHref } from '../../data/firma';
+import { anfrageZiel, credit, footerSpalten, rechtlicheLinks } from '../../data/navigation';
+import Icon from '../ui/Icon.astro';
+import Logo from '../ui/Logo.astro';
+
+const jahr = new Date().getFullYear();
+const spaltenTitel = 'font-mono text-12 tracking-p010 uppercase text-label';
+---
+<footer class="overflow-hidden bg-sand text-ink">
+  <div class="mx-auto max-w-content px-page-x pt-f64-112 pb-32">
+    <div class="flex flex-wrap items-stretch gap-16">
+      <div class="flex min-w-0 shrink grow-2 basis-600 flex-col overflow-hidden rounded-28 bg-white">
+        <div class="raster-170 grid flex-1 gap-x-32 gap-y-40 p-f28-56">
+          {footerSpalten.map((spalte) => (
+            <div>
+              {spalte.map((gruppe, i) => (
+                <nav aria-label={gruppe.titel}>
+                  <div class:list={[spaltenTitel, i === 0 ? 'mb-20' : 'mt-40 mb-20']}>{gruppe.titel}</div>
+                  <div class="flex flex-col gap-12 text-15 font-medium">
+                    {gruppe.links.map((l) =>
+                      l.nochNicht ? (
+                        <span class="opacity-40" aria-disabled="true">{l.text}</span>
+                      ) : (
+                        <a href={l.href} class="hover:text-gold-text">{l.text}</a>
+                      ),
+                    )}
+                  </div>
+                </nav>
+              ))}
+            </div>
+          ))}
+        </div>
+        <div class="flex flex-wrap items-end justify-between gap-24 px-f28-56 pb-f28-40">
+          <div class="flex flex-col gap-12">
+            <Logo variante="dunkel" hoehe={64} alt="GDM" class="self-start" />
+            <span class="text-14 text-label">{adresseEinzeilig}</span>
+          </div>
+          <div class="flex flex-wrap gap-x-48 gap-y-20 rounded-20 bg-ink px-28 py-24 text-white">
+            <a href={mailHref} class="flex flex-col gap-4 text-white">
+              <span class="font-mono text-11 tracking-p010 uppercase text-mute-on-dark-2">E-Mail</span>
+              <span class="text-kontakt font-medium">{firma.email}</span>
+            </a>
+            <a href={telHref} class="flex flex-col gap-4 text-white">
+              <span class="font-mono text-11 tracking-p010 uppercase text-mute-on-dark-2">Telefon</span>
+              <span class="text-kontakt font-medium tabular-nums">{firma.telefon}</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="relative min-h-f480-600 shrink grow basis-320 overflow-hidden rounded-28 bg-ink">
+        <Picture
+          src={portrait}
+          alt={`${firma.inhaber}, ${firma.rolle} von ${firma.kurzname}`}
+          widths={[400, 640, 900]}
+          sizes="(min-width: 1080px) 440px, 100vw"
+          formats={['avif', 'webp']}
+          fallbackFormat="jpg"
+          quality={70}
+          class="absolute inset-0 block size-full object-cover object-[50%_18%]"
+        />
+        <div class="absolute inset-x-16 bottom-16 flex flex-col gap-16 rounded-20 bg-ink/92 p-20 text-white">
+          <div>
+            <div class="text-20 font-medium tracking-n010">{firma.inhaber}</div>
+            <div class="text-14 text-mute-on-dark">{firma.rolle} · Ihr Ansprechpartner</div>
+          </div>
+          <a href={anfrageZiel} class="flex h-52 items-center justify-center gap-8 rounded-10 bg-gold text-16 font-semibold text-ink hover:bg-gold-hover">
+            Kontakt aufnehmen<Icon name="arrow_outward" class="text-20" />
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="mt-32 flex flex-wrap justify-between gap-x-24 gap-y-12 text-14 text-label">
+      <span>© {jahr} {firma.name}. Alle Rechte vorbehalten.</span>
+      <div class="flex flex-wrap gap-24">
+        {rechtlicheLinks.map((l) => <a href={l.href} class="hover:text-ink">{l.text}</a>)}
+      </div>
+    </div>
+
+    <svg aria-hidden="true" viewBox="0 0 1000 124" class="mt-f40-72 block h-auto w-full select-none">
+      <text x="0" y="121" textLength="1000" lengthAdjust="spacingAndGlyphs" class="fill-sand-schrift font-sans font-semibold tracking-n040" font-size="166">GDM Service</text>
+    </svg>
+
+    <a href={credit.href} target="_blank" rel="noopener" class="mt-f20-32 flex flex-wrap items-center justify-between gap-x-24 gap-y-8 border-t border-line-strong pt-18 pb-4 text-ink hover:text-gold-text">
+      <span class="font-mono text-11 tracking-p012 uppercase text-label">Website erstellt von</span>
+      <span class="flex items-center gap-10 text-credit font-medium tracking-n020">{credit.text}<Icon name="north_east" class="text-20" /></span>
+    </a>
+  </div>
+  <!-- Platz für die feste Mobil-Leiste -->
+  <div class="h-kopf nav:hidden"></div>
+</footer>

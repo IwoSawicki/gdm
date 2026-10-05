@@ -1,0 +1,62 @@
+---
+/** Anfrage (dunkel): Riesenüberschrift, Ansprechpartner, Formular */
+import { Image } from 'astro:assets';
+import portrait from '../../../assets/taha-ali-portrait.webp';
+import Formular, { type Feld } from '../../blocks/Formular.astro';
+import Icon from '../../ui/Icon.astro';
+import { firma, mailHref, telHref } from '../../../data/firma';
+import { anfrage } from '../../../data/startseite';
+
+const felder: Feld[] = [
+  { art: 'auswahl', name: 'leistung', label: 'Leistung', optionen: anfrage.optionenLeistung, breit: true },
+  { art: 'text', name: 'firma', label: 'Firma / Hausverwaltung', autocomplete: 'organization', placeholder: 'optional' },
+  { art: 'text', name: 'ort', label: 'Ort / PLZ', placeholder: 'z. B. 68161 Mannheim', pflicht: true },
+  { art: 'zahl', name: 'flaeche', label: 'Fläche in m²', placeholder: 'z. B. 450' },
+  { art: 'auswahl', name: 'turnus', label: 'Turnus', optionen: anfrage.optionenTurnus },
+  { art: 'date', name: 'start', label: 'Gewünschter Start' },
+  { art: 'text', name: 'name', label: 'Name', autocomplete: 'name', pflicht: true },
+  { art: 'tel', name: 'telefon', label: 'Telefon', autocomplete: 'tel', pflicht: true },
+  { art: 'email', name: 'email', label: 'E-Mail', autocomplete: 'email', pflicht: true },
+];
+const zeilenHuelle = 'block overflow-hidden pt-[0.15em] pb-[0.05em] -mt-[0.15em]';
+---
+<section id="anfrage" class="bg-ink text-white">
+  <div class="raster-440 mx-auto grid max-w-content items-start gap-f40-96 px-page-x py-section-y">
+    <div>
+      <h2 class="m-0 text-anfrage leading-088 font-medium tracking-n060">
+        <span class={zeilenHuelle}><span data-reveal class="block">{anfrage.zeile1}</span></span>
+        <span class={zeilenHuelle}><span data-reveal data-delay="100" class="block">{anfrage.zeile2}</span></span>
+      </h2>
+      <p data-reveal data-delay="200" class="mt-32 mb-0 max-w-440 text-hero-lead text-pretty text-mute-on-dark-2">{anfrage.lead}</p>
+      <div data-reveal data-delay="300" class="mt-48 flex max-w-460 items-center gap-20 rounded-24 border border-line-dark p-16">
+        <div class="relative size-88 shrink-0 overflow-hidden rounded-18">
+          <!-- Ausschnitt wie im Entwurf: 170 % breit, nach links/oben verschoben -->
+          <Image src={portrait} alt={firma.inhaber} width={150} densities={[1, 2]} quality={70} class="absolute -top-[12%] -left-[35%] block h-auto w-[170%] max-w-none" />
+        </div>
+        <div class="flex min-w-0 flex-col gap-2">
+          <span class="text-19 font-medium">{firma.inhaber}</span>
+          <span class="text-14 text-mute-on-dark-2">{anfrage.kontaktRolle}</span>
+          <a href={telHref} class="mt-6 text-16 text-gold tabular-nums">{firma.telefon}</a>
+          <a href={mailHref} class="text-15 text-stone">{firma.email}</a>
+        </div>
+      </div>
+    </div>
+
+    <div data-reveal data-delay="150" class="rounded-28 bg-paper p-f24-44 text-ink">
+      <Formular
+        felder={felder}
+        betreff="Neue Anfrage über service-gdm.de"
+        absendenText="Anfrage senden"
+        vorauswahlFeld="leistung"
+        datenschutzHref="/datenschutz"
+      >
+        <div slot="danke" class="flex flex-col gap-14 px-8 py-40">
+          <Icon name="check" class="flex size-64 items-center justify-center rounded-pill bg-ink text-30 text-white" />
+          <h3 class="mt-12 mb-0 text-32 font-medium tracking-n030">{anfrage.danke.titel}</h3>
+          <p class="m-0 text-muted">{anfrage.danke.text} {firma.telefon}.</p>
+          <button type="button" data-formular-neu class="mt-12 h-48 self-start rounded-10 border border-line-strong bg-paper px-22 text-15">{anfrage.danke.nochmal}</button>
+        </div>
+      </Formular>
+    </div>
+  </div>
+</section>

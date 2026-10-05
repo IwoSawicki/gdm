@@ -1,0 +1,239 @@
+---
+/**
+ * Hero-Slider: 4 Slides, 7s Autoplay mit Fortschrittsbalken, Pause,
+ * Pfeile, Wischen, Parallaxe. Ohne Bewegung (prefers-reduced-motion)
+ * kein Autoplay und keine Parallaxe — wie im Entwurf.
+ */
+import Bildflaeche from '../../ui/Bildflaeche.astro';
+import Icon from '../../ui/Icon.astro';
+import KachelButton from '../../ui/KachelButton.astro';
+import { firma, telHref } from '../../../data/firma';
+import { anfrageZiel } from '../../../data/navigation';
+import { hero } from '../../../data/startseite';
+---
+<section class="hero relative flex min-h-hero-min flex-col justify-end overflow-hidden bg-ink text-white" aria-roledescription="Karussell" aria-label="Leistungen im Überblick" data-hero>
+  <div class="absolute inset-x-0 -top-[6%] bottom-0" data-hero-bild>
+    {hero.slides.map((s, i) => (
+      <div class="hero-bild absolute inset-0" data-slide-bild data-aktiv={i === 0 ? '' : undefined}>
+        <Bildflaeche motiv={s.motiv} sizes="100vw" widths={[828, 1440, 2160, 2880]} prioritaet={i === 0} />
+      </div>
+    ))}
+  </div>
+  <div class="pointer-events-none absolute inset-0 bg-linear-to-b from-ink/55 via-ink/45 via-35% to-ink/90"></div>
+
+  <div class="pointer-events-none relative mx-auto w-full max-w-content px-page-x pt-150">
+    <h1 class="nur-sr">{hero.h1}</h1>
+    <div class="grid">
+      {hero.slides.map((s, i) => (
+        <div
+          class="hero-slide col-start-1 row-start-1 flex flex-col justify-end"
+          role="group"
+          aria-roledescription="Slide"
+          aria-label={`${i + 1} von ${hero.slides.length}: ${s.label}`}
+          aria-hidden={i === 0 ? 'false' : 'true'}
+          data-slide
+          data-aktiv={i === 0 ? '' : undefined}
+        >
+          <div class="hero-eyebrow mb-f20-32 flex items-center gap-14 font-mono text-13 tracking-p010 uppercase text-stone">
+            <span class="h-1 w-28 bg-gold"></span>{s.eyebrow}
+          </div>
+          <p class="m-0 max-w-1000 text-hero leading-096 font-medium tracking-n050">
+            {s.zeilen.map((z, j) => (
+              <span class="-mt-[0.14em] block overflow-hidden pt-[0.14em] pb-[0.06em]">
+                <span
+                  class:list={['hero-zeile block', j === s.zeilen.length - 1 ? 'text-gold' : 'text-white']}
+                  style={`--zeile-delay: ${0.15 + j * 0.08}s`}
+                >{z}</span>
+              </span>
+            ))}
+          </p>
+          <p class="hero-text mt-f20-32 mb-0 max-w-560 text-hero-lead leading-150 text-pretty text-stone">{s.text}</p>
+          <div class="hero-aktionen mt-f28-44 flex flex-wrap items-center gap-f8-12">
+            <KachelButton variante="hero" href={anfrageZiel} vorauswahl={s.vorauswahl} tabindex={i === 0 ? undefined : '-1'}>{s.cta}</KachelButton>
+            <a href={telHref} class="flex items-center gap-f10-14 rounded-10 border border-gold py-6 pr-f18-24 pl-6 text-white hover:bg-gold/14" tabindex={i === 0 ? undefined : '-1'}>
+              <Icon name="call" gefuellt class="flex size-f38-48 items-center justify-center rounded-8 bg-gold text-20 text-ink" />
+              <span class="text-hero-tel font-medium tabular-nums">{firma.telefon}</span>
+            </a>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <div class="pointer-events-auto mt-f56-96 flex items-start gap-f16-32 pb-f24-40">
+      <div class="grid min-w-0 flex-1 grid-cols-4 gap-f8-24">
+        {hero.slides.map((s, i) => (
+          <button
+            type="button"
+            aria-label={s.label}
+            aria-current={i === 0 ? 'true' : undefined}
+            data-slide-reiter={i}
+            class="hero-reiter flex flex-col gap-14 border-0 bg-transparent p-0 pb-4 text-left"
+          >
+            <span class="block h-2 w-full overflow-hidden bg-white/18"><span class="block h-full w-0 bg-gold" data-slide-balken></span></span>
+            <span class="flex gap-10 overflow-hidden text-14 font-medium text-ellipsis whitespace-nowrap">
+              <span class="pt-2 font-mono text-12">0{i + 1}</span>
+              <span class="hidden nav:inline">{s.label}</span>
+            </span>
+          </button>
+        ))}
+      </div>
+      <div class="-mt-14 flex shrink-0 gap-8">
+        <button type="button" aria-label="Pause" data-slide-pause class="group hidden size-44 items-center justify-center rounded-10 border-0 bg-transparent text-white nav:flex">
+          <Icon name="pause" class="text-22 group-data-pausiert:hidden" />
+          <Icon name="play_arrow" class="hidden text-22 group-data-pausiert:inline" />
+        </button>
+        <button type="button" aria-label="Vorheriger Slide" data-slide-schritt="-1" class="flex size-44 items-center justify-center rounded-10 border border-white/30 bg-transparent text-white hover:bg-white hover:text-ink">
+          <Icon name="arrow_back" class="text-20" />
+        </button>
+        <button type="button" aria-label="Nächster Slide" data-slide-schritt="1" class="flex size-44 items-center justify-center rounded-10 border border-white/30 bg-transparent text-white hover:bg-white hover:text-ink">
+          <Icon name="arrow_forward" class="text-20" />
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style is:global>
+  /* Zustände der Slides — Dauern, Easings und Verzögerungen aus dem Entwurf */
+  .hero-bild {
+    opacity: 0;
+    transform: scale(1.06);
+    pointer-events: none;
+    transition:
+      opacity 1.1s var(--ease-gdm),
+      transform 7s linear;
+  }
+  .hero-bild[data-aktiv] {
+    opacity: 1;
+    transform: scale(1);
+    pointer-events: auto;
+  }
+  .hero-slide {
+    visibility: hidden;
+    transition: visibility 0s linear 0.7s;
+  }
+  .hero-slide[data-aktiv] {
+    visibility: visible;
+    transition-delay: 0s;
+  }
+  .hero-eyebrow {
+    opacity: 0;
+    transition: opacity 0.6s var(--ease-gdm) 0s;
+  }
+  .hero-zeile {
+    transform: translateY(110%);
+    transition: transform 0.9s var(--ease-gdm) 0s;
+  }
+  .hero-text,
+  .hero-aktionen {
+    opacity: 0;
+    transform: translateY(16px);
+    transition:
+      opacity 0.7s var(--ease-gdm) 0s,
+      transform 0.7s var(--ease-gdm) 0s;
+  }
+  .hero-aktionen {
+    pointer-events: none;
+  }
+  [data-aktiv] .hero-eyebrow {
+    opacity: 1;
+    transition-delay: 0.15s;
+  }
+  [data-aktiv] .hero-zeile {
+    transform: translateY(0);
+    transition-delay: var(--zeile-delay);
+  }
+  [data-aktiv] .hero-text,
+  [data-aktiv] .hero-aktionen {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  [data-aktiv] .hero-text {
+    transition-delay: 0.45s;
+  }
+  [data-aktiv] .hero-aktionen {
+    pointer-events: auto;
+    transition-delay: 0.55s;
+  }
+  .hero-reiter {
+    color: var(--color-dim-on-dark);
+    transition: color 0.4s;
+  }
+  .hero-reiter[aria-current='true'] {
+    color: var(--color-white);
+  }
+</style>
+
+<script>
+  const DAUER = 7000;
+  const hero = document.querySelector<HTMLElement>('[data-hero]');
+  if (hero) {
+    const bewegung = !matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const slides = [...hero.querySelectorAll<HTMLElement>('[data-slide]')];
+    const bilder = [...hero.querySelectorAll<HTMLElement>('[data-slide-bild]')];
+    const reiter = [...hero.querySelectorAll<HTMLButtonElement>('[data-slide-reiter]')];
+    const balken = [...hero.querySelectorAll<HTMLElement>('[data-slide-balken]')];
+    const pause = hero.querySelector<HTMLButtonElement>('[data-slide-pause]');
+    const bildEbene = hero.querySelector<HTMLElement>('[data-hero-bild]');
+    const anzahl = slides.length;
+    let aktuell = 0;
+    let fortschritt = 0;
+    let pausiert = false;
+
+    const zeigen = (i: number) => {
+      aktuell = (i + anzahl) % anzahl;
+      fortschritt = 0;
+      slides.forEach((s, k) => {
+        const aktiv = k === aktuell;
+        s.toggleAttribute('data-aktiv', aktiv);
+        s.setAttribute('aria-hidden', String(!aktiv));
+        // Links unsichtbarer Slides nicht per Tab erreichbar
+        s.querySelectorAll<HTMLElement>('a').forEach((a) => (aktiv ? a.removeAttribute('tabindex') : a.setAttribute('tabindex', '-1')));
+      });
+      bilder.forEach((b, k) => b.toggleAttribute('data-aktiv', k === aktuell));
+      reiter.forEach((r, k) => (k === aktuell ? r.setAttribute('aria-current', 'true') : r.removeAttribute('aria-current')));
+    };
+
+    reiter.forEach((r, k) => r.addEventListener('click', () => zeigen(k)));
+    hero.querySelectorAll<HTMLButtonElement>('[data-slide-schritt]').forEach((b) =>
+      b.addEventListener('click', () => zeigen(aktuell + Number(b.dataset.slideSchritt))),
+    );
+    pause?.addEventListener('click', () => {
+      pausiert = !pausiert;
+      pause.toggleAttribute('data-pausiert', pausiert);
+      pause.setAttribute('aria-label', pausiert ? 'Abspielen' : 'Pause');
+    });
+
+    // Wischen auf dem Handy
+    let startX = 0;
+    hero.addEventListener('touchstart', (e) => { startX = e.touches[0].clientX; }, { passive: true });
+    hero.addEventListener('touchend', (e) => {
+      const dx = e.changedTouches[0].clientX - startX;
+      if (Math.abs(dx) > 50) zeigen(aktuell + (dx < 0 ? 1 : -1));
+    });
+
+    // Autoplay + Fortschrittsbalken
+    let zuletzt = performance.now();
+    const schleife = (t: number) => {
+      const dt = t - zuletzt;
+      zuletzt = t;
+      if (bewegung && !pausiert && document.visibilityState === 'visible') fortschritt += dt / DAUER;
+      if (fortschritt >= 1) zeigen(aktuell + 1);
+      balken.forEach((b, k) => {
+        b.style.width = `${k < aktuell ? 100 : k === aktuell ? fortschritt * 100 : 0}%`;
+      });
+      requestAnimationFrame(schleife);
+    };
+    requestAnimationFrame(schleife);
+
+    // Parallaxe
+    if (bewegung && bildEbene) {
+      const parallaxe = () => {
+        const y = window.scrollY;
+        if (y < innerHeight * 1.2) bildEbene.style.transform = `translateY(${y * 0.25}px)`;
+      };
+      window.addEventListener('scroll', parallaxe, { passive: true });
+      parallaxe();
+    }
+  }
+</script>

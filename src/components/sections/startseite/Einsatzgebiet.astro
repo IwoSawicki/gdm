@@ -1,0 +1,54 @@
+---
+/** 06 — Einsatzgebiet (dunkel): Riesenzeile + Ortsliste mit Luftlinie */
+import Eyebrow from '../../ui/Eyebrow.astro';
+import { firma } from '../../../data/firma';
+import { gebiet } from '../../../data/startseite';
+const zeilenHuelle = 'block overflow-hidden pt-[0.12em] pb-[0.04em] -mt-[0.06em]';
+const km = (n: number) => `ca. ${n} km`;
+---
+<section id="gebiet" class="overflow-hidden bg-ink text-white">
+  <div class="mx-auto max-w-content px-page-x py-section-y">
+    <Eyebrow variante="dunkel" class="mb-f24-40" data-reveal>{gebiet.eyebrow}</Eyebrow>
+    <h2 class="m-0 text-gebiet leading-094 font-medium tracking-n055">
+      <span class={zeilenHuelle}><span data-reveal class="block">{gebiet.zeile1}</span></span>
+      <span class={zeilenHuelle}><span data-reveal data-delay="120" class="block"><span class="text-gold">&amp;</span> {gebiet.zeile2}</span></span>
+    </h2>
+    <div class="raster-420 mt-f48-88 grid items-start gap-f32-80">
+      <div data-reveal>
+        <p class="m-0 max-w-520 text-gebiet-lead leading-145 text-pretty text-mute-on-dark">{gebiet.text}</p>
+        <p class="mt-24 mb-0 text-14 text-dim-on-dark">{gebiet.hinweis} {firma.strasse}, {firma.ort}</p>
+      </div>
+      <div data-reveal data-delay="120" class="border-t border-line-dark">
+        <!-- Desktop: Tabelle -->
+        <table class="hidden w-full border-collapse nav:block">
+          <thead class="block">
+            <tr class="spalten-gebiet grid gap-16 border-b border-line-dark py-14 font-mono text-12 tracking-p006 uppercase text-dim-on-dark">
+              {gebiet.spalten.map((s) => <th scope="col" class="p-0 text-left font-normal">{s}</th>)}
+            </tr>
+          </thead>
+          <tbody class="block">
+            {gebiet.orte.map((o) => (
+              <tr class="spalten-gebiet grid gap-16 border-b border-line-dark py-18 text-gebiet-zeile">
+                <td class="p-0 font-medium">{o.ort}</td>
+                <td class="p-0 text-mute-on-dark">{o.region}</td>
+                <td class="p-0 text-dim-on-dark tabular-nums">{km(o.km)}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+        <!-- Mobil: Liste -->
+        <ul class="m-0 list-none p-0 nav:hidden">
+          {gebiet.orte.map((o) => (
+            <li class="flex flex-col gap-4 border-b border-line-dark py-16">
+              <div class="flex items-baseline justify-between gap-12">
+                <span class="text-17 font-medium">{o.ort}</span>
+                <span class="font-mono text-12 text-dim-on-dark">{km(o.km)}</span>
+              </div>
+              <span class="text-15 text-mute-on-dark">{o.region}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>

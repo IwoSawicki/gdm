@@ -1,0 +1,44 @@
+---
+/**
+ * Karte „Google-Bewertungen 5,0" — im Bento (03) und als erste Karte
+ * im Kundenstimmen-Karussell (07). Werte aus firma.ts.
+ */
+import { Image } from 'astro:assets';
+import googleG from '../../assets/google-g.svg';
+import Icon from '../ui/Icon.astro';
+import { firma } from '../../data/firma';
+
+type Variante = 'bento' | 'karussell';
+interface Props {
+  variante: Variante;
+  class?: string;
+  [key: `data-${string}`]: string | boolean | undefined;
+}
+const { variante, class: klasse, ...rest } = Astro.props;
+
+const huelle: Record<Variante, string> = {
+  bento: 'min-h-320 rounded-28 p-f22-32 gap-32',
+  karussell: 'basis-karte-stimme shrink-0 grow-0 snap-start min-h-400 rounded-24 p-28 gap-24',
+};
+const zahl: Record<Variante, string> = { bento: 'text-bewertung', karussell: 'text-bewertung-gross' };
+const sterneAbstand: Record<Variante, string> = { bento: 'mt-14', karussell: 'mt-12' };
+const zusatz: Record<Variante, string> = {
+  bento: `aus ${firma.google.anzahl} Bewertungen auf Google`,
+  karussell: `aus ${firma.google.anzahl} Bewertungen`,
+};
+---
+<article class:list={['flex flex-col justify-between bg-ink text-white', huelle[variante], klasse]} {...rest}>
+  <div class="flex items-center justify-between gap-12">
+    <span class="flex size-40 shrink-0 items-center justify-center rounded-pill bg-white">
+      <Image src={googleG} alt="Google" class="block size-22" />
+    </span>
+    <span class="font-mono text-12 tracking-p008 uppercase text-mute-on-dark-2">Google-Bewertungen</span>
+  </div>
+  <div>
+    <div class:list={['leading-090 font-medium tracking-n060', zahl[variante]]}>{firma.google.sterne}</div>
+    <div class:list={['flex gap-2 text-gold', sterneAbstand[variante]]} role="img" aria-label={`${firma.google.sterne} von 5 Sternen`}>
+      {[1, 2, 3, 4, 5].map(() => <Icon name="star" gefuellt class="text-22" />)}
+    </div>
+    <div class="mt-12 text-15 text-mute-on-dark-2">{zusatz[variante]}</div>
+  </div>
+</article>
