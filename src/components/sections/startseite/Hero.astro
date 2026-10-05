@@ -15,11 +15,13 @@ import { hero } from '../../../data/startseite';
   <div class="absolute inset-x-0 -top-[6%] bottom-0" data-hero-bild>
     {hero.slides.map((s, i) => (
       <div class="hero-bild absolute inset-0" data-slide-bild data-aktiv={i === 0 ? '' : undefined}>
-        <Bildflaeche motiv={s.motiv} sizes="100vw" widths={[828, 1440, 2160, 2880]} prioritaet={i === 0} />
+        <Bildflaeche bild={s.bild} alt={s.alt} motiv={s.motiv} sizes="100vw" widths={[828, 1000]} prioritaet={i === 0} />
       </div>
     ))}
   </div>
   <div class="pointer-events-none absolute inset-0 bg-linear-to-b from-ink/55 via-ink/45 via-35% to-ink/90"></div>
+  <!-- Zusätzlicher Verlauf oben: helle Fotos (z. B. Jalousien) hinter der transparenten Kopfzeile — sonst ist das helle Logo nicht lesbar -->
+  <div class="pointer-events-none absolute inset-x-0 top-0 h-200 bg-linear-to-b from-ink/50 to-transparent"></div>
 
   <div class="pointer-events-none relative mx-auto w-full max-w-content px-page-x pt-150">
     <h1 class="nur-sr">{hero.h1}</h1>

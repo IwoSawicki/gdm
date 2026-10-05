@@ -6,6 +6,13 @@
 
 import fotoGebaeudereinigung from '../assets/fotos/gebaeudereinigung-kueche.jpg';
 import fotoBaureinigung from '../assets/fotos/baureinigung-fensterreinigung.jpg';
+import fotoHeroGebaeudereinigung from '../assets/fotos/hero-gebaeudereinigung-team-fenster.jpg';
+import fotoHeroGebaeudeservice from '../assets/fotos/hero-gebaeudeservice-flur.jpg';
+import fotoHeroSonderreinigung from '../assets/fotos/hero-sonderreinigung-fassade.jpg';
+import fotoHeroBaureinigung from '../assets/fotos/hero-baureinigung-baustelle.jpg';
+import fotoBentoFenster from '../assets/fotos/bento-fensterrahmen.jpg';
+import fotoBentoKontrolle from '../assets/fotos/bento-qualitaetskontrolle.jpg';
+import type { ImageMetadata } from 'astro';
 
 export const meta = {
   title: 'Gebäudereinigung Rhein-Neckar | GDM aus Lorsch',
@@ -28,6 +35,8 @@ export interface Slide {
   vorauswahl?: Vorauswahl;
   /** Motivbeschreibung aus dem Entwurf, solange kein Foto da ist */
   motiv: string;
+  bild?: ImageMetadata;
+  alt?: string;
 }
 
 export const hero = {
@@ -40,6 +49,8 @@ export const hero = {
       text: 'Ihr Gebäude ist Ihre Visitenkarte. Wir kümmern uns um einen Auftritt, der bis ins Detail überzeugt.',
       cta: 'Angebot anfordern',
       motiv: 'Foto Slide 1: modernes Bürogebäude oder Fassade, abends oder bei Tageslicht',
+      bild: fotoHeroGebaeudereinigung,
+      alt: 'Zwei GDM-Mitarbeiter reinigen Fensterfront und Jalousien in einem hellen Raum',
     },
     {
       label: 'Gebäudeservice',
@@ -49,6 +60,8 @@ export const hero = {
       cta: 'Gebäudereinigung anfragen',
       vorauswahl: 'Unterhaltsreinigung',
       motiv: 'Foto Slide 4: gepflegter Eingangsbereich oder Treppenhaus',
+      bild: fotoHeroGebaeudeservice,
+      alt: 'Reinigungskraft mit Einscheibenmaschine im Flur eines Bürogebäudes',
     },
     {
       label: 'Sonderreinigung',
@@ -58,6 +71,8 @@ export const hero = {
       cta: 'Sonderreinigung anfragen',
       vorauswahl: 'Sonder- & Grundreinigung',
       motiv: 'Foto Slide 3: Glasfassade oder Industriehalle bei der Reinigung',
+      bild: fotoHeroSonderreinigung,
+      alt: 'Hochdruckreinigung einer Klinkerfassade',
     },
     {
       label: 'Baureinigung',
@@ -67,6 +82,8 @@ export const hero = {
       cta: 'Baureinigung anfragen',
       vorauswahl: 'Baureinigung',
       motiv: 'Foto Slide 2: Neubau kurz vor Übergabe, Team auf der Baustelle',
+      bild: fotoHeroBaureinigung,
+      alt: 'Arbeiter in Schutzkleidung räumt Bauschutt in einem Rohbau zusammen',
     },
   ] satisfies Slide[],
 };
@@ -149,6 +166,8 @@ export const warum = {
   lead: 'Qualität ist bei uns kein Zusatz, sondern der Auftrag. Sie bekommen eine Leistung, die Sie nicht prüfen und nicht nachfordern müssen.',
   a: {
     motiv: 'Foto: gepflegter Büro- oder Praxisraum, Detail Boden oder Fensterrahmen',
+    bild: fotoBentoFenster,
+    alt: 'Hand im Schutzhandschuh reinigt einen Fensterrahmen mit einem Mikrofasertuch',
     titel: 'Fester Turnus, festes Team. Sie müssen nicht nachkontrollieren.',
     cta: 'Gebäudereinigung anfragen',
     vorauswahl: 'Unterhaltsreinigung' as Vorauswahl,
@@ -162,6 +181,8 @@ export const warum = {
     satz: 'Regelmäßige Qualitätskontrollen.',
     zusatz: 'Mängel beheben wir, bevor sie Ihnen auffallen.',
     motiv: 'Foto: Objektleiter bei der Qualitätskontrolle im Objekt',
+    bild: fotoBentoKontrolle,
+    alt: 'Objektleiter hakt eine Checkliste auf dem Klemmbrett ab',
   },
 };
 

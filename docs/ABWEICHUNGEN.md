@@ -31,6 +31,14 @@ gibt es nicht (Absprache 05.10.2026).
   1000 px breit; auf Retina-Desktops (Darstellung bis 690 px) wären
   1380 px ideal — bei Gelegenheit größere Fassungen nachliefern.
   Alt-Texte als Vorschlag zur Freigabe in `src/data/startseite.ts`.
+- **05.10.2026, Wunsch Iwo:** Bilder der alten Website (`bildarchiv/alte-website/`)
+  eingebaut. Hero: Team an Fensterfront (`newbild4`), Flur mit
+  Einscheibenmaschine (`hausmeister2`), Fassaden-Hochdruckreinigung
+  (`fassade1`), Rohbau mit Bauschutt (`bau1`). Bento A: Fensterrahmen
+  (`newbilddown`), Bento D: Checkliste (`Slider2`). Referenzen bleiben ohne
+  Foto — dort gehören echte Fotos der betreuten Objekte hin. **[Rückfrage]**
+  Lizenzen der Fotos klären (siehe `bildarchiv/README.md`). Alle Originale
+  nur 1000 px breit: im Hero (bis 1440 px Darstellung) leicht weich.
 
 ### 3. Meta-Texte ergänzt — [Rückfrage]
 - **Vorlage:** keine.
@@ -112,6 +120,13 @@ gibt es nicht (Absprache 05.10.2026).
   Karte auf 360 px Breite.
 - **Umgesetzt:** Karte bleibt 268,8 px (84vw) — so, wie sie mit echtem Foto
   auch im Entwurf wäre.
+
+### 14a. Hero: zusätzlicher Verlauf am oberen Rand
+- **Vorlage:** nur der Verlauf ink 55 % → 45 % → 90 %.
+- **Umgesetzt:** zusätzlich 200 px Verlauf von ink 50 % nach transparent
+  am oberen Rand.
+- **Grund:** Mit den echten Fotos (Slide 1: weiße Jalousien) war das helle
+  Logo in der transparenten Kopfzeile auf dem Handy kaum lesbar.
 
 ### 15. Leistungsliste: Hover per CSS, auch bei Tastaturfokus
 - **Vorlage:** Hover-Zustand per JS (`onMouseEnter`).
