@@ -4,6 +4,7 @@
  * Hintergrund der Sektion und der Karten je Variante.
  */
 import SektionsKopf from './SektionsKopf.astro';
+import { weichTrennen } from '../../lib/trennen';
 import type { Karte } from '../../data/leistungen/typ';
 
 type Variante = 'hell' | 'sand' | 'dunkel';
@@ -37,7 +38,7 @@ const nrFarbe: Record<Variante, string> = { hell: 'text-label', sand: 'text-labe
         <article data-reveal data-delay={String(i * 80)} class:list={['flex flex-col gap-14 rounded-24 p-f24-36-karte', karte[variante], nummeriert && 'gap-32']}>
           {nummeriert && <span class:list={['font-mono text-13', nrFarbe[variante]]}>0{i + 1}</span>}
           <div class="flex flex-col gap-10">
-            <h3 class="m-0 text-24 leading-110 font-medium tracking-n030">{k.titel}</h3>
+            <h3 class="m-0 text-24 leading-110 font-medium tracking-n030">{weichTrennen(k.titel)}</h3>
             <p class:list={['m-0 text-15 text-pretty', textFarbe[variante]]}>{k.text}</p>
           </div>
         </article>

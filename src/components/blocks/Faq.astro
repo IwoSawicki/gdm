@@ -2,6 +2,7 @@
 /** FAQ: Kopf links, Akkordeon rechts. Das FAQPage-JSON-LD setzt die Seite (faqJsonLd). */
 import Akkordeon, { type AkkordeonEintrag } from './Akkordeon.astro';
 import Eyebrow from '../ui/Eyebrow.astro';
+import { weichTrennen } from '../../lib/trennen';
 import { firma, telHref } from '../../data/firma';
 
 interface Props {
@@ -19,7 +20,7 @@ const faq = { eyebrow, titel, hinweis };
   <div class="raster-380 mx-auto grid max-w-content items-start gap-f32-96 px-page-x py-section-y">
     <div data-reveal>
       <Eyebrow class="mb-16">{faq.eyebrow}</Eyebrow>
-      <h2 class="m-0 text-h2 leading-100 font-medium tracking-n040">{faq.titel}</h2>
+      <h2 class="m-0 text-h2 leading-100 font-medium tracking-n040">{weichTrennen(faq.titel)}</h2>
       <p class="mt-24 mb-0 max-w-380 text-17 text-muted">{faq.hinweis} <a href={telHref} class="border-b border-ink font-medium text-ink">{firma.telefon}</a></p>
     </div>
     <div data-reveal data-delay="100" class="border-t border-ink">

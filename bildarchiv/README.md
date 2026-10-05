@@ -28,3 +28,10 @@ der Theme-Demo, nichts mit GDM zu tun.
 | `bau1.jpeg` | `hero-baureinigung-baustelle.jpg` | Hero Slide 4 |
 | `newbilddown.jpeg` | `bento-fensterrahmen.jpg` | 03 Bento A |
 | `Slider2.jpg` | `bento-qualitaetskontrolle.jpg` | 03 Bento D |
+| `hausmeisterdienste1.jpeg` | `bueroreinigung-papierkorb.jpg` | Leistungsseite Büroreinigung |
+| `unterhalt2.jpeg` | `unterhaltsreinigung-teppich.jpg` | Leistungsseite Unterhaltsreinigung |
+| `hausmeister2.jpeg` | (= `hero-gebaeudeservice-flur.jpg`) | Leistungsseite Treppenhausreinigung |
+| `praxis1.jpeg` | `praxisreinigung-behandlungsstuhl.jpg` | Leistungsseite Praxisreinigung |
+| `newbilddown2.jpeg` | `glasreinigung-team-fenster.jpg` | Leistungsseite Glasreinigung |
+| `Hausmeisternew.jpeg` | `hausmeisterservice-aussenanlage.jpg` | Leistungsseite Hausmeisterservice |
+| `winter1.jpeg` | `winterdienst-streuen.jpg` | Leistungsseite Winterdienst |

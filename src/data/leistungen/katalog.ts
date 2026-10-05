@@ -18,13 +18,14 @@ export interface Leistung {
 }
 
 export const leistungen: Leistung[] = [
-  { name: 'Unterhaltsreinigung', slug: 'unterhaltsreinigung', gruppe: 'gebaeudeservice' },
+  { name: 'Unterhaltsreinigung', slug: 'unterhaltsreinigung', gruppe: 'gebaeudeservice', seite: true },
   { name: 'Büroreinigung', slug: 'bueroreinigung', gruppe: 'gebaeudeservice', seite: true },
-  { name: 'Praxisreinigung', slug: 'praxisreinigung', gruppe: 'gebaeudeservice' },
+  { name: 'Treppenhausreinigung', slug: 'treppenhausreinigung', gruppe: 'gebaeudeservice', seite: true },
+  { name: 'Praxisreinigung', slug: 'praxisreinigung', gruppe: 'gebaeudeservice', seite: true },
   { name: 'Hotelreinigung', slug: 'hotelreinigung', gruppe: 'gebaeudeservice' },
-  { name: 'Glasreinigung', slug: 'glasreinigung', gruppe: 'gebaeudeservice' },
-  { name: 'Hausmeisterservice', slug: 'hausmeisterservice', gruppe: 'gebaeudeservice' },
-  { name: 'Winterdienst', slug: 'winterdienst', gruppe: 'gebaeudeservice' },
+  { name: 'Glasreinigung', slug: 'glasreinigung', gruppe: 'gebaeudeservice', seite: true },
+  { name: 'Hausmeisterservice', slug: 'hausmeisterservice', gruppe: 'gebaeudeservice', seite: true },
+  { name: 'Winterdienst', slug: 'winterdienst', gruppe: 'gebaeudeservice', seite: true },
   { name: 'Baugrobreinigung', slug: 'baugrobreinigung', gruppe: 'baureinigung' },
   { name: 'Bauzwischenreinigung', slug: 'bauzwischenreinigung', gruppe: 'baureinigung' },
   { name: 'Baufeinreinigung', slug: 'baufeinreinigung', gruppe: 'baureinigung' },

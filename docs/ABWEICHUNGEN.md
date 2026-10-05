@@ -74,10 +74,11 @@ gibt es nicht (Absprache 05.10.2026).
   in `src/data/leistungen.ts` schon angelegt; Link umstellen, sobald die
   Seite existiert.
 
-### 8. Sektion 01 ohne Menüpunkt — [Rückfrage]
+### 8. Sektion 01 ohne Menüpunkt — Geklärt
 - **Vorlage:** Menüpunkt „Leistungen" springt zu 02, „Baureinigung" zur
   zweiten Karte in 01; 01 selbst hat keinen eigenen Menüpunkt.
-- **Umgesetzt:** 1:1. Bitte bestätigen, dass das so gewollt ist.
+- **Umgesetzt:** 1:1.
+- **Geklärt 05.10.2026 (Wunsch Iwo):** Menü bleibt wie im Entwurf.
 
 ### 9. Links auf allen Seiten mit Startseiten-Präfix
 - **Vorlage:** `#leistungen` usw.
@@ -181,6 +182,39 @@ gibt es nicht (Absprache 05.10.2026).
 ### 21. Anfrage-CTAs zeigen auf das Formular der eigenen Seite
 - `#anfrage` statt `/#anfrage`; Seiten ohne Formular (Rechtstexte, 404)
   verlinken weiter auf die Startseite (`BaseLayout mitAnfrage={false}`).
+
+### 22. Sechs weitere Leistungsseiten — Texte als Entwurf — [Rückfrage]
+- `/unterhaltsreinigung`, `/treppenhausreinigung`, `/praxisreinigung`,
+  `/glasreinigung`, `/hausmeisterservice`, `/winterdienst` nach der Vorlage
+  von `/bueroreinigung`. Gemeinsame Aussagen (Versprechen, Standard-FAQ,
+  Ablauf) stehen einmal in `src/data/leistungen/gemeinsam.ts`.
+- Bitte von GDM bestätigen lassen, ob angeboten:
+  - Treppenhaus: Mülltonnen bereitstellen, Fahrradraum, Aufzug.
+  - Praxis: Arbeit nach Hygieneplan der Praxis, Zwischenreinigung mittags.
+  - Glas: Glasfassaden/Glasdächer „nach Erreichbarkeit", Jalousien —
+    **bis zu welcher Höhe / mit welchen Hilfsmitteln?** (FAQ dazu fehlt
+    bewusst, bis die Antwort da ist).
+  - Hausmeister: Zählerstände ablesen, Schlüssel- und Terminbegleitung,
+    Koordination von Handwerkern.
+  - Winterdienst: **Abrechnung als Saisonpauschale oder nach Einsätzen?**
+    Welche Zeiten werden zugesagt? (Bewusst keine Uhrzeit genannt.)
+- Antwort im FAQ „Urlaub/Krankheit": „Die Arbeit findet wie vereinbart
+  statt" statt „Die Reinigung …" (Entwurf), weil der Satz auch für
+  Hausmeister und Winterdienst gilt.
+
+### 23. Treppenhausreinigung als neue Leistung im Katalog
+- **Vorlage:** Footer-Spalte „Gebäudeservice" mit 7 Links, Formularfeld
+  „Leistung" ohne Treppenhausreinigung.
+- **Umgesetzt:** Footer listet 8 Leistungen (aus dem Katalog abgeleitet),
+  Formular hat die Option „Treppenhausreinigung". Der Footer wird dadurch
+  auf dem Handy 35 px höher.
+- **Grund:** Seite für Hausverwaltungen (Retainer), siehe SEITENSTRUKTUR.md.
+
+### 24. Alte Adressen und Schrägstrich am Ende
+- nginx leitet `/hausmeisterdienste/` → `/hausmeisterservice` und
+  `/winterdienste/` → `/winterdienst` (301). Alle Adressen mit Schrägstrich
+  am Ende (z. B. `/praxisreinigung/` der alten Seite) → 301 auf die Fassung
+  ohne Schrägstrich, damit es pro Inhalt nur eine Adresse gibt.
 
 ## Was ausdrücklich *nicht* abweicht
 - Alle Texte, Farben, Schriftgrößen, Clamp-Kurven, Abstände und Radien.

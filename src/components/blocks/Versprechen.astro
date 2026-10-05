@@ -3,6 +3,7 @@
 import AnsprechpartnerKarte from './AnsprechpartnerKarte.astro';
 import GoogleBewertung from './GoogleBewertung.astro';
 import Eyebrow from '../ui/Eyebrow.astro';
+import { weichTrennen } from '../../lib/trennen';
 import type { Leistungsseite } from '../../data/leistungen/typ';
 
 interface Props {
@@ -15,14 +16,14 @@ const { versprechen } = Astro.props;
     <div>
       <div data-reveal>
         <Eyebrow class="mb-16">{versprechen.eyebrow}</Eyebrow>
-        <h2 class="m-0 text-h2 leading-100 font-medium tracking-n040 text-balance">{versprechen.titel}</h2>
+        <h2 class="m-0 text-h2 leading-100 font-medium tracking-n040 text-balance">{weichTrennen(versprechen.titel)}</h2>
       </div>
       <ol class="mt-f36-56 mb-0 list-none border-t border-ink p-0">
         {versprechen.punkte.map((p, i) => (
           <li data-reveal data-delay={String(i * 80)} class="grid grid-cols-[auto_1fr] gap-x-20 border-b border-line-strong py-24">
             <span class="pt-4 font-mono text-13 text-label">0{i + 1}</span>
             <div>
-              <h3 class="m-0 text-22 leading-110 font-medium tracking-n015">{p.titel}</h3>
+              <h3 class="m-0 text-22 leading-110 font-medium tracking-n015">{weichTrennen(p.titel)}</h3>
               <p class="mt-8 mb-0 text-15 text-pretty text-muted">{p.text}</p>
             </div>
           </li>

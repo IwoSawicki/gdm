@@ -8,7 +8,7 @@
  * alten Website. Keine Zahlen erfunden; offene Werte bleiben [X].
  */
 import fotoHero from '../../assets/fotos/bueroreinigung-papierkorb.jpg';
-import { ablauf } from '../startseite';
+import { ablaufSchritte, faqHinweis, faqStandard, nr, versprechenPunkte } from './gemeinsam';
 import type { Leistungsseite } from './typ';
 
 export const bueroreinigung: Leistungsseite = {
@@ -32,7 +32,7 @@ export const bueroreinigung: Leistungsseite = {
   },
 
   vergleich: {
-    eyebrow: '01 — Der Unterschied',
+    eyebrow: nr.vergleich,
     titel: 'Kennen Sie das?',
     lead: 'Die meisten Büros wechseln ihre Reinigung nicht wegen des Preises, sondern weil sie hinterherlaufen müssen. Genau das soll bei uns nicht passieren.',
     paare: [
@@ -44,7 +44,7 @@ export const bueroreinigung: Leistungsseite = {
   },
 
   umfang: {
-    eyebrow: '02 — Leistungsumfang',
+    eyebrow: nr.umfang,
     titel: 'Was zur Büroreinigung gehört',
     lead: 'Was wann gereinigt wird, legen wir gemeinsam in einem Leistungsverzeichnis fest. Das ist der übliche Rahmen.',
     gruppen: [
@@ -68,7 +68,7 @@ export const bueroreinigung: Leistungsseite = {
   },
 
   turnus: {
-    eyebrow: '03 — Turnus',
+    eyebrow: nr.turnus,
     titel: 'So oft, wie Ihr Büro es braucht',
     lead: 'Wie oft wir kommen, hängt von Fläche, Mitarbeiterzahl und Publikumsverkehr ab. Wir empfehlen nach der Besichtigung einen passenden Turnus.',
     karten: [
@@ -80,7 +80,7 @@ export const bueroreinigung: Leistungsseite = {
   },
 
   zielgruppen: {
-    eyebrow: '04 — Für wen',
+    eyebrow: nr.zielgruppen,
     titel: 'Für Unternehmen, Kanzleien und Verwaltungen',
     lead: 'Ob ein Büro mit fünf Arbeitsplätzen oder mehrere Etagen: Sie bekommen ein festes Team, das Ihr Objekt kennt.',
     karten: [
@@ -92,25 +92,20 @@ export const bueroreinigung: Leistungsseite = {
   },
 
   versprechen: {
-    eyebrow: '05 — Warum GDM',
+    eyebrow: nr.versprechen,
     titel: 'Sie müssen nicht nachkontrollieren.',
-    punkte: [
-      { titel: 'Festes Team', text: 'Dieselben Reinigungskräfte in Ihrem Objekt, eingearbeitet in Ihre Abläufe.' },
-      { titel: 'Vertretung inklusive', text: 'Für jedes Objekt gibt es eine eingearbeitete Vertretung. Die Reinigung findet wie vereinbart statt.' },
-      { titel: 'Kontrollen mit Protokoll', text: 'Regelmäßige Qualitätskontrollen im Objekt. Mängel beheben wir, bevor sie Ihnen auffallen.' },
-      { titel: 'Ein Ansprechpartner', text: 'Direkt erreichbar, ohne Hotline und ohne Ticketsystem.' },
-    ],
+    punkte: versprechenPunkte,
   },
 
   ablauf: {
-    eyebrow: '06 — Ablauf',
+    eyebrow: nr.ablauf,
     titel: 'In vier Schritten zur festen Büroreinigung',
     cta: 'Anfrage stellen',
-    schritte: ablauf.schritte,
+    schritte: ablaufSchritte,
   },
 
   preis: {
-    eyebrow: '07 — Kosten',
+    eyebrow: nr.preis,
     titel: 'Wovon der Preis abhängt',
     lead: 'Sie erhalten ein schriftliches Angebot mit Leistungsverzeichnis und einem festen monatlichen Preis. Diese Punkte bestimmen ihn.',
     karten: [
@@ -122,21 +117,21 @@ export const bueroreinigung: Leistungsseite = {
   },
 
   einsatzgebiet: {
-    eyebrow: '08 — Einsatzgebiet',
+    eyebrow: nr.einsatzgebiet,
     text: 'Büroreinigung von Frankfurt bis Heidelberg und von Mainz bis in den Odenwald. Kurze Wege von Lorsch aus und feste Teams, die Ihr Objekt kennen.',
   },
 
   faq: {
-    eyebrow: '09 — FAQ',
+    eyebrow: nr.faq,
     titel: 'Fragen zur Büroreinigung',
-    hinweis: 'Ihre Frage ist nicht dabei?',
+    hinweis: faqHinweis,
     eintraege: [
       { frage: 'Wann wird gereinigt?', antwort: 'Die Reinigungszeiten stimmen wir auf Ihre Betriebszeiten ab, zum Beispiel morgens vor Arbeitsbeginn oder abends nach Feierabend. So läuft Ihr Betrieb ungestört weiter.' },
-      { frage: 'Was passiert bei Urlaub oder Krankheit?', antwort: 'Für jedes Objekt gibt es eine eingearbeitete Vertretung aus dem festen Team. Die Reinigung findet wie vereinbart statt.' },
-      { frage: 'Wie setzen sich die Kosten zusammen?', antwort: 'Die Kosten richten sich nach Fläche, Reinigungsturnus und Leistungsumfang. Sie erhalten ein schriftliches Angebot mit Leistungsverzeichnis und einem festen monatlichen Preis.' },
-      { frage: 'Welche Vertragslaufzeit gilt?', antwort: 'Verträge für die Büroreinigung schließen wir mit einer Laufzeit von [X] Monaten und einer Kündigungsfrist von [X] Wochen ab.' },
-      { frage: 'Wie schnell reagieren Sie bei Reklamationen?', antwort: 'Reklamationen bearbeiten wir innerhalb von [X] Stunden. Ihr Ansprechpartner ist direkt erreichbar, ohne Hotline und ohne Ticketsystem.' },
-      { frage: 'Sind Sie für Schäden versichert?', antwort: 'GDM verfügt über eine Betriebshaftpflichtversicherung mit einer Deckungssumme von [X] Mio. €. Einen Nachweis senden wir Ihnen auf Anfrage zu.' },
+      faqStandard.urlaub,
+      faqStandard.kosten,
+      faqStandard.laufzeit,
+      faqStandard.reklamation,
+      faqStandard.versicherung,
     ],
   },
 

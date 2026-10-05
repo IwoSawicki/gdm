@@ -37,6 +37,9 @@ Jeder neue Block kommt hierher **und** auf `/styleguide`.
 ## `components/seo/`
 `Breadcrumb` (`pfad`, `aktuell`, `variante`), `JsonLd`, `jsonld.ts` (`faqJsonLd`, `breadcrumbJsonLd`, `dienstJsonLd`).
 
+## `lib/`
+`trennen.ts` → `weichTrennen(text)`: weiche Trennzeichen an Wortfugen langer Komposita (Fallgrube 9). Wird in den Leistungsseiten-Blöcken auf Überschriften und Kartentitel angewendet; nie auf JSON-LD oder Formularwerte.
+
 ## Seiten
 `src/pages/[leistung].astro` setzt jede Leistungsseite aus den Blöcken zusammen (Reihenfolge: `docs/SEITENSTRUKTUR.md`).
 

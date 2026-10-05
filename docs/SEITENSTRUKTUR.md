@@ -18,12 +18,12 @@ Abweichungen vom Report sind markiert (▲).
 | Seite | Haupt-Keyword | Alte Adresse | Stufe | Anzeigengruppe |
 |---|---|---|---|---|
 | `/bueroreinigung` ✅ | büroreinigung (+ Mannheim/Heidelberg/Darmstadt) | — (neu) | 1 | Büroreinigung |
-| `/unterhaltsreinigung` | unterhaltsreinigung | `/unterhaltsreinigung/` | 1 | Unterhaltsreinigung |
-| `/praxisreinigung` | praxisreinigung, arztpraxis reinigung | `/praxisreinigung/` | 1 | Praxisreinigung |
-| `/treppenhausreinigung` ▲ | treppenhausreinigung (1.000–10.000) | — (neu) | **1** statt 3 | Treppenhaus / Hausverwaltung |
-| `/glasreinigung` | glasreinigung, fensterreinigung firma | `/glasreinigung/` | 1 | Glasreinigung |
-| `/hausmeisterservice` | hausmeisterservice (+ Darmstadt/Mannheim) | `/hausmeisterdienste/` → 301 | 1 | Hausmeisterservice |
-| `/winterdienst` | winterdienst (saisonal) | `/winterdienste/` → 301 | 1 (vor Saison live) | Winterdienst (Okt–Feb) |
+| `/unterhaltsreinigung` ✅ | unterhaltsreinigung | `/unterhaltsreinigung/` | 1 | Unterhaltsreinigung |
+| `/praxisreinigung` ✅ | praxisreinigung, arztpraxis reinigung | `/praxisreinigung/` | 1 | Praxisreinigung |
+| `/treppenhausreinigung` ▲ ✅ | treppenhausreinigung (1.000–10.000) | — (neu) | **1** statt 3 | Treppenhaus / Hausverwaltung |
+| `/glasreinigung` ✅ | glasreinigung, fensterreinigung firma | `/glasreinigung/` | 1 | Glasreinigung |
+| `/hausmeisterservice` ✅ | hausmeisterservice (+ Darmstadt/Mannheim) | `/hausmeisterdienste/` → 301 | 1 | Hausmeisterservice |
+| `/winterdienst` ✅ | winterdienst (saisonal) | `/winterdienste/` → 301 | 1 (vor Saison live) | Winterdienst (Okt–Feb) |
 | `/hotelreinigung` | hotelreinigung | `/hotelreinigung/` | 2 | — |
 | `/gruenanlagenpflege` | grünanlagenpflege, grünflächenpflege | `/gruenanlagenpflege/` | 2 | — |
 | `/waschraumloesungen` | waschraumhygiene | `/waschraumloesungen/` | 2 | — |
@@ -64,8 +64,8 @@ echtem Inhalt (Referenz vor Ort).
 | `/management`, `/service` | — | alte Sammelseiten → 301 auf `/gebaeudereinigung` |
 | Blog-Reste der Theme-Demo (Auto-Artikel) | — | 410 bzw. 301 auf `/` |
 
-## Hauptmenü — [Rückfrage]
-Der Entwurf zeigt: Leistungen · Über uns · Ablauf · Einsatzgebiet ·
+## Hauptmenü — Geklärt 05.10.2026: Menü aus dem Entwurf bleibt (Wunsch Iwo)
+Ursprünglicher Vorschlag (nicht umgesetzt): Der Entwurf zeigt Leistungen · Über uns · Ablauf · Einsatzgebiet ·
 Referenzen · Baureinigung (alles Anker der Startseite). Mit eigenen Seiten
 schlage ich vor: **Gebäudereinigung ▾ · Baureinigung ▾ · Einsatzgebiet ·
 Referenzen · Über uns** + „Angebot anfordern" (wie im Report). Umsetzung

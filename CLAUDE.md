@@ -10,7 +10,7 @@ Daten.
 | Adresse | |
 |---|---|
 | `/` | Startseite |
-| `/bueroreinigung` | Leistungsseite (Vorlage aller Leistungen, `src/pages/[leistung].astro`) |
+| `/bueroreinigung`, `/unterhaltsreinigung`, `/treppenhausreinigung`, `/praxisreinigung`, `/glasreinigung`, `/hausmeisterservice`, `/winterdienst` | Leistungsseiten (`src/pages/[leistung].astro`, Daten in `src/data/leistungen/`) |
 | `/impressum`, `/datenschutz` | Rechtstexte (Entwurf, offene Angaben markiert) |
 | `/404` | `noindex` |
 | `/styleguide` | **intern**: `noindex`, nicht in der Sitemap, nirgends verlinkt |

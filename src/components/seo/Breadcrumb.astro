@@ -12,7 +12,8 @@ interface Props {
   class?: string;
 }
 const { pfad, aktuell, variante = 'dunkel', class: klasse } = Astro.props;
-const farben: Record<Variante, string> = { hell: 'text-label', dunkel: 'text-mute-on-dark-2' };
+// dunkel: stone statt mute-on-dark-2 — auf hellen Fotos sonst zu kontrastarm
+const farben: Record<Variante, string> = { hell: 'text-label', dunkel: 'text-stone' };
 ---
 <nav aria-label="Brotkrumen" class={klasse}>
   <ol class:list={['m-0 flex list-none flex-wrap items-center gap-x-10 gap-y-4 p-0 font-mono text-12 tracking-p008 uppercase', farben[variante]]}>

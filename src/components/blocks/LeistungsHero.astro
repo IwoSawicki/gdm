@@ -10,6 +10,7 @@ import KachelButton from '../ui/KachelButton.astro';
 import TelefonButton from '../ui/TelefonButton.astro';
 import Breadcrumb from '../seo/Breadcrumb.astro';
 import Formular from './Formular.astro';
+import { weichTrennen } from '../../lib/trennen';
 import type { Krume } from '../seo/jsonld';
 import type { Leistungsseite } from '../../data/leistungen/typ';
 import { firma } from '../../data/firma';
@@ -41,7 +42,7 @@ const zeilenHuelle = '-mt-[0.14em] block overflow-hidden pt-[0.14em] pb-[0.06em]
         <h1 class="m-0 max-w-1000 text-hero leading-096 font-medium tracking-n050">
           {hero.zeilen.map((z, i) => (
             <span class={zeilenHuelle}>
-              <span data-reveal data-delay={String(i * 80)} class:list={['block', i === hero.zeilen.length - 1 && 'text-gold']}>{z}</span>
+              <span data-reveal data-delay={String(i * 80)} class:list={['block', i === hero.zeilen.length - 1 && 'text-gold']}>{weichTrennen(z)}</span>
             </span>
           ))}
         </h1>

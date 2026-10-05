@@ -2,6 +2,7 @@
 /** Leistungsumfang als Checklisten-Karten (Leistungsseiten) */
 import Icon from '../ui/Icon.astro';
 import SektionsKopf from './SektionsKopf.astro';
+import { weichTrennen } from '../../lib/trennen';
 import type { Leistungsseite } from '../../data/leistungen/typ';
 
 interface Props {
@@ -15,7 +16,7 @@ const { umfang } = Astro.props;
     <div class="raster-260 grid gap-16">
       {umfang.gruppen.map((g, i) => (
         <article data-reveal data-delay={String(i * 80)} class="flex flex-col gap-18 rounded-24 bg-paper p-f24-36-karte">
-          <h3 class="m-0 text-22 leading-110 font-medium tracking-n015">{g.titel}</h3>
+          <h3 class="m-0 text-22 leading-110 font-medium tracking-n015">{weichTrennen(g.titel)}</h3>
           <ul class="m-0 flex list-none flex-col gap-10 p-0">
             {g.punkte.map((p) => (
               <li class="flex items-start gap-10 text-15"><Icon name="check" class="pt-1 text-20 text-ink" />{p}</li>
