@@ -2,12 +2,17 @@
 import { Picture } from 'astro:assets';
 import portrait from '../../assets/taha-ali-portrait.webp';
 import { adresseEinzeilig, firma, mailHref, telHref } from '../../data/firma';
-import { anfrageZiel, credit, footerSpalten, rechtlicheLinks } from '../../data/navigation';
+import { credit, footerSpalten, rechtlicheLinks } from '../../data/navigation';
 import Icon from '../ui/Icon.astro';
 import Logo from '../ui/Logo.astro';
 
 const jahr = new Date().getFullYear();
 const spaltenTitel = 'font-mono text-12 tracking-p010 uppercase text-label';
+interface Props {
+  /** Ziel der Anfrage-CTAs (Seite mit oder ohne eigenes Formular) */
+  anfrageHref: string;
+}
+const { anfrageHref } = Astro.props;
 ---
 <footer class="overflow-hidden bg-sand text-ink">
   <div class="mx-auto max-w-content px-page-x pt-f64-112 pb-32">
@@ -67,7 +72,7 @@ const spaltenTitel = 'font-mono text-12 tracking-p010 uppercase text-label';
             <div class="text-20 font-medium tracking-n010">{firma.inhaber}</div>
             <div class="text-14 text-mute-on-dark">{firma.rolle} · Ihr Ansprechpartner</div>
           </div>
-          <a href={anfrageZiel} class="flex h-52 items-center justify-center gap-8 rounded-10 bg-gold text-16 font-semibold text-ink hover:bg-gold-hover">
+          <a href={anfrageHref} class="flex h-52 items-center justify-center gap-8 rounded-10 bg-gold text-16 font-semibold text-ink hover:bg-gold-hover">
             Kontakt aufnehmen<Icon name="arrow_outward" class="text-20" />
           </a>
         </div>

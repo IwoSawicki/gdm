@@ -1,0 +1,27 @@
+---
+/** Sichtbare Brotkrumen-Navigation (Unterseiten). JSON-LD: breadcrumbJsonLd() */
+import type { Krume } from './jsonld';
+
+type Variante = 'hell' | 'dunkel';
+interface Props {
+  /** Pfad ohne die aktuelle Seite */
+  pfad: Krume[];
+  /** Name der aktuellen Seite */
+  aktuell: string;
+  variante?: Variante;
+  class?: string;
+}
+const { pfad, aktuell, variante = 'dunkel', class: klasse } = Astro.props;
+const farben: Record<Variante, string> = { hell: 'text-label', dunkel: 'text-mute-on-dark-2' };
+---
+<nav aria-label="Brotkrumen" class={klasse}>
+  <ol class:list={['m-0 flex list-none flex-wrap items-center gap-x-10 gap-y-4 p-0 font-mono text-12 tracking-p008 uppercase', farben[variante]]}>
+    {pfad.map((k) => (
+      <li class="flex items-center gap-10">
+        <a href={k.href} class="hover:underline hover:underline-offset-3">{k.text}</a>
+        <span aria-hidden="true">/</span>
+      </li>
+    ))}
+    <li aria-current="page" class:list={[variante === 'dunkel' ? 'text-white' : 'text-ink']}>{aktuell}</li>
+  </ol>
+</nav>

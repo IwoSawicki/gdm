@@ -6,6 +6,7 @@ import MobileLeiste from '../components/layout/MobileLeiste.astro';
 import JsonLd from '../components/seo/JsonLd.astro';
 import { firma } from '../data/firma';
 import { dienste } from '../data/dienste';
+import { anfrageZiel, anfrageZielStartseite } from '../data/navigation';
 
 interface Props {
   /** ≤ 60 Zeichen */
@@ -20,8 +21,10 @@ interface Props {
   kopf?: 'ueber-bild' | 'hell';
   /** zusätzliche JSON-LD-Objekte (z. B. FAQPage) */
   jsonLd?: Record<string, unknown>[];
+  /** Seite endet mit dem Anfrageformular (#anfrage). false bei Rechtstexten und 404 */
+  mitAnfrage?: boolean;
 }
-const { title, description, canonical, noindex = false, bild = '/og-bild.jpg', kopf = 'hell', jsonLd = [] } = Astro.props;
+const { title, description, canonical, noindex = false, bild = '/og-bild.jpg', kopf = 'hell', jsonLd = [], mitAnfrage = true } = Astro.props;
 const site = Astro.site ?? new URL(firma.domain);
 const kanonisch = new URL(canonical ?? Astro.url.pathname, site).href;
 const bildUrl = new URL(bild, site).href;
@@ -44,6 +47,7 @@ const unternehmen = {
   },
   founder: { '@type': 'Person', name: firma.inhaber },
 };
+const anfrageHref = mitAnfrage ? anfrageZiel : anfrageZielStartseite;
 const umamiAktiv = Boolean(dienste.umami.skript && dienste.umami.websiteId);
 ---
 <!doctype html>
@@ -92,12 +96,12 @@ const umamiAktiv = Boolean(dienste.umami.skript && dienste.umami.websiteId);
     )}
   </head>
   <body>
-    <Header variante={kopf} />
+    <Header variante={kopf} anfrageHref={anfrageHref} />
     <main>
       <slot />
     </main>
-    <Footer />
-    <MobileLeiste />
+    <Footer anfrageHref={anfrageHref} />
+    <MobileLeiste anfrageHref={anfrageHref} />
 
     <script>
       // Einblenden beim Scrollen. Werte aus dem Entwurf: mobil (< 1080px)

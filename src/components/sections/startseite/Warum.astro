@@ -1,12 +1,10 @@
 ---
 /** 03 — Warum GDM: Bento-Raster (ab 1080px dreispaltig) */
-import { Picture } from 'astro:assets';
-import portrait from '../../../assets/taha-ali-portrait.webp';
 import Bildflaeche from '../../ui/Bildflaeche.astro';
 import KachelButton from '../../ui/KachelButton.astro';
+import AnsprechpartnerKarte from '../../blocks/AnsprechpartnerKarte.astro';
 import GoogleBewertung from '../../blocks/GoogleBewertung.astro';
 import SektionsKopf from '../../blocks/SektionsKopf.astro';
-import { firma } from '../../../data/firma';
 import { anfrageZiel } from '../../../data/navigation';
 import { warum } from '../../../data/startseite';
 ---
@@ -26,23 +24,7 @@ import { warum } from '../../../data/startseite';
         </div>
       </article>
 
-      <article data-reveal data-delay="80" class="relative flex min-h-320 flex-col justify-end overflow-hidden rounded-28 bg-ink text-white nav:col-start-2 nav:row-start-1">
-        <Picture
-          src={portrait}
-          alt={firma.inhaber}
-          widths={[400, 640, 900]}
-          sizes="(min-width: 1080px) 30vw, 100vw"
-          formats={['avif', 'webp']}
-          fallbackFormat="jpg"
-          quality={70}
-          class="absolute inset-0 size-full object-cover object-[50%_15%]"
-        />
-        <div class="absolute inset-0 bg-ink/45"></div>
-        <div class="relative p-f22-32">
-          <p class="m-0 text-bento-b leading-115 font-medium tracking-n025 text-balance">{warum.b.satz} <span class="text-mute-on-dark">{warum.b.zusatz}</span></p>
-          <div class="mt-14 font-mono text-12 tracking-p008 uppercase text-stone">{firma.inhaber} · {firma.rolle}</div>
-        </div>
-      </article>
+      <AnsprechpartnerKarte satz={warum.b.satz} zusatz={warum.b.zusatz} data-reveal data-delay="80" class="nav:col-start-2 nav:row-start-1" />
 
       <GoogleBewertung variante="bento" data-reveal data-delay="160" class="nav:col-start-3 nav:row-start-1" />
 

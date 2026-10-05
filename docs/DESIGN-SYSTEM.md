@@ -67,7 +67,8 @@ Transparenzen über Modifier (`bg-ink/45`, `border-white/30`).
 
 ## Abstände
 - `content` 1440px, `page-x` clamp(20px,4vw,56px), `section-y` clamp(80px,10vw,144px),
-  `kopf` 84px, `hero-min` clamp(680px,100svh,1000px), `buehne` (Karussell-Einzug).
+  `kopf` 84px, `hero-min` clamp(680px,100svh,1000px), `buehne` (Karussell-Einzug),
+  `leistung-hero-min` clamp(640px,92svh,980px) (Leistungs-Hero, eigene Ergänzung).
 - Fluide Abstände `f<min>-<max>` (z. B. `gap-f16-32` = clamp(16px,2vw,32px)); bei
   gleicher Spanne mit anderer Kurve Zusatz im Namen (`f32-48` vs. `f32-48-mt`).
 - Kartenbreiten `karte-referenz` min(84vw,600px), `karte-stimme` min(80vw,340px).
@@ -75,7 +76,7 @@ Transparenzen über Modifier (`bg-ink/45`, `border-white/30`).
 ## Raster
 - `raster-<min>`: `repeat(auto-fit, minmax(min(100%, <min>px), 1fr))` — Mindestbreiten
   170/180/200/220/260/280/380/420/440.
-- Feste Spalten: `spalten-leistung`, `spalten-gebiet`, `spalten-bento`, `spalten-leiste`.
+- Feste Spalten: `spalten-leistungs-hero` (Text | Kurzformular 460px, eigene Ergänzung), `spalten-leistung`, `spalten-gebiet`, `spalten-bento`, `spalten-leiste`.
 
 ## Radien
 8, 10, 14, 18, 20, 24, 28, `pill` (999px).

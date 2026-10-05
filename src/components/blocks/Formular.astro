@@ -23,7 +23,8 @@ export type Feld =
       autocomplete?: string;
       placeholder?: string;
     })
-  | (FeldBasis & { art: 'auswahl'; optionen: string[] });
+  | (FeldBasis & { art: 'versteckt'; wert: string })
+  | (FeldBasis & { art: 'auswahl'; optionen: string[]; /** vorausgewählte Option */ vorbelegt?: string });
 
 interface Props {
   felder: Feld[];
@@ -35,6 +36,10 @@ interface Props {
   datenschutzHref: string;
 }
 const { felder, betreff, absendenText, vorauswahlFeld, datenschutzHref } = Astro.props;
+
+type Versteckt = Extract<Feld, { art: 'versteckt' }>;
+const versteckte = felder.filter((f): f is Versteckt => f.art === 'versteckt');
+const sichtbare = felder.filter((f): f is Exclude<Feld, Versteckt> => f.art !== 'versteckt');
 
 const labelKlasse = 'flex flex-col gap-8 text-13 font-medium text-muted';
 const feldKlasse = 'h-56 rounded-14 border border-line-strong bg-sand-input px-16 text-16 text-ink';
@@ -53,13 +58,14 @@ const feldKlasse = 'h-56 rounded-14 border border-line-strong bg-sand-input px-1
     <!-- Honeypot: bleibt bei Menschen leer -->
     <input type="checkbox" name="botcheck" class="hidden" tabindex="-1" autocomplete="off" />
 
-    {felder.map((f) => (
+    {versteckte.map((f) => <input type="hidden" name={f.name} value={f.wert} />)}
+    {sichtbare.map((f) => (
       <label class:list={[labelKlasse, f.breit && 'col-span-full']}>
         {f.label}
         {f.art === 'auswahl' ? (
           <select name={f.name} required={f.pflicht} class={feldKlasse}>
             <option value="">Bitte wählen</option>
-            {f.optionen.map((o) => <option value={o}>{o}</option>)}
+            {f.optionen.map((o) => <option value={o} selected={o === f.vorbelegt}>{o}</option>)}
           </select>
         ) : (
           <input

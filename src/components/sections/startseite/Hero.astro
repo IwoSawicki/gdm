@@ -7,7 +7,7 @@
 import Bildflaeche from '../../ui/Bildflaeche.astro';
 import Icon from '../../ui/Icon.astro';
 import KachelButton from '../../ui/KachelButton.astro';
-import { firma, telHref } from '../../../data/firma';
+import TelefonButton from '../../ui/TelefonButton.astro';
 import { anfrageZiel } from '../../../data/navigation';
 import { hero } from '../../../data/startseite';
 ---
@@ -52,10 +52,7 @@ import { hero } from '../../../data/startseite';
           <p class="hero-text mt-f20-32 mb-0 max-w-560 text-hero-lead leading-150 text-pretty text-stone">{s.text}</p>
           <div class="hero-aktionen mt-f28-44 flex flex-wrap items-center gap-f8-12">
             <KachelButton variante="hero" href={anfrageZiel} vorauswahl={s.vorauswahl} tabindex={i === 0 ? undefined : '-1'}>{s.cta}</KachelButton>
-            <a href={telHref} class="flex items-center gap-f10-14 rounded-10 border border-gold py-6 pr-f18-24 pl-6 text-white hover:bg-gold/14" tabindex={i === 0 ? undefined : '-1'}>
-              <Icon name="call" gefuellt class="flex size-f38-48 items-center justify-center rounded-8 bg-gold text-20 text-ink" />
-              <span class="text-hero-tel font-medium tabular-nums">{firma.telefon}</span>
-            </a>
+            <TelefonButton tabindex={i === 0 ? undefined : '-1'} />
           </div>
         </div>
       ))}

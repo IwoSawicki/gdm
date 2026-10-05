@@ -207,6 +207,7 @@
   --spacing-buehne: max(clamp(20px, 4vw, 56px), calc((100vw - 1440px) / 2 + 56px));
   --spacing-kopf: 84px;                            /* Höhe Kopfzeile und Mobil-Leiste */
   --spacing-hero-min: clamp(680px, 100svh, 1000px);
+  --spacing-leistung-hero-min: clamp(640px, 92svh, 980px);  /* Hero der Leistungsseiten (eigene Ergänzung) */
 
   /* Fluide Abstände, benannt nach Spanne „f<min>-<max>" */
   --spacing-f8-12: clamp(8px, 1vw, 12px);
@@ -382,6 +383,10 @@
 }
 @utility spalten-bento {
   grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr) minmax(0, 1fr);
+}
+@utility spalten-leistungs-hero {
+  /* Leistungs-Hero ab 1080px: Text | Kurzformular (eigene Ergänzung, kein Entwurf) */
+  grid-template-columns: minmax(0, 1fr) minmax(0, 460px);
 }
 @utility spalten-leiste {
   /* Mobile Leiste: Anrufen | Angebot anfordern */

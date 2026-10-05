@@ -1,4 +1,4 @@
-import { leistungenNachGruppe } from './leistungen';
+import { leistungenNachGruppe, leistungsHref, type Leistung } from './leistungen/katalog';
 
 export interface NavLink {
   text: string;
@@ -9,8 +9,11 @@ export interface NavLink {
   extern?: boolean;
 }
 
-/** Zentrales Ziel aller „Angebot anfordern"-CTAs */
-export const anfrageZiel = '/#anfrage';
+/** Zentrales Ziel aller „Angebot anfordern"-CTAs: das Anfrageformular am Ende
+ *  jeder Seite. Seiten ohne Formular (Rechtstexte, 404) verlinken auf die
+ *  Startseite (BaseLayout-Prop `mitAnfrage={false}`). */
+export const anfrageZiel = '#anfrage';
+export const anfrageZielStartseite = '/#anfrage';
 
 /** Hauptnavigation (Kopfzeile und mobiles Menü) */
 export const hauptnavigation: NavLink[] = [
@@ -22,7 +25,7 @@ export const hauptnavigation: NavLink[] = [
   { text: 'Baureinigung', href: '/#baureinigung' },
 ];
 
-const zuLink = (l: { name: string }): NavLink => ({ text: l.name, href: '/#leistungen' });
+const zuLink = (l: Leistung): NavLink => ({ text: l.name, href: leistungsHref(l) });
 
 export interface FooterSpalte {
   titel: string;

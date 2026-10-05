@@ -1,0 +1,14 @@
+---
+/** Telefon-CTA mit goldener Kachel (Hero der Startseite, Leistungs-Hero) — auf dunklem Grund */
+import Icon from './Icon.astro';
+import { firma, telHref } from '../../data/firma';
+
+interface Props {
+  tabindex?: string;
+}
+const { tabindex } = Astro.props;
+---
+<a href={telHref} tabindex={tabindex} class="flex items-center gap-f10-14 rounded-10 border border-gold py-6 pr-f18-24 pl-6 text-white hover:bg-gold/14">
+  <Icon name="call" gefuellt class="flex size-f38-48 items-center justify-center rounded-8 bg-gold text-20 text-ink" />
+  <span class="text-hero-tel font-medium tabular-nums">{firma.telefon}</span>
+</a>

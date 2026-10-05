@@ -5,16 +5,18 @@
  * goldene Linie zeigt den Lesefortschritt. Unter 1080px Burger-Menü.
  */
 import { firma, telHref } from '../../data/firma';
-import { anfrageZiel, hauptnavigation } from '../../data/navigation';
+import { hauptnavigation } from '../../data/navigation';
 import Icon from '../ui/Icon.astro';
 import Logo from '../ui/Logo.astro';
 
 type Variante = 'ueber-bild' | 'hell';
 interface Props {
+  /** Ziel der Anfrage-CTAs (Seite mit oder ohne eigenes Formular) */
+  anfrageHref: string;
   /** ueber-bild = Startseite mit dunklem Hero, hell = Unterseiten */
   variante?: Variante;
 }
-const { variante = 'ueber-bild' } = Astro.props;
+const { variante = 'ueber-bild', anfrageHref } = Astro.props;
 ---
 <header
   class="kopf fixed inset-x-0 top-0 z-50 border-b"
@@ -35,7 +37,7 @@ const { variante = 'ueber-bild' } = Astro.props;
     </nav>
     <div class="hidden shrink-0 items-center gap-24 nav:flex">
       <a href={telHref} class="text-15 font-medium whitespace-nowrap tabular-nums">{firma.telefon}</a>
-      <a href={anfrageZiel} class="kopf-knopf flex h-46 items-center rounded-10 px-22 text-15 font-medium whitespace-nowrap">Angebot anfordern</a>
+      <a href={anfrageHref} class="kopf-knopf flex h-46 items-center rounded-10 px-22 text-15 font-medium whitespace-nowrap">Angebot anfordern</a>
     </div>
 
     <div class="flex items-center gap-8 nav:hidden">
@@ -68,7 +70,7 @@ const { variante = 'ueber-bild' } = Astro.props;
     {hauptnavigation.map((l) => (
       <a href={l.href} class="border-b border-sand-menu py-14" data-menue-link>{l.text}</a>
     ))}
-    <a href={anfrageZiel} data-menue-link class="mt-20 flex h-56 items-center justify-center rounded-10 bg-ink text-17 font-medium tracking-0 text-white">Angebot anfordern</a>
+    <a href={anfrageHref} data-menue-link class="mt-20 flex h-56 items-center justify-center rounded-10 bg-ink text-17 font-medium tracking-0 text-white">Angebot anfordern</a>
   </nav>
 </header>
 

@@ -3,7 +3,8 @@
  * später entsteht hier je Eintrag eine Leistungsseite (`slug`).
  *
  * Solange es die Seite nicht gibt, zeigt der Link — wie im Entwurf — auf
- * die Leistungsübersicht der Startseite (`/#leistungen`).
+ * die Leistungsübersicht der Startseite (`/#leistungen`). Sobald eine Datei
+ * in src/data/leistungen/ existiert, `seite: true` setzen.
  */
 export type Leistungsgruppe = 'gebaeudeservice' | 'baureinigung';
 
@@ -12,11 +13,13 @@ export interface Leistung {
   /** künftige Adresse /leistungen/<slug> (Kleinbuchstaben, ohne Umlaute) */
   slug: string;
   gruppe: Leistungsgruppe;
+  /** Leistungsseite existiert unter /<slug> */
+  seite?: boolean;
 }
 
 export const leistungen: Leistung[] = [
   { name: 'Unterhaltsreinigung', slug: 'unterhaltsreinigung', gruppe: 'gebaeudeservice' },
-  { name: 'Büroreinigung', slug: 'bueroreinigung', gruppe: 'gebaeudeservice' },
+  { name: 'Büroreinigung', slug: 'bueroreinigung', gruppe: 'gebaeudeservice', seite: true },
   { name: 'Praxisreinigung', slug: 'praxisreinigung', gruppe: 'gebaeudeservice' },
   { name: 'Hotelreinigung', slug: 'hotelreinigung', gruppe: 'gebaeudeservice' },
   { name: 'Glasreinigung', slug: 'glasreinigung', gruppe: 'gebaeudeservice' },
@@ -33,3 +36,8 @@ export const leistungen: Leistung[] = [
 
 export const leistungenNachGruppe = (gruppe: Leistungsgruppe) =>
   leistungen.filter((l) => l.gruppe === gruppe);
+
+/** Ziel eines Leistungslinks: eigene Seite oder (noch) die Übersicht der Startseite */
+export const leistungsHref = (l: Leistung) => (l.seite ? `/${l.slug}` : '/#leistungen');
+
+export const leistungPerSlug = (slug: string) => leistungen.find((l) => l.slug === slug);

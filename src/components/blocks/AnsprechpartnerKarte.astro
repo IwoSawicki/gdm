@@ -1,0 +1,31 @@
+---
+/** Porträtkarte „Ein Ansprechpartner" (Bento 03 der Startseite, „Warum GDM" der Leistungsseiten) */
+import { Picture } from 'astro:assets';
+import portrait from '../../assets/taha-ali-portrait.webp';
+import { firma } from '../../data/firma';
+
+interface Props {
+  satz: string;
+  zusatz: string;
+  class?: string;
+  [key: `data-${string}`]: string | boolean | undefined;
+}
+const { satz, zusatz, class: klasse, ...rest } = Astro.props;
+---
+<article class:list={['relative flex min-h-320 flex-col justify-end overflow-hidden rounded-28 bg-ink text-white', klasse]} {...rest}>
+  <Picture
+    src={portrait}
+    alt={firma.inhaber}
+    widths={[400, 640, 900]}
+    sizes="(min-width: 1080px) 30vw, 100vw"
+    formats={['avif', 'webp']}
+    fallbackFormat="jpg"
+    quality={70}
+    class="absolute inset-0 size-full object-cover object-[50%_15%]"
+  />
+  <div class="absolute inset-0 bg-ink/45"></div>
+  <div class="relative p-f22-32">
+    <p class="m-0 text-bento-b leading-115 font-medium tracking-n025 text-balance">{satz} <span class="text-mute-on-dark">{zusatz}</span></p>
+    <div class="mt-14 font-mono text-12 tracking-p008 uppercase text-stone">{firma.inhaber} · {firma.rolle}</div>
+  </div>
+</article>

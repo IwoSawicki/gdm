@@ -12,7 +12,7 @@ interface Props {
 }
 const { title, description, h1, html } = Astro.props;
 ---
-<BaseLayout title={title} description={description} kopf="hell">
+<BaseLayout title={title} description={description} kopf="hell" mitAnfrage={false}>
   <section class="bg-paper">
     <div class="mx-auto max-w-content px-page-x pt-[calc(var(--spacing-kopf)+var(--spacing-section-y))] pb-section-y">
       <Eyebrow class="mb-16">Rechtliches</Eyebrow>

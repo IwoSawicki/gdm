@@ -10,6 +10,7 @@ Jeder neue Block kommt hierher **und** auf `/styleguide`.
 | `Button` | `variante: 'dunkel' \| 'hell' \| 'kontur' \| 'gold'`, `groesse: 'm' \| 'l' \| 'xl' \| 'leiste'`, `href?`, `vorauswahl?` | Karten-CTAs, Ablauf, 404 |
 | `KachelButton` | `variante: 'hero' \| 'dunkel' \| 'gold'`, `href?`, `type?`, `vorauswahl?` | CTA mit Pfeilkachel: Hero, Bento, Formular |
 | `Bildflaeche` | `bild?`, `alt?`, `motiv`, `sizes`, `widths`, `ausschnitt?`, `prioritaet?` | füllt positionierten Container; ohne `bild` Motiv-Platzhalter |
+| `TelefonButton` | `tabindex?` | Telefon-CTA mit Goldkachel (Hero, Leistungs-Hero) |
 | `Logo` | `variante: 'hell' \| 'dunkel'`, `hoehe: 52 \| 64` | Kopfzeile, Footer |
 
 ## `components/blocks/` — wiederverwendbar
@@ -21,6 +22,23 @@ Jeder neue Block kommt hierher **und** auf `/styleguide`.
 | `Akkordeon` | `eintraege`, `id`, `offen?` | FAQ |
 | `Formular` | `felder: Feld[]`, `betreff`, `absendenText`, `vorauswahlFeld?`, `datenschutzHref`, Slot `danke` | Anfrage; Web3Forms, Honeypot, Fehler, Danke |
 | `Laufband` | `eintraege` | Startseite unter dem Hero |
+| `Schritte` | `id?`, `eyebrow`, `titel`, `cta?`, `schritte` | Ablauf (Startseite 04, Leistungsseiten) |
+| `Einsatzgebiet` | `eyebrow`, `text?` | Startseite 06, Leistungsseiten; Orte aus `data/einsatzgebiet.ts` |
+| `Faq` | `id?`, `eyebrow`, `titel`, `hinweis`, `eintraege` | Startseite 08, Leistungsseiten; JSON-LD über `faqJsonLd()` |
+| `Anfrage` | `vorauswahl?` | Abschluss jeder Seite (`#anfrage`) |
+| `AnsprechpartnerKarte` | `satz`, `zusatz` | Bento 03, „Warum GDM" der Leistungsseiten |
+| `LeistungsHero` | `hero`, `pfad`, `aktuell`, `formularLeistung` | Leistungsseiten: H1, CTAs, Kurzformular, Vertrauensleiste |
+| `Vergleich` | `vergleich` | Leistungsseiten: „Kennen Sie das?" |
+| `Leistungsumfang` | `umfang` | Leistungsseiten: Checklisten-Karten |
+| `KartenRaster` | `eyebrow`, `titel`, `lead?`, `karten`, `variante: 'hell' \| 'sand' \| 'dunkel'`, `nummeriert?` | Turnus, Zielgruppen, Kosten |
+| `Versprechen` | `versprechen` | Leistungsseiten: Warum GDM + Bewertung |
+| `VerwandteLeistungen` | `slugs` | Leistungsseiten; Ziele aus dem Katalog |
+
+## `components/seo/`
+`Breadcrumb` (`pfad`, `aktuell`, `variante`), `JsonLd`, `jsonld.ts` (`faqJsonLd`, `breadcrumbJsonLd`, `dienstJsonLd`).
+
+## Seiten
+`src/pages/[leistung].astro` setzt jede Leistungsseite aus den Blöcken zusammen (Reihenfolge: `docs/SEITENSTRUKTUR.md`).
 
 ## `components/layout/`
 `Header` (`variante: 'ueber-bild' \| 'hell'`), `Footer`, `MobileLeiste` — im `BaseLayout`.

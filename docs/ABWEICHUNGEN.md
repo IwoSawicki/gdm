@@ -160,6 +160,28 @@ gibt es nicht (Absprache 05.10.2026).
 
 ---
 
+## Leistungsseiten (nicht im Entwurf)
+
+### 19. Gestaltung der Leistungsseiten — [Rückfrage]
+- **Vorlage:** Es gibt nur die Startseite.
+- **Umgesetzt:** `/bueroreinigung` als Vorlage aller Leistungsseiten, gebaut
+  ausschließlich aus Tokens und Bausteinen der Startseite (Hero-Look,
+  Sektionsköpfe, Karten, FAQ, Ablauf, Einsatzgebiet, Anfrage). Neu sind nur
+  Kurzformular im Hero, Vergleich „Kennen Sie das?", Checklisten- und
+  Textkarten. Aufbau und Begründung: `docs/SEITENSTRUKTUR.md`.
+
+### 20. Texte der Büroreinigung sind ein Entwurf — [Rückfrage]
+- Aussagen nur aus dem Entwurf (fester Turnus, festes Team, Vertretung,
+  Kontrollen mit Protokoll, Leistungsverzeichnis, fester Monatspreis,
+  „abgestimmt auf Ihre Betriebszeiten"). Neu formuliert und zu prüfen:
+  Leistungsumfang (Checklisten), Turnus-Empfehlungen, Zielgruppen,
+  „Kennen Sie das?", FAQ „Wann wird gereinigt?". Platzhalter [X] wie auf
+  der Startseite. Foto Hero: `hausmeisterdienste1` der alten Seite.
+
+### 21. Anfrage-CTAs zeigen auf das Formular der eigenen Seite
+- `#anfrage` statt `/#anfrage`; Seiten ohne Formular (Rechtstexte, 404)
+  verlinken weiter auf die Startseite (`BaseLayout mitAnfrage={false}`).
+
 ## Was ausdrücklich *nicht* abweicht
 - Alle Texte, Farben, Schriftgrößen, Clamp-Kurven, Abstände und Radien.
 - Schrift-Stack `'Geist', system-ui, sans-serif` exakt wie im Entwurf.

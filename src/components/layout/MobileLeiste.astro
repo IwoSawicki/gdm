@@ -1,12 +1,16 @@
 ---
 /** Feste Leiste unten auf dem Handy (unter 1080px): Anrufen | Angebot anfordern */
 import { telHref } from '../../data/firma';
-import { anfrageZiel } from '../../data/navigation';
 import Icon from '../ui/Icon.astro';
+interface Props {
+  /** Ziel der Anfrage-CTAs (Seite mit oder ohne eigenes Formular) */
+  anfrageHref: string;
+}
+const { anfrageHref } = Astro.props;
 ---
 <div class="spalten-leiste fixed inset-x-0 bottom-0 z-60 grid gap-10 border-t border-line bg-white px-16 py-12 nav:hidden">
   <a href={telHref} class="flex h-54 items-center justify-center gap-8 rounded-10 border border-stone text-16 font-medium">
     <Icon name="call" class="text-22" />Anrufen
   </a>
-  <a href={anfrageZiel} class="flex h-54 items-center justify-center rounded-10 bg-ink text-16 font-medium text-white">Angebot anfordern</a>
+  <a href={anfrageHref} class="flex h-54 items-center justify-center rounded-10 bg-ink text-16 font-medium text-white">Angebot anfordern</a>
 </div>

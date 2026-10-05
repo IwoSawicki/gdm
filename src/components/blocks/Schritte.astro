@@ -1,0 +1,37 @@
+---
+/** Ablauf in Schritten als <ol> mit großen Nummern (Startseite 04, Leistungsseiten) */
+import Button from '../ui/Button.astro';
+import SektionsKopf from './SektionsKopf.astro';
+import { anfrageZiel } from '../../data/navigation';
+
+export interface Schritt {
+  n: string;
+  titel: string;
+  text: string;
+}
+interface Props {
+  id?: string;
+  eyebrow: string;
+  titel: string;
+  /** Text des Buttons rechts im Kopf (führt zur Anfrage) */
+  cta?: string;
+  schritte: Schritt[];
+}
+const { id, eyebrow, titel, cta, schritte } = Astro.props;
+---
+<section id={id} class="bg-paper">
+  <div class="mx-auto max-w-content px-page-x py-section-y">
+    <SektionsKopf eyebrow={eyebrow} titel={titel} abstand="gross" ausgleichen={false}>
+      {cta && <Button slot="rechts" href={anfrageZiel} groesse="xl" data-reveal data-delay="100">{cta}</Button>}
+    </SektionsKopf>
+    <ol class="raster-260 m-0 grid list-none gap-f32-48 p-0">
+      {schritte.map((s, i) => (
+        <li data-reveal data-delay={String(i * 120)} class="flex flex-col gap-14">
+          <span class="text-schritt leading-086 font-medium tracking-n065 text-ink" aria-hidden="true">{s.n}</span>
+          <h3 class="mt-18 mb-0 border-t border-ink pt-20 text-22 font-medium tracking-n015">{s.titel}</h3>
+          <p class="m-0 text-15 text-pretty text-muted">{s.text}</p>
+        </li>
+      ))}
+    </ol>
+  </div>
+</section>

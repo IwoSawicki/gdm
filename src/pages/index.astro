@@ -6,23 +6,16 @@ import Manifest from '../components/sections/startseite/Manifest.astro';
 import Bereiche from '../components/sections/startseite/Bereiche.astro';
 import Leistungen from '../components/sections/startseite/Leistungen.astro';
 import Warum from '../components/sections/startseite/Warum.astro';
-import Ablauf from '../components/sections/startseite/Ablauf.astro';
+import Schritte from '../components/blocks/Schritte.astro';
 import Referenzen from '../components/sections/startseite/Referenzen.astro';
-import Einsatzgebiet from '../components/sections/startseite/Einsatzgebiet.astro';
+import Einsatzgebiet from '../components/blocks/Einsatzgebiet.astro';
 import Kundenstimmen from '../components/sections/startseite/Kundenstimmen.astro';
-import Faq from '../components/sections/startseite/Faq.astro';
-import Anfrage from '../components/sections/startseite/Anfrage.astro';
-import { faq, laufband, meta } from '../data/startseite';
+import Faq from '../components/blocks/Faq.astro';
+import Anfrage from '../components/blocks/Anfrage.astro';
+import { faqJsonLd } from '../components/seo/jsonld';
+import { ablauf, faq, gebietEyebrow, laufband, meta } from '../data/startseite';
 
-const faqLd = {
-  '@context': 'https://schema.org',
-  '@type': 'FAQPage',
-  mainEntity: faq.eintraege.map((e) => ({
-    '@type': 'Question',
-    name: e.frage,
-    acceptedAnswer: { '@type': 'Answer', text: e.antwort },
-  })),
-};
+const faqLd = faqJsonLd(faq.eintraege);
 ---
 <BaseLayout title={meta.title} description={meta.description} canonical="/" kopf="ueber-bild" jsonLd={[faqLd]}>
   <Hero />
@@ -31,10 +24,10 @@ const faqLd = {
   <Bereiche />
   <Leistungen />
   <Warum />
-  <Ablauf />
+  <Schritte id="ablauf" eyebrow={ablauf.eyebrow} titel={ablauf.titel} cta={ablauf.cta} schritte={ablauf.schritte} />
   <Referenzen />
-  <Einsatzgebiet />
+  <Einsatzgebiet eyebrow={gebietEyebrow} />
   <Kundenstimmen />
-  <Faq />
+  <Faq eyebrow={faq.eyebrow} titel={faq.titel} hinweis={faq.hinweis} eintraege={faq.eintraege} />
   <Anfrage />
 </BaseLayout>

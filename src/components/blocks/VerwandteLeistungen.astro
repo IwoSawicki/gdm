@@ -1,0 +1,29 @@
+---
+/** Querverweise auf verwandte Leistungen — aus dem Katalog abgeleitet, nicht von Hand */
+import Icon from '../ui/Icon.astro';
+import SektionsKopf from './SektionsKopf.astro';
+import { leistungPerSlug, leistungsHref, type Leistung } from '../../data/leistungen/katalog';
+
+interface Props {
+  slugs: string[];
+}
+const { slugs } = Astro.props;
+const eintraege = slugs.map(leistungPerSlug).filter((l): l is Leistung => Boolean(l));
+---
+{eintraege.length > 0 && (
+  <section class="bg-paper">
+    <div class="mx-auto max-w-content px-page-x py-section-y">
+      <SektionsKopf eyebrow="Weitere Leistungen" titel="Alles aus einer Hand" lead="Viele Kunden kombinieren mehrere Leistungen in einem Vertrag, mit demselben Ansprechpartner." />
+      <ul class="raster-260 m-0 grid list-none gap-16 p-0">
+        {eintraege.map((l) => (
+          <li data-reveal>
+            <a href={leistungsHref(l)} class="group flex items-center justify-between gap-16 rounded-24 border border-line-strong p-24 hover:border-ink">
+              <span class="text-22 leading-110 font-medium tracking-n015">{l.name}</span>
+              <Icon name="arrow_outward" class="flex size-44 shrink-0 items-center justify-center rounded-8 border border-line-strong text-20 transition-transform duration-500 ease-gdm group-hover:rotate-45 group-hover:border-ink group-hover:bg-ink group-hover:text-white" />
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+)}

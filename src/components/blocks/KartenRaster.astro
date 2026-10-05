@@ -1,0 +1,47 @@
+---
+/**
+ * Sektionskopf + Raster aus Textkarten (Turnus, Zielgruppen, Kostenfaktoren …).
+ * Hintergrund der Sektion und der Karten je Variante.
+ */
+import SektionsKopf from './SektionsKopf.astro';
+import type { Karte } from '../../data/leistungen/typ';
+
+type Variante = 'hell' | 'sand' | 'dunkel';
+interface Props {
+  id?: string;
+  eyebrow: string;
+  titel: string;
+  lead?: string;
+  karten: Karte[];
+  /** hell = weiße Sektion/sandfarbene Karten, sand = umgekehrt, dunkel = Ink mit Konturkarten */
+  variante?: Variante;
+  /** Kartennummern 01, 02 … oben links */
+  nummeriert?: boolean;
+}
+const { id, eyebrow, titel, lead, karten, variante = 'hell', nummeriert = false } = Astro.props;
+
+const sektion: Record<Variante, string> = { hell: 'bg-paper', sand: 'bg-sand', dunkel: 'bg-ink text-white' };
+const karte: Record<Variante, string> = {
+  hell: 'bg-sand',
+  sand: 'bg-paper',
+  dunkel: 'border border-line-dark',
+};
+const textFarbe: Record<Variante, string> = { hell: 'text-muted', sand: 'text-muted', dunkel: 'text-mute-on-dark-2' };
+const nrFarbe: Record<Variante, string> = { hell: 'text-label', sand: 'text-label', dunkel: 'text-gold' };
+---
+<section id={id} class={sektion[variante]}>
+  <div class="mx-auto max-w-content px-page-x py-section-y">
+    <SektionsKopf eyebrow={eyebrow} titel={titel} lead={lead} variante={variante === 'dunkel' ? 'dunkel' : 'hell'} />
+    <div class="raster-260 grid gap-16">
+      {karten.map((k, i) => (
+        <article data-reveal data-delay={String(i * 80)} class:list={['flex flex-col gap-14 rounded-24 p-f24-36-karte', karte[variante], nummeriert && 'gap-32']}>
+          {nummeriert && <span class:list={['font-mono text-13', nrFarbe[variante]]}>0{i + 1}</span>}
+          <div class="flex flex-col gap-10">
+            <h3 class="m-0 text-24 leading-110 font-medium tracking-n030">{k.titel}</h3>
+            <p class:list={['m-0 text-15 text-pretty', textFarbe[variante]]}>{k.text}</p>
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>

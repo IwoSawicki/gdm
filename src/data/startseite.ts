@@ -198,6 +198,9 @@ export const ablauf = {
   ],
 };
 
+/** Kopf der Einsatzgebiet-Sektion (Orte: data/einsatzgebiet.ts) */
+export const gebietEyebrow = '06 — Einsatzgebiet';
+
 export const referenzen = {
   eyebrow: '05 — Referenzen',
   titel: 'Objekte, die wir betreuen',
@@ -210,25 +213,6 @@ export const referenzen = {
   ],
 };
 
-export const gebiet = {
-  eyebrow: '06 — Einsatzgebiet',
-  zeile1: 'Rhein-Neckar',
-  zeile2: 'darüber hinaus.',
-  text: 'Laufende Gebäudereinigung und Gebäudeservice von Frankfurt bis Heidelberg und von Mainz bis in den Odenwald. Kurze Wege und feste Teams, die Ihr Objekt kennen.',
-  hinweis: 'Baureinigung zusätzlich deutschlandweit und in Österreich · Firmensitz',
-  spalten: ['Ort', 'Region', 'Luftlinie'],
-  orte: [
-    { ort: 'Bensheim', region: 'Bergstraße', km: 5 },
-    { ort: 'Weinheim', region: 'Bergstraße', km: 13 },
-    { ort: 'Worms', region: 'Rheinhessen', km: 15 },
-    { ort: 'Mannheim', region: 'Rhein-Neckar', km: 19 },
-    { ort: 'Ludwigshafen', region: 'Rhein-Neckar', km: 21 },
-    { ort: 'Darmstadt', region: 'Südhessen', km: 25 },
-    { ort: 'Heidelberg', region: 'Rhein-Neckar', km: 29 },
-    { ort: 'Mainz', region: 'Rheinhessen', km: 44 },
-    { ort: 'Frankfurt am Main', region: 'Rhein-Main', km: 52 },
-  ],
-};
 
 export const kundenstimmen = {
   eyebrow: '07 — Kundenstimmen',
@@ -256,16 +240,3 @@ export const faq = {
   ],
 };
 
-export const anfrage = {
-  zeile1: 'Angebot',
-  zeile2: 'anfordern',
-  lead: 'Beschreiben Sie kurz Ihr Objekt und den gewünschten Turnus. Wir melden uns innerhalb von [X] Werktagen mit einem Termin zur Besichtigung.',
-  kontaktRolle: 'Inhaber · Ihr Ansprechpartner',
-  optionenLeistung: ['Unterhaltsreinigung', 'Büro- & Praxisreinigung', 'Hotelreinigung', 'Glasreinigung', 'Hausmeisterservice', 'Winterdienst', 'Mehrere Leistungen', 'Baureinigung', 'Sonder- & Grundreinigung', 'Sonstiges'],
-  optionenTurnus: ['Täglich', 'Mehrmals pro Woche', 'Wöchentlich', '14-tägig', 'Monatlich', 'Einmalig'],
-  danke: {
-    titel: 'Vielen Dank für Ihre Anfrage',
-    text: 'Wir melden uns innerhalb von [X] Werktagen. Bei Rückfragen erreichen Sie uns unter',
-    nochmal: 'Weitere Anfrage',
-  },
-};

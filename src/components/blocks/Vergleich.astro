@@ -1,0 +1,30 @@
+---
+/** „Kennen Sie das?" — Problem beim bisherigen Dienstleister vs. Antwort von GDM */
+import Icon from '../ui/Icon.astro';
+import SektionsKopf from './SektionsKopf.astro';
+import type { Leistungsseite } from '../../data/leistungen/typ';
+
+interface Props {
+  vergleich: Leistungsseite['vergleich'];
+}
+const { vergleich } = Astro.props;
+---
+<section class="bg-paper">
+  <div class="mx-auto max-w-content px-page-x py-section-y">
+    <SektionsKopf eyebrow={vergleich.eyebrow} titel={vergleich.titel} lead={vergleich.lead} />
+    <ul class="m-0 list-none border-t border-ink p-0">
+      {vergleich.paare.map((p, i) => (
+        <li data-reveal data-delay={String(i * 60)} class="raster-380 grid items-start gap-x-32 gap-y-12 border-b border-line-strong py-f22-36">
+          <div class="flex items-start gap-14 text-17 text-label">
+            <Icon name="close" class="flex size-28 shrink-0 items-center justify-center rounded-pill border border-line-strong text-16" />
+            <span class="pt-2">{p.problem}</span>
+          </div>
+          <div class="flex items-start gap-14 text-17 font-medium text-ink">
+            <Icon name="check" class="flex size-28 shrink-0 items-center justify-center rounded-pill bg-gold text-16 text-ink" />
+            <span class="pt-2">{p.loesung}</span>
+          </div>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>

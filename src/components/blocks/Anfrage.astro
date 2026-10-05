@@ -1,14 +1,20 @@
 ---
-/** Anfrage (dunkel): Riesenüberschrift, Ansprechpartner, Formular */
+/** Anfrage (dunkel): Riesenüberschrift, Ansprechpartner, Formular — Abschluss jeder Seite */
 import { Image } from 'astro:assets';
-import portrait from '../../../assets/taha-ali-portrait.webp';
-import Formular, { type Feld } from '../../blocks/Formular.astro';
-import Icon from '../../ui/Icon.astro';
-import { firma, mailHref, telHref } from '../../../data/firma';
-import { anfrage } from '../../../data/startseite';
+import portrait from '../../assets/taha-ali-portrait.webp';
+import Formular, { type Feld } from './Formular.astro';
+import Icon from '../ui/Icon.astro';
+import { firma, mailHref, telHref } from '../../data/firma';
+import { anfrage } from '../../data/anfrage';
+
+interface Props {
+  /** belegt das Feld „Leistung" vor (muss in anfrage.optionenLeistung stehen) */
+  vorauswahl?: string;
+}
+const { vorauswahl } = Astro.props;
 
 const felder: Feld[] = [
-  { art: 'auswahl', name: 'leistung', label: 'Leistung', optionen: anfrage.optionenLeistung, breit: true },
+  { art: 'auswahl', name: 'leistung', label: 'Leistung', optionen: anfrage.optionenLeistung, breit: true, vorbelegt: vorauswahl },
   { art: 'text', name: 'firma', label: 'Firma / Hausverwaltung', autocomplete: 'organization', placeholder: 'optional' },
   { art: 'text', name: 'ort', label: 'Ort / PLZ', placeholder: 'z. B. 68161 Mannheim', pflicht: true },
   { art: 'zahl', name: 'flaeche', label: 'Fläche in m²', placeholder: 'z. B. 450' },

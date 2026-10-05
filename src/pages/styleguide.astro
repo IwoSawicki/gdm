@@ -7,6 +7,14 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import Akkordeon from '../components/blocks/Akkordeon.astro';
 import GoogleBewertung from '../components/blocks/GoogleBewertung.astro';
 import Laufband from '../components/blocks/Laufband.astro';
+import KartenRaster from '../components/blocks/KartenRaster.astro';
+import Vergleich from '../components/blocks/Vergleich.astro';
+import Leistungsumfang from '../components/blocks/Leistungsumfang.astro';
+import Versprechen from '../components/blocks/Versprechen.astro';
+import VerwandteLeistungen from '../components/blocks/VerwandteLeistungen.astro';
+import Breadcrumb from '../components/seo/Breadcrumb.astro';
+import TelefonButton from '../components/ui/TelefonButton.astro';
+import { bueroreinigung as b } from '../data/leistungen/bueroreinigung';
 import SektionsKopf from '../components/blocks/SektionsKopf.astro';
 import Button from '../components/ui/Button.astro';
 import Eyebrow from '../components/ui/Eyebrow.astro';
@@ -25,7 +33,7 @@ const radien = tokens('radius');
 const icons: IconName[] = ['add', 'apartment', 'arrow_back', 'arrow_forward', 'arrow_outward', 'call', 'check', 'close', 'home_work', 'location_on', 'medical_services', 'menu', 'north_east', 'pause', 'play_arrow', 'remove', 'star'];
 const ueberschrift = 'mt-64 mb-24 border-t border-line pt-24 text-24 font-medium';
 ---
-<BaseLayout title="Styleguide (intern)" description="Interner Styleguide" noindex kopf="hell">
+<BaseLayout title="Styleguide (intern)" description="Interner Styleguide" noindex kopf="hell" mitAnfrage={false}>
   <div class="mx-auto max-w-content overflow-hidden px-page-x pt-150 pb-section-y">
     <Eyebrow>Intern · noindex</Eyebrow>
     <h1 class="m-0 text-h2 leading-100 font-medium tracking-n040">Styleguide</h1>
@@ -115,7 +123,20 @@ const ueberschrift = 'mt-64 mb-24 border-t border-line pt-24 text-24 font-medium
     <div class="flex"><GoogleBewertung variante="karussell" /></div>
   </div>
 
-  <div class="mx-auto max-w-content px-page-x pb-section-y">
+  <div class="mx-auto flex max-w-content flex-wrap items-center gap-24 bg-ink px-page-x py-48">
+    <Breadcrumb pfad={[{ text: 'Startseite', href: '/' }]} aktuell="Breadcrumb dunkel" />
+    <TelefonButton />
+  </div>
+  <div class="mx-auto max-w-content px-page-x py-24"><Breadcrumb pfad={[{ text: 'Startseite', href: '/' }]} aktuell="Breadcrumb hell" variante="hell" /></div>
+  <Vergleich vergleich={b.vergleich} />
+  <Leistungsumfang umfang={b.umfang} />
+  <KartenRaster eyebrow="KartenRaster · dunkel, nummeriert" titel="Variante dunkel" karten={b.turnus.karten} variante="dunkel" nummeriert />
+  <KartenRaster eyebrow="KartenRaster · hell" titel="Variante hell" karten={b.zielgruppen.karten} />
+  <KartenRaster eyebrow="KartenRaster · sand" titel="Variante sand" karten={b.preis.karten} variante="sand" />
+  <Versprechen versprechen={b.versprechen} />
+  <VerwandteLeistungen slugs={b.verwandt} />
+
+  <div class="mx-auto max-w-content px-page-x py-section-y">
     <div class="border-t border-ink">
       <Akkordeon id="styleguide" eintraege={[{ frage: 'Akkordeon-Frage (offen)', antwort: 'Antwort in 17px, muted.' }, { frage: 'Zweite Frage', antwort: 'Zweite Antwort.' }]} />
     </div>
