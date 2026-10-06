@@ -4,7 +4,11 @@
  * Bewertungen (data/bewertungen.ts) als <figure>/<blockquote>/<figcaption>.
  * Startseite (07, sand) und Leistungs-/Übersichtsseiten (hell oder sand).
  */
+import { Image } from 'astro:assets';
 import GoogleBewertung from './GoogleBewertung.astro';
+import googleG from '../../assets/google-g.svg';
+// Offizielles App-Icon von my-hammer.de (apple-touch-icon, 180 px)
+import myHammer from '../../assets/myhammer-icon.png';
 import Karussell from './Karussell.astro';
 import { initialen, type Bewertung } from '../../data/bewertungen';
 
@@ -22,6 +26,8 @@ interface Props {
 const { eyebrow, titel, eintraege, variante = 'sand', spurId = 'stimmen-spur', id } = Astro.props;
 const karte: Record<Variante, string> = { sand: 'bg-paper', hell: 'bg-sand' };
 const avatar: Record<Variante, string> = { sand: 'bg-sand-avatar', hell: 'bg-paper' };
+/** Logo der Plattform, auf der die Bewertung steht — Herkunft auf einen Blick */
+const quellenLogo: Record<Bewertung['quelle'], ImageMetadata> = { Google: googleG, MyHammer: myHammer };
 ---
 <Karussell id={id} spurId={spurId} eyebrow={eyebrow} titel={titel} ausgleichen abstand="stimmen" label="Kundenstimmen" variante={variante}>
   <GoogleBewertung variante="karussell" data-reveal />
@@ -39,6 +45,8 @@ const avatar: Record<Variante, string> = { sand: 'bg-sand-avatar', hell: 'bg-pap
           <div class="text-15 font-medium">{k.name}</div>
           <div class="text-13 text-label">{k.quelle}-Bewertung · {k.jahr}</div>
         </div>
+        <!-- alt leer: die Quelle steht schon als Text daneben -->
+        <Image src={quellenLogo[k.quelle]} alt="" widths={[24, 48]} sizes="24px" class="ml-auto size-24 shrink-0" />
       </figcaption>
     </figure>
   ))}

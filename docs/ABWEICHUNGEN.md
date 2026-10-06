@@ -275,6 +275,14 @@ gibt es nicht (Absprache 05.10.2026).
 - Lighthouse meldet geringen Kontrast der grauen Manifest-Wörter vor dem
   Einfärben — das ist der Effekt aus dem Entwurf, bewusst so belassen.
 
+### 31. Plattform-Logo an jeder Kundenstimme (Wunsch Iwo, 06.10.2026)
+- **Vorlage:** Bewertungskarten ohne Logo, Quelle nur als Text.
+- **Umgesetzt:** Rechts in der Fußzeile jeder Karte das Logo der Plattform
+  (24 px): Google-„G" (vorhandene Datei) bzw. MyHammer-App-Icon
+  (`src/assets/myhammer-icon.png`, offizielles Icon von my-hammer.de).
+  `alt=""`, weil die Quelle daneben schon als Text steht.
+- **Grund:** Herkunft der Bewertung auf einen Blick, mehr Vertrauen.
+
 ## Was ausdrücklich *nicht* abweicht
 - Alle Texte, Farben, Schriftgrößen, Clamp-Kurven, Abstände und Radien.
 - Schrift-Stack `'Geist', system-ui, sans-serif` exakt wie im Entwurf.
