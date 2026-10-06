@@ -218,13 +218,7 @@ export const referenzen = {
 export const kundenstimmen = {
   eyebrow: '07 — Kundenstimmen',
   titel: 'Was unsere Auftraggeber sagen',
-  /** Platzhalter aus dem Entwurf — echte Kundenstimmen fehlen noch */
-  eintraege: [
-    { zitat: '[Kundenstimme Hausverwaltung: zwei bis drei Sätze zur laufenden Reinigung und zum festen Ansprechpartner.]', name: '[Vorname Nachname]', rolle: '[Objektbetreuung, Hausverwaltung]', initialen: '[–]' },
-    { zitat: '[Kundenstimme Büro: zwei bis drei Sätze zu gleichbleibender Qualität und Verlässlichkeit.]', name: '[Vorname Nachname]', rolle: '[Office Management, Unternehmen]', initialen: '[–]' },
-    { zitat: '[Kundenstimme Praxis: zwei bis drei Sätze zu Hygiene und Reinigung außerhalb der Sprechzeiten.]', name: '[Vorname Nachname]', rolle: '[Inhaber/in, Praxis]', initialen: '[–]' },
-    { zitat: '[Kundenstimme Bauträger: zwei bis drei Sätze zu Termintreue bei der Bauendreinigung.]', name: '[Vorname Nachname]', rolle: '[Projektleitung, Bauträger]', initialen: '[–]' },
-  ],
+  // Bewertungen selbst: data/bewertungen.ts
 };
 
 export const faq = {

@@ -11,7 +11,7 @@ gibt es nicht (Absprache 05.10.2026).
 
 ## Inhalte und Platzhalter
 
-### 1. Platzhalter des Entwurfs bleiben sichtbar — [Rückfrage]
+### 1. Platzhalter des Entwurfs bleiben sichtbar — [Rückfrage] (Kundenstimmen: Geklärt 06.10.2026)
 - **Vorlage:** „[X] Werktage" (Anfrage-Lead, Danke-Text), „[X] Stunden",
   „[X] Monaten / [X] Wochen", „[X] Mio. €" (FAQ), alle 4 Referenzen
   („[Ort]", „[Objekt, z. B. …]"), alle 4 Kundenstimmen inkl. Initialen „[–]".
@@ -245,6 +245,16 @@ gibt es nicht (Absprache 05.10.2026).
 - **Grund:** „Gebäudereinigung Rhein-Neckar" ist jetzt das Keyword von
   `/gebaeudereinigung`; zwei Seiten sollen nicht auf dasselbe zielen. Die
   Startseite trägt Marke + beide Bereiche (wie im Report).
+
+### 28. Echte Kundenstimmen statt Platzhalter
+- **06.10.2026, geliefert von Iwo:** 10 Bewertungen (8 Google, 2 MyHammer)
+  in `src/data/bewertungen.ts`, wörtlich. Namen als „Vorname I.", Jahr statt
+  „vor X Monaten". Nicht übernommen: abgeschnittene, englische und
+  textlose Bewertungen sowie eine mit „dauerte länger als gedacht".
+- Startseite 07 wie im Entwurf (Zeile unter dem Namen: „Google-Bewertung ·
+  Jahr" statt Rolle). Zusätzlich auf allen Leistungs- und Übersichtsseiten
+  (6 Bewertungen, passende zuerst). Kein Review-Schema (Google wertet
+  selbst veröffentlichte Bewertungen nicht als Sterne aus).
 
 ## Was ausdrücklich *nicht* abweicht
 - Alle Texte, Farben, Schriftgrößen, Clamp-Kurven, Abstände und Radien.

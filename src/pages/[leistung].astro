@@ -9,6 +9,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import Anfrage from '../components/blocks/Anfrage.astro';
 import Einsatzgebiet from '../components/blocks/Einsatzgebiet.astro';
 import Faq from '../components/blocks/Faq.astro';
+import Kundenstimmen from '../components/blocks/Kundenstimmen.astro';
+import { bewertungenFuer } from '../data/bewertungen';
 import KartenRaster from '../components/blocks/KartenRaster.astro';
 import LeistungsHero from '../components/blocks/LeistungsHero.astro';
 import Leistungsumfang from '../components/blocks/Leistungsumfang.astro';
@@ -53,6 +55,8 @@ const jsonLd = [
   <Versprechen versprechen={seite.versprechen} />
   <Schritte id="ablauf" eyebrow={seite.ablauf.eyebrow} titel={seite.ablauf.titel} cta={seite.ablauf.cta} schritte={seite.ablauf.schritte} />
   <KartenRaster eyebrow={seite.preis.eyebrow} titel={seite.preis.titel} lead={seite.preis.lead} karten={seite.preis.karten} variante="sand" />
+  <!-- hell: zwischen der sandfarbenen Kosten-Sektion und dem dunklen Einsatzgebiet -->
+  <Kundenstimmen eyebrow="Kundenstimmen" titel="Was unsere Auftraggeber sagen" eintraege={bewertungenFuer(seite.slug, 6)} variante="hell" />
   <Einsatzgebiet eyebrow={seite.einsatzgebiet.eyebrow} text={seite.einsatzgebiet.text} />
   <Faq eyebrow={seite.faq.eyebrow} titel={seite.faq.titel} hinweis={seite.faq.hinweis} eintraege={seite.faq.eintraege} />
   <VerwandteLeistungen slugs={seite.verwandt} />

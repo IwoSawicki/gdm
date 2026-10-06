@@ -7,6 +7,8 @@ import BaseLayout from '../../../layouts/BaseLayout.astro';
 import Anfrage from '../../blocks/Anfrage.astro';
 import Einsatzgebiet from '../../blocks/Einsatzgebiet.astro';
 import Faq from '../../blocks/Faq.astro';
+import Kundenstimmen from '../../blocks/Kundenstimmen.astro';
+import { bewertungenFuer } from '../../../data/bewertungen';
 import KartenRaster from '../../blocks/KartenRaster.astro';
 import LeistungsHero from '../../blocks/LeistungsHero.astro';
 import LeistungsKacheln from '../../blocks/LeistungsKacheln.astro';
@@ -60,6 +62,7 @@ const jsonLd = [
   ) : (
     <KartenRaster id="gebiet" eyebrow={seite.gebiet.eyebrow} titel={seite.gebiet.titel} lead={seite.gebiet.lead} karten={seite.gebiet.karten} variante="dunkel" />
   )}
+  <Kundenstimmen eyebrow="Kundenstimmen" titel="Was unsere Auftraggeber sagen" eintraege={bewertungenFuer(seite.slug, 6)} />
   <Faq eyebrow={seite.faq.eyebrow} titel={seite.faq.titel} hinweis={seite.faq.hinweis} eintraege={seite.faq.eintraege} />
   <Anfrage vorauswahl={seite.formularLeistung} />
 </BaseLayout>

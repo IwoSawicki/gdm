@@ -20,11 +20,14 @@ interface Props {
   abstand: Abstand;
   /** Bezeichnung der Kartenspur für Screenreader */
   label: string;
+  /** Hintergrund der Sektion (sand wie im Entwurf, hell für Seiten mit sandfarbenen Nachbarn) */
+  variante?: 'sand' | 'hell';
 }
-const { id, spurId, eyebrow, titel, ausgleichen = false, abstand, label } = Astro.props;
+const { id, spurId, eyebrow, titel, ausgleichen = false, abstand, label, variante = 'sand' } = Astro.props;
+const hintergrund: Record<'sand' | 'hell', string> = { sand: 'bg-sand', hell: 'bg-paper' };
 const abstaende: Record<Abstand, string> = { referenzen: 'gap-f16-24-karussell', stimmen: 'gap-16' };
 ---
-<section id={id} class="overflow-hidden bg-sand" data-karussell>
+<section id={id} class:list={['overflow-hidden', hintergrund[variante]]} data-karussell>
   <div class="mx-auto max-w-content px-page-x pt-section-y">
     <SektionsKopf eyebrow={eyebrow} titel={titel} ausgleichen={ausgleichen}>
       <div slot="rechts" data-reveal data-delay="100" class="flex gap-8">

@@ -9,11 +9,12 @@ import Warum from '../components/sections/startseite/Warum.astro';
 import Schritte from '../components/blocks/Schritte.astro';
 import Referenzen from '../components/sections/startseite/Referenzen.astro';
 import Einsatzgebiet from '../components/blocks/Einsatzgebiet.astro';
-import Kundenstimmen from '../components/sections/startseite/Kundenstimmen.astro';
+import Kundenstimmen from '../components/blocks/Kundenstimmen.astro';
+import { bewertungen } from '../data/bewertungen';
 import Faq from '../components/blocks/Faq.astro';
 import Anfrage from '../components/blocks/Anfrage.astro';
 import { faqJsonLd } from '../components/seo/jsonld';
-import { ablauf, faq, gebietEyebrow, laufband, meta } from '../data/startseite';
+import { ablauf, faq, gebietEyebrow, kundenstimmen, laufband, meta } from '../data/startseite';
 
 const faqLd = faqJsonLd(faq.eintraege);
 ---
@@ -27,7 +28,7 @@ const faqLd = faqJsonLd(faq.eintraege);
   <Schritte id="ablauf" eyebrow={ablauf.eyebrow} titel={ablauf.titel} cta={ablauf.cta} schritte={ablauf.schritte} />
   <Referenzen />
   <Einsatzgebiet eyebrow={gebietEyebrow} />
-  <Kundenstimmen />
+  <Kundenstimmen eyebrow={kundenstimmen.eyebrow} titel={kundenstimmen.titel} eintraege={bewertungen} />
   <Faq eyebrow={faq.eyebrow} titel={faq.titel} hinweis={faq.hinweis} eintraege={faq.eintraege} />
   <Anfrage />
 </BaseLayout>
