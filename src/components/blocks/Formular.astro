@@ -132,6 +132,10 @@ const feldKlasse = 'h-56 rounded-14 border border-line-strong bg-sand-input px-1
         if (!antwort.ok || !ergebnis.success) throw new Error(ergebnis.message ?? 'Versand fehlgeschlagen');
         form.hidden = true;
         danke.hidden = false;
+        // Erfolgsmeldung für die Messung (BaseLayout → Umami, später Ads-Conversion)
+        document.dispatchEvent(new CustomEvent('gdm:anfrage', {
+          detail: { leistung: String(daten.leistung ?? ''), formular: String(daten.subject ?? '') },
+        }));
       } catch {
         fehler.hidden = false;
       } finally {

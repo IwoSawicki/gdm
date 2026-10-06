@@ -15,7 +15,7 @@ import { hero } from '../../../data/startseite';
   <div class="absolute inset-x-0 -top-[6%] bottom-0" data-hero-bild>
     {hero.slides.map((s, i) => (
       <div class="hero-bild absolute inset-0" data-slide-bild data-aktiv={i === 0 ? '' : undefined}>
-        <Bildflaeche bild={s.bild} alt={s.alt} motiv={s.motiv} sizes="100vw" widths={[828, 1000]} prioritaet={i === 0} />
+        <Bildflaeche bild={s.bild} alt={s.alt} motiv={s.motiv} sizes="100vw" widths={[828, 1000]} prioritaet={i === 0} nachrangig={i > 0} />
       </div>
     ))}
   </div>
@@ -63,12 +63,12 @@ import { hero } from '../../../data/startseite';
         {hero.slides.map((s, i) => (
           <button
             type="button"
-            aria-label={s.label}
+            aria-label={`0${i + 1} ${s.label}`}
             aria-current={i === 0 ? 'true' : undefined}
             data-slide-reiter={i}
             class="hero-reiter flex flex-col gap-14 border-0 bg-transparent p-0 pb-4 text-left"
           >
-            <span class="block h-2 w-full overflow-hidden bg-white/18"><span class="block h-full w-0 bg-gold" data-slide-balken></span></span>
+            <span class="block h-2 w-full overflow-hidden bg-white/18"><span class="block h-full w-full origin-left scale-x-0 bg-gold" data-slide-balken></span></span>
             <span class="flex gap-10 overflow-hidden text-14 font-medium text-ellipsis whitespace-nowrap">
               <span class="pt-2 font-mono text-12">0{i + 1}</span>
               <span class="hidden nav:inline">{s.label}</span>
@@ -219,7 +219,8 @@ import { hero } from '../../../data/startseite';
       if (bewegung && !pausiert && document.visibilityState === 'visible') fortschritt += dt / DAUER;
       if (fortschritt >= 1) zeigen(aktuell + 1);
       balken.forEach((b, k) => {
-        b.style.width = `${k < aktuell ? 100 : k === aktuell ? fortschritt * 100 : 0}%`;
+        // transform statt width: kein Layout pro Frame (Lighthouse/LCP auf langsamen Handys)
+        b.style.transform = `scaleX(${k < aktuell ? 1 : k === aktuell ? fortschritt : 0})`;
       });
       requestAnimationFrame(schleife);
     };

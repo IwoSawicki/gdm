@@ -83,6 +83,7 @@ const { anfrageHref } = Astro.props;
       <span>© {jahr} {firma.name}. Alle Rechte vorbehalten.</span>
       <div class="flex flex-wrap gap-24">
         {rechtlicheLinks.map((l) => <a href={l.href} class="hover:text-ink">{l.text}</a>)}
+        <button type="button" data-cookie-einstellungen class="border-0 bg-transparent p-0 text-14 text-label hover:text-ink">Cookie-Einstellungen</button>
       </div>
     </div>
 

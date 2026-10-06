@@ -16,12 +16,14 @@ interface Props {
   /** sand = sandfarbene Sektion/weiße Karten, hell = weiße Sektion/sandfarbene Karten */
   variante?: Variante;
   spurId?: string;
+  /** Anker der Sektion */
+  id?: string;
 }
-const { eyebrow, titel, eintraege, variante = 'sand', spurId = 'stimmen-spur' } = Astro.props;
+const { eyebrow, titel, eintraege, variante = 'sand', spurId = 'stimmen-spur', id } = Astro.props;
 const karte: Record<Variante, string> = { sand: 'bg-paper', hell: 'bg-sand' };
 const avatar: Record<Variante, string> = { sand: 'bg-sand-avatar', hell: 'bg-paper' };
 ---
-<Karussell spurId={spurId} eyebrow={eyebrow} titel={titel} ausgleichen abstand="stimmen" label="Kundenstimmen" variante={variante}>
+<Karussell id={id} spurId={spurId} eyebrow={eyebrow} titel={titel} ausgleichen abstand="stimmen" label="Kundenstimmen" variante={variante}>
   <GoogleBewertung variante="karussell" data-reveal />
   {eintraege.map((k, i) => (
     <figure data-reveal data-delay={String(Math.min(i + 1, 4) * 80)} class:list={['m-0 flex min-h-400 shrink-0 grow-0 basis-karte-stimme snap-start flex-col justify-between gap-32 rounded-24 p-28', karte[variante]]}>

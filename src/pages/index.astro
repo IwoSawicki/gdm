@@ -14,7 +14,7 @@ import { bewertungen } from '../data/bewertungen';
 import Faq from '../components/blocks/Faq.astro';
 import Anfrage from '../components/blocks/Anfrage.astro';
 import { faqJsonLd } from '../components/seo/jsonld';
-import { ablauf, faq, gebietEyebrow, kundenstimmen, laufband, meta } from '../data/startseite';
+import { ablauf, faq, gebietEyebrow, kundenstimmen, laufband, meta, referenzen } from '../data/startseite';
 
 const faqLd = faqJsonLd(faq.eintraege);
 ---
@@ -26,9 +26,9 @@ const faqLd = faqJsonLd(faq.eintraege);
   <Leistungen />
   <Warum />
   <Schritte id="ablauf" eyebrow={ablauf.eyebrow} titel={ablauf.titel} cta={ablauf.cta} schritte={ablauf.schritte} />
-  <Referenzen />
+  {referenzen.anzeigen && <Referenzen />}
   <Einsatzgebiet eyebrow={gebietEyebrow} />
-  <Kundenstimmen eyebrow={kundenstimmen.eyebrow} titel={kundenstimmen.titel} eintraege={bewertungen} />
+  <Kundenstimmen id={referenzen.anzeigen ? undefined : 'referenzen'} eyebrow={kundenstimmen.eyebrow} titel={kundenstimmen.titel} eintraege={bewertungen} />
   <Faq eyebrow={faq.eyebrow} titel={faq.titel} hinweis={faq.hinweis} eintraege={faq.eintraege} />
   <Anfrage />
 </BaseLayout>

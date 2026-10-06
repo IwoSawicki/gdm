@@ -200,9 +200,19 @@ export const ablauf = {
 };
 
 /** Kopf der Einsatzgebiet-Sektion (Orte: data/einsatzgebiet.ts) */
-export const gebietEyebrow = '06 — Einsatzgebiet';
+/**
+ * Referenzen (05) sind Platzhalter des Entwurfs und dürfen nicht live gehen.
+ * Solange `referenzen.anzeigen` false ist: Sektion ausgeblendet, „Referenzen"
+ * im Menü springt zu den Kundenstimmen, Nummern rücken auf. Sobald echte
+ * Referenzen da sind: auf true setzen — Nummern stellen sich zurück.
+ */
+const mitReferenzen = false;
+const nummer = (mit: string, ohne: string) => (mitReferenzen ? mit : ohne);
+
+export const gebietEyebrow = `${nummer('06', '05')} — Einsatzgebiet`;
 
 export const referenzen = {
+  anzeigen: mitReferenzen,
   eyebrow: '05 — Referenzen',
   titel: 'Objekte, die wir betreuen',
   /** Platzhalter aus dem Entwurf — echte Referenzen fehlen noch */
@@ -216,13 +226,13 @@ export const referenzen = {
 
 
 export const kundenstimmen = {
-  eyebrow: '07 — Kundenstimmen',
+  eyebrow: `${nummer('07', '06')} — Kundenstimmen`,
   titel: 'Was unsere Auftraggeber sagen',
   // Bewertungen selbst: data/bewertungen.ts
 };
 
 export const faq = {
-  eyebrow: '08 — FAQ',
+  eyebrow: `${nummer('08', '07')} — FAQ`,
   titel: 'Häufige Fragen',
   hinweis: 'Ihre Frage ist nicht dabei?',
   eintraege: [

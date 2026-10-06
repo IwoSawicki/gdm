@@ -21,8 +21,11 @@ interface Props {
   ausschnitt?: string;
   /** Hero-Bild: sofort laden */
   prioritaet?: boolean;
+  /** zunächst unsichtbar (z. B. spätere Hero-Slides): niedrige Ladepriorität,
+   *  damit das sichtbare Bild und die Schriften zuerst kommen */
+  nachrangig?: boolean;
 }
-const { bild, alt = '', motiv, sizes, widths, ausschnitt = 'object-center', prioritaet = false } = Astro.props;
+const { bild, alt = '', motiv, sizes, widths, ausschnitt = 'object-center', prioritaet = false, nachrangig = false } = Astro.props;
 ---
 {bild ? (
   <Picture
@@ -34,7 +37,7 @@ const { bild, alt = '', motiv, sizes, widths, ausschnitt = 'object-center', prio
     fallbackFormat="jpg"
     quality={70}
     loading={prioritaet ? 'eager' : 'lazy'}
-    fetchpriority={prioritaet ? 'high' : 'auto'}
+    fetchpriority={prioritaet ? 'high' : nachrangig ? 'low' : 'auto'}
     class:list={['absolute inset-0 size-full object-cover', ausschnitt]}
   />
 ) : (

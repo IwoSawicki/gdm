@@ -387,8 +387,10 @@ verursacht.
 ---
 
 ## Messung und Datenschutz
-- **Umami** läuft (Konfiguration in `src/data/dienste.ts`), Google Analytics
-  folgt später hinter dem Cookie-Banner. Bewährt bei Stolz:
+- **Umami** und **Google Analytics 4** (hinter dem Cookie-Banner
+  `CookieBanner.astro`) sind eingebunden, Konfiguration in
+  `src/data/dienste.ts`. Ereignisse (Anruf-/E-Mail-Klick, Anfrage) zentral
+  im `BaseLayout`. Livegang-Status: `docs/GOLIVE.md`. Bewährt bei Stolz:
   - **Umami** (selbst gehostet, cookielos) ohne Einwilligung direkt im
     `BaseLayout`, mit `data-domains` auf die Produktionsdomain begrenzt.
   - **Google Analytics / Microsoft Clarity** nur hinter dem Cookie-Banner.

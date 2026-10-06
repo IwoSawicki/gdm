@@ -59,11 +59,13 @@ gibt es nicht (Absprache 05.10.2026).
 
 ## Struktur und Links
 
-### 5. „Cookie-Einstellungen" im Footer entfernt — [Rückfrage]
+### 5. „Cookie-Einstellungen" im Footer — Geklärt 06.10.2026
 - **Vorlage:** Link „Cookie-Einstellungen" (auf `#`).
 - **Umgesetzt:** weggelassen.
-- **Grund:** Es gibt keine Cookies und kein Banner (Umami ist cookielos).
-  Kommt mit Google Analytics zurück und öffnet dann das Banner.
+- **Grund:** Es gab keine Cookies und kein Banner (Umami ist cookielos).
+- **Geklärt:** Mit Google Analytics (06.10.2026) ist der Link wieder da und
+  öffnet das Einwilligungs-Banner (`CookieBanner.astro`, eigene Gestaltung
+  mit den Tokens — im Entwurf nicht vorhanden).
 
 ### 6. „Karriere" ausgegraut
 - **Vorlage:** Link auf `#`.
@@ -255,6 +257,23 @@ gibt es nicht (Absprache 05.10.2026).
   Jahr" statt Rolle). Zusätzlich auf allen Leistungs- und Übersichtsseiten
   (6 Bewertungen, passende zuerst). Kein Review-Schema (Google wertet
   selbst veröffentlichte Bewertungen nicht als Sterne aus).
+
+### 29. Referenzen (05) ausgeblendet bis echte Inhalte da sind — [Rückfrage]
+- **Vorlage:** Sektion 05 mit vier Platzhalter-Karten.
+- **Umgesetzt:** ausgeblendet (`mitReferenzen = false` in
+  `src/data/startseite.ts`); Menüpunkt „Referenzen" und der Button in 01
+  springen zu den Kundenstimmen; Nummern rücken auf (05 Einsatzgebiet,
+  06 Kundenstimmen, 07 FAQ).
+- **Grund:** Keine Platzhalter-Kacheln auf der Live-Seite (CLAUDE.md).
+
+### 30. Performance: Fortschrittsbalken per transform, Slide-Fotos nachrangig
+- Balken im Hero animieren `transform: scaleX()` statt `width` (optisch
+  gleich, kein Layout pro Frame); Fotos der Slides 2–4 mit
+  `fetchpriority="low"`. Lighthouse Mobil Startseite 91 → 99.
+- Screenreader-Name der Slide-Reiter enthält jetzt die sichtbare Nummer
+  („01 Gebäudereinigung").
+- Lighthouse meldet geringen Kontrast der grauen Manifest-Wörter vor dem
+  Einfärben — das ist der Effekt aus dem Entwurf, bewusst so belassen.
 
 ## Was ausdrücklich *nicht* abweicht
 - Alle Texte, Farben, Schriftgrößen, Clamp-Kurven, Abstände und Radien.

@@ -1,0 +1,90 @@
+---
+/**
+ * Einwilligung für Google Analytics. Erscheint beim ersten Besuch, bis eine
+ * Wahl getroffen ist (gespeichert in localStorage). „Cookie-Einstellungen"
+ * im Footer öffnet es erneut. GA lädt erst nach „Akzeptieren" und nur auf
+ * der Produktionsdomain — auf Staging erscheint das Banner zur Ansicht,
+ * lädt aber nie etwas. Beide Buttons gleich prominent (DSGVO).
+ */
+import { dienste } from '../../data/dienste';
+---
+<div
+  role="dialog"
+  aria-labelledby="einwilligung-titel"
+  hidden
+  data-einwilligung
+  data-ga-id={dienste.googleAnalytics.id}
+  data-ga-domains={dienste.googleAnalytics.domains.join(',')}
+  class="fixed inset-x-16 bottom-[calc(var(--spacing-kopf)+var(--spacing)*16)] z-70 mx-auto max-w-560 rounded-24 bg-ink p-24 text-white nav:right-auto nav:bottom-16 nav:left-16"
+>
+  <h2 id="einwilligung-titel" class="m-0 text-19 font-medium">Cookies & Statistik</h2>
+  <p class="mt-8 mb-0 text-15 text-mute-on-dark">
+    Mit Ihrer Einwilligung nutzen wir Google Analytics, um zu verstehen, wie unsere Website genutzt wird. Sie können die Wahl jederzeit unter „Cookie-Einstellungen" ändern. Mehr in der <a href="/datenschutz" class="text-white underline underline-offset-3">Datenschutzerklärung</a>.
+  </p>
+  <div class="mt-20 flex flex-wrap gap-8">
+    <button type="button" data-einwilligung-wahl="alle" class="flex h-48 grow items-center justify-center rounded-10 bg-gold px-20 text-15 font-medium text-ink hover:bg-gold-hover">Akzeptieren</button>
+    <button type="button" data-einwilligung-wahl="notwendig" class="flex h-48 grow items-center justify-center rounded-10 border border-white/30 px-20 text-15 font-medium text-white hover:bg-white hover:text-ink">Nur notwendige</button>
+  </div>
+</div>
+
+<script>
+  const SCHLUESSEL = 'gdm-einwilligung';
+  const banner = document.querySelector<HTMLElement>('[data-einwilligung]');
+
+  const lesen = () => {
+    try { return localStorage.getItem(SCHLUESSEL); } catch { return null; }
+  };
+  const schreiben = (wert: string) => {
+    try { localStorage.setItem(SCHLUESSEL, wert); } catch { /* privates Fenster: Wahl gilt nur für diese Seite */ }
+  };
+
+  type Fenster = Window & { dataLayer?: unknown[]; gtag?: (...args: unknown[]) => void };
+  const gaLaden = () => {
+    if (!banner) return;
+    const id = banner.dataset.gaId ?? '';
+    const erlaubt = (banner.dataset.gaDomains ?? '').split(',');
+    if (!id || !erlaubt.includes(location.hostname)) return;
+    const w = window as Fenster;
+    if (w.gtag) return;
+    w.dataLayer = w.dataLayer || [];
+    // gtag muss `arguments` pushen, nicht ein Array (so verlangt es gtag.js)
+    w.gtag = function () { w.dataLayer!.push(arguments); };
+    w.gtag('js', new Date());
+    w.gtag('config', id);
+    const skript = document.createElement('script');
+    skript.async = true;
+    skript.src = `https://www.googletagmanager.com/gtag/js?id=${id}`;
+    document.head.appendChild(skript);
+  };
+
+  if (banner) {
+    const wahl = lesen();
+    if (wahl === 'alle') gaLaden();
+    else if (wahl !== 'notwendig') banner.hidden = false;
+
+    banner.querySelectorAll<HTMLButtonElement>('[data-einwilligung-wahl]').forEach((knopf) =>
+      knopf.addEventListener('click', () => {
+        const neu = knopf.dataset.einwilligungWahl ?? 'notwendig';
+        const vorher = lesen();
+        schreiben(neu);
+        banner.hidden = true;
+        if (neu === 'alle') gaLaden();
+        // Widerruf: GA ist schon geladen → neu laden, damit es weg ist; GA-Cookies löschen
+        else if (vorher === 'alle') {
+          document.cookie.split(';').map((c) => c.split('=')[0].trim()).filter((n) => n.startsWith('_ga')).forEach((n) => {
+            document.cookie = `${n}=; Max-Age=0; path=/; domain=.${location.hostname.replace(/^www\./, '')}`;
+            document.cookie = `${n}=; Max-Age=0; path=/`;
+          });
+          location.reload();
+        }
+      }),
+    );
+
+    document.querySelectorAll('[data-cookie-einstellungen]').forEach((link) =>
+      link.addEventListener('click', () => {
+        banner.hidden = false;
+        banner.querySelector<HTMLButtonElement>('[data-einwilligung-wahl]')?.focus();
+      }),
+    );
+  }
+</script>
