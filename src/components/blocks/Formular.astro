@@ -50,9 +50,10 @@ const feldKlasse = 'h-56 rounded-14 border border-line-strong bg-sand-input px-1
     action={dienste.web3forms.endpunkt}
     method="post"
     data-formular-form
-    data-schluessel={dienste.web3forms.zugangsschluessel}
     data-vorauswahl-feld={vorauswahlFeld}
   >
+    <!-- Öffentlicher Web3Forms-Schlüssel als Feld, wie bei Stolz Marketing -->
+    <input type="hidden" name="access_key" value={dienste.web3forms.zugangsschluessel} />
     <input type="hidden" name="subject" value={betreff} />
     <input type="hidden" name="from_name" value={`Website ${firma.domain.replace('https://', '')}`} />
     <!-- Honeypot: bleibt bei Menschen leer -->
@@ -121,12 +122,15 @@ const feldKlasse = 'h-56 rounded-14 border border-line-strong bg-sand-input px-1
       e.preventDefault();
       fehler.hidden = true;
       absenden.disabled = true;
-      const daten = Object.fromEntries(new FormData(form).entries());
+      const formdaten = new FormData(form);
+      const daten = Object.fromEntries(formdaten.entries());
       try {
+        // FormData statt JSON (wie bei Stolz): kein Content-Type setzen, der
+        // Browser ergänzt die multipart-Grenze selbst.
         const antwort = await fetch(form.action, {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-          body: JSON.stringify({ ...daten, access_key: form.dataset.schluessel }),
+          headers: { Accept: 'application/json' },
+          body: formdaten,
         });
         const ergebnis = await antwort.json().catch(() => ({}));
         if (!antwort.ok || !ergebnis.success) throw new Error(ergebnis.message ?? 'Versand fehlgeschlagen');
