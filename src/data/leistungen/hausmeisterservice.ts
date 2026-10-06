@@ -14,6 +14,7 @@ export const hausmeisterservice: Leistungsseite = {
   title: 'Hausmeisterservice Rhein-Neckar & Bergstraße | GDM',
   description:
     'Hausmeisterservice für Wohnanlagen und Gewerbe: Kontrollgänge, Kleinreparaturen, Außenanlagen und ein fester Ansprechpartner. Rhein-Neckar & Bergstraße.',
+  kurz: 'Kontrollgänge, Kleinreparaturen und Außenanlagen.',
   formularLeistung: 'Hausmeisterservice',
 
   hero: {

@@ -216,6 +216,36 @@ gibt es nicht (Absprache 05.10.2026).
   am Ende (z. B. `/praxisreinigung/` der alten Seite) → 301 auf die Fassung
   ohne Schrägstrich, damit es pro Inhalt nur eine Adresse gibt.
 
+### 25. Übersichtsseiten Gebäudereinigung und Baureinigung — Texte als Entwurf — [Rückfrage]
+- `/gebaeudereinigung`: Landingpage der allgemeinen Anzeigen, Kacheln auf alle
+  Leistungsseiten; Hotelreinigung, Grünanlagenpflege, Waschraumlösungen als
+  „Außerdem" (führen zur Anfrage).
+- `/baureinigung` (alte Adresse bleibt): Bauphasen, Sonderreinigung,
+  Einsatzgebiet Deutschland & Österreich. Bitte bestätigen:
+  - „Gemeinsame Abnahme/Begehung" zum Abschluss — so üblich bei GDM?
+  - Angebot „je Bauphase oder für das ganze Projekt".
+  - Entrümpelung & Montage weiterhin im Angebot? (stehen im Entwurf als
+    projektbezogene Leistung)
+- Das Anfrageformular unten ist auf allen Seiten gleich (mit Feld „Turnus",
+  Option „Einmalig"); für Baureinigung später ggf. eigene Felder
+  (Bauvorhaben, Bauphase, Termin).
+
+### 26. Links auf die neuen Übersichten
+- Menüpunkt „Baureinigung" führt jetzt auf `/baureinigung` statt auf die
+  Karte der Startseite (`/#baureinigung`); Beschriftung unverändert.
+- Footer „Einsatzgebiet": „Gebäudeservice Rhein-Neckar" → `/gebaeudereinigung`,
+  „Baureinigung Deutschland/Österreich" → `/baureinigung`.
+- Leistungen ohne eigene Seite verlinken im Footer auf die Übersicht ihres
+  Bereichs statt auf `/#leistungen`.
+- Brotkrumen der Leistungsseiten: Startseite / Gebäudereinigung / Leistung.
+
+### 27. Title der Startseite geändert — [Rückfrage]
+- **Vorher:** „Gebäudereinigung Rhein-Neckar | GDM aus Lorsch" (mein Vorschlag aus #3).
+- **Jetzt:** „GDM – Gebäudereinigung & Baureinigung aus Lorsch".
+- **Grund:** „Gebäudereinigung Rhein-Neckar" ist jetzt das Keyword von
+  `/gebaeudereinigung`; zwei Seiten sollen nicht auf dasselbe zielen. Die
+  Startseite trägt Marke + beide Bereiche (wie im Report).
+
 ## Was ausdrücklich *nicht* abweicht
 - Alle Texte, Farben, Schriftgrößen, Clamp-Kurven, Abstände und Radien.
 - Schrift-Stack `'Geist', system-ui, sans-serif` exakt wie im Entwurf.

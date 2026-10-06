@@ -17,6 +17,7 @@ export const bueroreinigung: Leistungsseite = {
   title: 'Büroreinigung Rhein-Neckar & Bergstraße | GDM',
   description:
     'Büroreinigung in Mannheim, Heidelberg, Darmstadt und an der Bergstraße: fester Turnus, festes Team, ein Ansprechpartner und ein fester Monatspreis.',
+  kurz: 'Arbeitsplätze, Küchen und Sanitärräume, abgestimmt auf Ihre Betriebszeiten.',
   formularLeistung: 'Büro- & Praxisreinigung',
 
   hero: {

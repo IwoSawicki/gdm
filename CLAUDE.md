@@ -10,6 +10,7 @@ Daten.
 | Adresse | |
 |---|---|
 | `/` | Startseite |
+| `/gebaeudereinigung`, `/baureinigung` | Übersichtsseiten der Geschäftsbereiche (`src/components/sections/bereich/Bereichsseite.astro`, Daten in `src/data/bereiche/`) |
 | `/bueroreinigung`, `/unterhaltsreinigung`, `/treppenhausreinigung`, `/praxisreinigung`, `/glasreinigung`, `/hausmeisterservice`, `/winterdienst` | Leistungsseiten (`src/pages/[leistung].astro`, Daten in `src/data/leistungen/`) |
 | `/impressum`, `/datenschutz` | Rechtstexte (Entwurf, offene Angaben markiert) |
 | `/404` | `noindex` |

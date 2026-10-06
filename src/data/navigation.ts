@@ -22,7 +22,7 @@ export const hauptnavigation: NavLink[] = [
   { text: 'Ablauf', href: '/#ablauf' },
   { text: 'Einsatzgebiet', href: '/#gebiet' },
   { text: 'Referenzen', href: '/#referenzen' },
-  { text: 'Baureinigung', href: '/#baureinigung' },
+  { text: 'Baureinigung', href: '/baureinigung' },
 ];
 
 const zuLink = (l: Leistung): NavLink => ({ text: l.name, href: leistungsHref(l) });
@@ -40,9 +40,9 @@ export const footerSpalten: FooterSpalte[][] = [
     {
       titel: 'Einsatzgebiet',
       links: [
-        { text: 'Gebäudeservice Rhein-Neckar', href: '/#gebiet' },
-        { text: 'Baureinigung Deutschland', href: '/#gebiet' },
-        { text: 'Baureinigung Österreich', href: '/#gebiet' },
+        { text: 'Gebäudeservice Rhein-Neckar', href: '/gebaeudereinigung' },
+        { text: 'Baureinigung Deutschland', href: '/baureinigung' },
+        { text: 'Baureinigung Österreich', href: '/baureinigung#gebiet' },
       ],
     },
     {

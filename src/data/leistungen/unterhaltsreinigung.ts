@@ -13,6 +13,7 @@ export const unterhaltsreinigung: Leistungsseite = {
   title: 'Unterhaltsreinigung Rhein-Neckar & Bergstraße | GDM',
   description:
     'Unterhaltsreinigung für Gewerbe, Verwaltung und Wohnanlagen: nach Leistungsverzeichnis, mit festem Team und Turnus. Region Rhein-Neckar & Bergstraße.',
+  kurz: 'Die laufende Reinigung nach Leistungsverzeichnis und festem Turnus.',
   formularLeistung: 'Unterhaltsreinigung',
 
   hero: {

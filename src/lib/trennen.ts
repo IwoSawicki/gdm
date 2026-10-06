@@ -8,7 +8,7 @@
  * Nur für Anzeige-Texte verwenden, nicht für JSON-LD oder Formularwerte.
  */
 const FUGEN = [
-  'reinigung', 'service', 'dienst', 'unternehmen', 'anforderungen', 'verwaltungen',
+  'reinigung', 'service', 'dienst', 'unternehmen', 'unternehmer', 'anforderungen', 'verwaltungen',
   'verwaltung', 'pflege', 'management', 'betreuung', 'kontrolle', 'verzeichnis',
 ];
 const MINDESTLAENGE = 13;

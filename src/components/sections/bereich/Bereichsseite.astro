@@ -1,0 +1,65 @@
+---
+/**
+ * Übersichtsseite eines Geschäftsbereichs — gleiche Bausteine wie die
+ * Leistungsseiten, Reihenfolge für eine Kampagnen-Landingpage.
+ */
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Anfrage from '../../blocks/Anfrage.astro';
+import Einsatzgebiet from '../../blocks/Einsatzgebiet.astro';
+import Faq from '../../blocks/Faq.astro';
+import KartenRaster from '../../blocks/KartenRaster.astro';
+import LeistungsHero from '../../blocks/LeistungsHero.astro';
+import LeistungsKacheln from '../../blocks/LeistungsKacheln.astro';
+import Schritte from '../../blocks/Schritte.astro';
+import Vergleich from '../../blocks/Vergleich.astro';
+import Versprechen from '../../blocks/Versprechen.astro';
+import { breadcrumbJsonLd, dienstJsonLd, faqJsonLd, type Krume } from '../../seo/jsonld';
+import { einsatzgebiet } from '../../../data/einsatzgebiet';
+import { leistungsseiten } from '../../../data/leistungen';
+import type { Leistungsseite } from '../../../data/leistungen/typ';
+import type { Bereichsseite } from '../../../data/bereiche/typ';
+
+interface Props {
+  seite: Bereichsseite;
+}
+const { seite } = Astro.props;
+const site = Astro.site ?? new URL('https://service-gdm.de');
+const pfad: Krume[] = [{ text: 'Startseite', href: '/' }];
+const kacheln = (seite.leistungen?.slugs ?? [])
+  .map((slug) => leistungsseiten.find((l) => l.slug === slug))
+  .filter((l): l is Leistungsseite => Boolean(l));
+const gebiet = seite.gebiet.art === 'regional' ? einsatzgebiet.orte.map((o) => o.ort) : ['Deutschland', 'Österreich'];
+
+// Hintergründe wechseln sich ab: ohne Zusatz-Sektion folgt Zielgruppen direkt
+// auf den hellen Vergleich und wird deshalb dunkel.
+const zielgruppenVariante = seite.zusatz ? 'hell' : 'dunkel';
+
+const jsonLd = [
+  dienstJsonLd(seite.name, seite.description, new URL(`/${seite.slug}`, site).href, gebiet, site),
+  breadcrumbJsonLd([...pfad, { text: seite.name, href: `/${seite.slug}` }], site),
+  faqJsonLd(seite.faq.eintraege),
+];
+---
+<BaseLayout title={seite.title} description={seite.description} kopf="ueber-bild" jsonLd={jsonLd}>
+  <LeistungsHero hero={seite.hero} pfad={pfad} aktuell={seite.name} formularLeistung={seite.formularLeistung} />
+  {seite.leistungen && (
+    <LeistungsKacheln eyebrow={seite.leistungen.eyebrow} titel={seite.leistungen.titel} lead={seite.leistungen.lead} seiten={kacheln} weitere={seite.leistungen.weitere} />
+  )}
+  <Vergleich vergleich={seite.vergleich} />
+  {seite.phasen && (
+    <KartenRaster id="bauphasen" eyebrow={seite.phasen.eyebrow} titel={seite.phasen.titel} lead={seite.phasen.lead} karten={seite.phasen.karten} variante="dunkel" nummeriert />
+  )}
+  {seite.zusatz && (
+    <KartenRaster id="sonderreinigung" eyebrow={seite.zusatz.eyebrow} titel={seite.zusatz.titel} lead={seite.zusatz.lead} karten={seite.zusatz.karten} variante="sand" />
+  )}
+  <KartenRaster eyebrow={seite.zielgruppen.eyebrow} titel={seite.zielgruppen.titel} lead={seite.zielgruppen.lead} karten={seite.zielgruppen.karten} variante={zielgruppenVariante} />
+  <Versprechen versprechen={seite.versprechen} />
+  <Schritte id="ablauf" eyebrow={seite.ablauf.eyebrow} titel={seite.ablauf.titel} cta={seite.ablauf.cta} schritte={seite.ablauf.schritte} />
+  {seite.gebiet.art === 'regional' ? (
+    <Einsatzgebiet eyebrow={seite.gebiet.eyebrow} text={seite.gebiet.text} />
+  ) : (
+    <KartenRaster id="gebiet" eyebrow={seite.gebiet.eyebrow} titel={seite.gebiet.titel} lead={seite.gebiet.lead} karten={seite.gebiet.karten} variante="dunkel" />
+  )}
+  <Faq eyebrow={seite.faq.eyebrow} titel={seite.faq.titel} hinweis={seite.faq.hinweis} eintraege={seite.faq.eintraege} />
+  <Anfrage vorauswahl={seite.formularLeistung} />
+</BaseLayout>

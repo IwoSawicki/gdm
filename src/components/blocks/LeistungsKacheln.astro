@@ -1,0 +1,57 @@
+---
+/**
+ * Kacheln mit Foto, Kurztext und Pfeil — je eine Leistungsseite. Darunter
+ * Leistungen ohne eigene Seite als Pills (führen zur Anfrage).
+ */
+import Bildflaeche from '../ui/Bildflaeche.astro';
+import Icon from '../ui/Icon.astro';
+import SektionsKopf from './SektionsKopf.astro';
+import { weichTrennen } from '../../lib/trennen';
+import { leistungPerSlug } from '../../data/leistungen/katalog';
+import type { Leistungsseite } from '../../data/leistungen/typ';
+
+interface Props {
+  id?: string;
+  eyebrow: string;
+  titel: string;
+  lead: string;
+  seiten: Leistungsseite[];
+  /** Leistungen ohne eigene Seite */
+  weitere?: string[];
+}
+const { id = 'leistungen', eyebrow, titel, lead, seiten, weitere = [] } = Astro.props;
+---
+<section id={id} class="bg-sand">
+  <div class="mx-auto max-w-content px-page-x py-section-y">
+    <SektionsKopf eyebrow={eyebrow} titel={titel} lead={lead} />
+    <ul class="raster-280 m-0 grid list-none gap-16 p-0">
+      {seiten.map((s, i) => (
+        <li data-reveal data-delay={String((i % 3) * 80)}>
+          <a href={`/${s.slug}`} class="group flex h-full flex-col overflow-hidden rounded-24 bg-paper">
+            <div class="relative h-200 overflow-hidden">
+              <Bildflaeche bild={s.hero.bild} alt="" motiv={s.hero.motiv} sizes="(min-width: 1080px) 440px, 100vw" widths={[480, 880]} />
+            </div>
+            <div class="flex flex-1 flex-col gap-10 p-f24-36-karte">
+              <h3 class="m-0 text-24 leading-110 font-medium tracking-n030">{weichTrennen(leistungPerSlug(s.slug)?.name ?? s.slug)}</h3>
+              <p class="m-0 text-15 text-pretty text-muted">{s.kurz}</p>
+              <span class="mt-auto flex items-center gap-6 pt-8 text-15 font-medium">
+                Mehr erfahren
+                <Icon name="arrow_forward" class="text-18 transition-transform duration-500 ease-gdm group-hover:translate-x-4" />
+              </span>
+            </div>
+          </a>
+        </li>
+      ))}
+    </ul>
+    {weitere.length > 0 && (
+      <div data-reveal class="mt-f32-48-mt flex flex-wrap items-center gap-x-28 gap-y-12">
+        <span class="font-mono text-13 tracking-p010 uppercase text-label">Außerdem</span>
+        <div class="flex flex-wrap gap-8">
+          {weitere.map((w) => (
+            <a href="#anfrage" class="rounded-pill border border-line-strong px-14 py-8 text-14 hover:border-ink">{w}</a>
+          ))}
+        </div>
+      </div>
+    )}
+  </div>
+</section>

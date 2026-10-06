@@ -15,7 +15,8 @@ import fotoBentoKontrolle from '../assets/fotos/bento-qualitaetskontrolle.jpg';
 import type { ImageMetadata } from 'astro';
 
 export const meta = {
-  title: 'Gebäudereinigung Rhein-Neckar | GDM aus Lorsch',
+  // Startseite = Marke + beide Bereiche; „Gebäudereinigung Rhein-Neckar“ trägt /gebaeudereinigung
+  title: 'GDM – Gebäudereinigung & Baureinigung aus Lorsch',
   description:
     'Gebäudereinigung und Gebäudeservice in der Rhein-Neckar-Region: Unterhalts-, Büro- und Glasreinigung mit festem Team. Baureinigung bundesweit.',
 };

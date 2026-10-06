@@ -2,8 +2,8 @@
  * Katalog aller Leistungen. Aus ihm leiten sich die Footer-Spalten ab;
  * später entsteht hier je Eintrag eine Leistungsseite (`slug`).
  *
- * Solange es die Seite nicht gibt, zeigt der Link — wie im Entwurf — auf
- * die Leistungsübersicht der Startseite (`/#leistungen`). Sobald eine Datei
+ * Solange es die Seite nicht gibt, zeigt der Link auf die Übersicht des
+ * Geschäftsbereichs (/gebaeudereinigung bzw. /baureinigung). Sobald eine Datei
  * in src/data/leistungen/ existiert, `seite: true` setzen.
  */
 export type Leistungsgruppe = 'gebaeudeservice' | 'baureinigung';
@@ -38,7 +38,13 @@ export const leistungen: Leistung[] = [
 export const leistungenNachGruppe = (gruppe: Leistungsgruppe) =>
   leistungen.filter((l) => l.gruppe === gruppe);
 
-/** Ziel eines Leistungslinks: eigene Seite oder (noch) die Übersicht der Startseite */
-export const leistungsHref = (l: Leistung) => (l.seite ? `/${l.slug}` : '/#leistungen');
+/** Übersichtsseite je Geschäftsbereich */
+export const bereichsHref: Record<Leistungsgruppe, string> = {
+  gebaeudeservice: '/gebaeudereinigung',
+  baureinigung: '/baureinigung',
+};
+
+/** Ziel eines Leistungslinks: eigene Seite oder (noch) die Übersicht des Bereichs */
+export const leistungsHref = (l: Leistung) => (l.seite ? `/${l.slug}` : bereichsHref[l.gruppe]);
 
 export const leistungPerSlug = (slug: string) => leistungen.find((l) => l.slug === slug);

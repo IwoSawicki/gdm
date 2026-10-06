@@ -32,6 +32,7 @@ Jeder neue Block kommt hierher **und** auf `/styleguide`.
 | `Leistungsumfang` | `umfang` | Leistungsseiten: Checklisten-Karten |
 | `KartenRaster` | `eyebrow`, `titel`, `lead?`, `karten`, `variante: 'hell' \| 'sand' \| 'dunkel'`, `nummeriert?` | Turnus, Zielgruppen, Kosten |
 | `Versprechen` | `versprechen` | Leistungsseiten: Warum GDM + Bewertung |
+| `LeistungsKacheln` | `id?`, `eyebrow`, `titel`, `lead`, `seiten`, `weitere?` | Übersicht Gebäudereinigung: Foto-Kacheln je Leistungsseite + Pills ohne eigene Seite |
 | `VerwandteLeistungen` | `slugs` | Leistungsseiten; Ziele aus dem Katalog |
 
 ## `components/seo/`
@@ -41,6 +42,8 @@ Jeder neue Block kommt hierher **und** auf `/styleguide`.
 `trennen.ts` → `weichTrennen(text)`: weiche Trennzeichen an Wortfugen langer Komposita (Fallgrube 9). Wird in den Leistungsseiten-Blöcken auf Überschriften und Kartentitel angewendet; nie auf JSON-LD oder Formularwerte.
 
 ## Seiten
+`src/components/sections/bereich/Bereichsseite.astro` setzt die Übersichtsseiten der Geschäftsbereiche zusammen (`/gebaeudereinigung`, `/baureinigung`), Typ `Bereichsseite` in `src/data/bereiche/typ.ts`. Optionale Sektionen: Kacheln, Bauphasen, Sonderreinigung; Einsatzgebiet regional (Ortstabelle) oder bundesweit (Karten).
+
 `src/pages/[leistung].astro` setzt jede Leistungsseite aus den Blöcken zusammen (Reihenfolge: `docs/SEITENSTRUKTUR.md`).
 
 ## `components/layout/`

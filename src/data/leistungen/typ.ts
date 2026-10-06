@@ -20,6 +20,8 @@ export interface Leistungsseite {
   title: string;
   /** ≤ 155 Zeichen */
   description: string;
+  /** Ein Satz für Kacheln auf Übersichtsseiten */
+  kurz: string;
   /** Option im Anfrageformular, die vorausgewählt wird */
   formularLeistung: string;
   hero: {

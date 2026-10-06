@@ -13,6 +13,7 @@ export const treppenhausreinigung: Leistungsseite = {
   title: 'Treppenhausreinigung für Hausverwaltungen | GDM',
   description:
     'Treppenhausreinigung für Hausverwaltungen und Eigentümer in Rhein-Neckar & an der Bergstraße: fester Turnus, festes Team, Kontrolle mit Protokoll.',
+  kurz: 'Treppenhäuser, Eingänge und Gemeinschaftsflächen für Hausverwaltungen.',
   formularLeistung: 'Treppenhausreinigung',
 
   hero: {

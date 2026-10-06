@@ -27,7 +27,7 @@ Abweichungen vom Report sind markiert (▲).
 | `/hotelreinigung` | hotelreinigung | `/hotelreinigung/` | 2 | — |
 | `/gruenanlagenpflege` | grünanlagenpflege, grünflächenpflege | `/gruenanlagenpflege/` | 2 | — |
 | `/waschraumloesungen` | waschraumhygiene | `/waschraumloesungen/` | 2 | — |
-| `/gebaeudereinigung` (Übersicht) | gebäudereinigung, reinigungsfirma in der nähe | — | 1 | allgemein (Kampagne A) |
+| `/gebaeudereinigung` (Übersicht) ✅ | gebäudereinigung, reinigungsfirma in der nähe | — | 1 | allgemein (Kampagne A) |
 
 ▲ **Treppenhausreinigung nach vorn:** Hausverwaltungen sind die typischen
 Retainer-Kunden (wöchentlich, viele Objekte, lange Laufzeit). Report führt
@@ -43,7 +43,7 @@ echtem Inhalt (Referenz vor Ort).
 
 | Seite | Haupt-Keyword | Alte Adresse | Stufe |
 |---|---|---|---|
-| `/baureinigung` (Übersicht + Landingpage Kampagne B) | baureinigung, bauendreinigung | `/baureinigung/` | 1 |
+| `/baureinigung` (Übersicht + Landingpage Kampagne B) ✅ | baureinigung, bauendreinigung | `/baureinigung/` | 1 |
 | `/baureinigung/bauendreinigung` | bauendreinigung (1.000–10.000) | — | 2 |
 | `/baureinigung/baufeinreinigung` | baufeinreinigung, bauschlussreinigung | — | 2 |
 | `/baureinigung/baugrobreinigung` | baugrobreinigung, baustellenreinigung | — | 2 |

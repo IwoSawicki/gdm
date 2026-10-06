@@ -13,6 +13,7 @@ export const glasreinigung: Leistungsseite = {
   title: 'Glasreinigung Rhein-Neckar & Bergstraße | GDM',
   description:
     'Glasreinigung für Büros, Praxen und Wohnanlagen: Fenster, Rahmen, Glastüren und Glasfassaden im vereinbarten Intervall. Rhein-Neckar & Bergstraße.',
+  kurz: 'Fenster, Rahmen und Glasflächen im vereinbarten Intervall.',
   formularLeistung: 'Glasreinigung',
 
   hero: {

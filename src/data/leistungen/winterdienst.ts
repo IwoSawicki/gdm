@@ -14,6 +14,7 @@ export const winterdienst: Leistungsseite = {
   title: 'Winterdienst Rhein-Neckar & Bergstraße | GDM',
   description:
     'Winterdienst für Wohnanlagen und Gewerbe: Räumen und Streuen nach Wetterlage, mit Einsatzdokumentation. Für die Region Rhein-Neckar & Bergstraße.',
+  kurz: 'Räumen und Streuen nach Wetterlage, mit Dokumentation.',
   formularLeistung: 'Winterdienst',
 
   hero: {

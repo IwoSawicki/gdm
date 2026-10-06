@@ -13,6 +13,7 @@ export const praxisreinigung: Leistungsseite = {
   title: 'Praxisreinigung Rhein-Neckar & Bergstraße | GDM',
   description:
     'Praxisreinigung für Arzt-, Zahnarzt- und Therapiepraxen: hygienegerecht, außerhalb der Sprechzeiten, mit festem Team. Rhein-Neckar & Bergstraße.',
+  kurz: 'Hygienegerecht und außerhalb der Sprechzeiten.',
   formularLeistung: 'Büro- & Praxisreinigung',
 
   hero: {

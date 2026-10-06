@@ -19,6 +19,7 @@ import VerwandteLeistungen from '../components/blocks/VerwandteLeistungen.astro'
 import { breadcrumbJsonLd, dienstJsonLd, faqJsonLd, type Krume } from '../components/seo/jsonld';
 import { einsatzgebiet } from '../data/einsatzgebiet';
 import { leistungPerSlug } from '../data/leistungen/katalog';
+import { gebaeudereinigung } from '../data/bereiche/gebaeudereinigung';
 import { leistungsseiten } from '../data/leistungen';
 import type { Leistungsseite } from '../data/leistungen/typ';
 
@@ -31,7 +32,11 @@ interface Props {
 const { seite } = Astro.props;
 const name = leistungPerSlug(seite.slug)?.name ?? seite.hero.zeilen[0];
 const site = Astro.site ?? new URL('https://service-gdm.de');
-const pfad: Krume[] = [{ text: 'Startseite', href: '/' }];
+// Alle Leistungsseiten gehören bisher zum Bereich Gebäudereinigung & Service
+const pfad: Krume[] = [
+  { text: 'Startseite', href: '/' },
+  { text: gebaeudereinigung.name, href: `/${gebaeudereinigung.slug}` },
+];
 
 const jsonLd = [
   dienstJsonLd(name, seite.description, new URL(`/${seite.slug}`, site).href, einsatzgebiet.orte.map((o) => o.ort), site),
