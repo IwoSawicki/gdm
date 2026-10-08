@@ -272,6 +272,13 @@ gibt es nicht (Absprache 05.10.2026).
   `fetchpriority="low"`. Lighthouse Mobil Startseite 91 → 99.
 - Screenreader-Name der Slide-Reiter enthält jetzt die sichtbare Nummer
   („01 Gebäudereinigung").
+- **Eigener Fehler (gemeldet von Iwo, 08.10.2026):** Beim Umbau auf
+  `transform` blieb die Tailwind-Klasse `scale-x-0` stehen. Tailwind v4
+  setzt damit die Eigenschaft `scale: 0`, die mit dem `transform` des Skripts
+  multipliziert wird — die Balken waren danach unsichtbar. Das war ein
+  Fehler von mir, keine bewusste Abweichung. Behoben über eigene Klasse
+  `.hero-balken`. Künftig: Animationen nach Performance-Umbauten messen
+  (Balkenbreite nach einigen Sekunden), nicht nur Lighthouse.
 - Lighthouse meldet geringen Kontrast der grauen Manifest-Wörter vor dem
   Einfärben — das ist der Effekt aus dem Entwurf, bewusst so belassen.
 

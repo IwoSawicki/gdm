@@ -68,7 +68,7 @@ import { hero } from '../../../data/startseite';
             data-slide-reiter={i}
             class="hero-reiter flex flex-col gap-14 border-0 bg-transparent p-0 pb-4 text-left"
           >
-            <span class="block h-2 w-full overflow-hidden bg-white/18"><span class="block h-full w-full origin-left scale-x-0 bg-gold" data-slide-balken></span></span>
+            <span class="block h-2 w-full overflow-hidden bg-white/18"><span class="block h-full w-full hero-balken origin-left bg-gold" data-slide-balken></span></span>
             <span class="flex gap-10 overflow-hidden text-14 font-medium text-ellipsis whitespace-nowrap">
               <span class="pt-2 font-mono text-12">0{i + 1}</span>
               <span class="hidden nav:inline">{s.label}</span>
@@ -160,6 +160,12 @@ import { hero } from '../../../data/startseite';
   }
   .hero-reiter[aria-current='true'] {
     color: var(--color-white);
+  }
+  /* Startwert über transform, NICHT über Tailwinds scale-x-0: das setzt die
+     Eigenschaft `scale: 0`, die mit dem transform aus dem Skript multipliziert
+     wird — der Balken blieb dadurch unsichtbar (Fehler aus #30). */
+  .hero-balken {
+    transform: scaleX(0);
   }
 </style>
 
