@@ -1,5 +1,8 @@
 ---
 import RechtstextLayout from '../layouts/RechtstextLayout.astro';
-import html from '../data/rechtstexte/impressum.html?raw';
+import roh from '../data/rechtstexte/impressum.html?raw';
+import { firma } from '../data/firma';
+// Eckdaten nur aus firma.ts — im HTML steht ein Platzhalter
+const html = roh.replace('{{ustId}}', firma.ustId);
 ---
 <RechtstextLayout title="Impressum | GDM Gebäudeservice Lorsch" description="Impressum von GDM Gebäude Dienstleistung Management, Kolpingstr. 44, 64653 Lorsch." h1="Impressum" html={html} />

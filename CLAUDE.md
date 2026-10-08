@@ -518,7 +518,7 @@ mit **Vorlage**, **Umgesetzt** und **Grund**. Nichts wird still geändert.
 - Adresse: Kolpingstr. 44, 64653 Lorsch
 - E-Mail: info@service-gdm.de
 - Telefon: 06251 / 826619-0 (`tel:+4962518266190`)
-- USt-ID: `[Rückfrage]`
+- USt-ID: DE362377341 (aus dem alten Impressum)
 - Domain: `service-gdm.de`, Staging: `gdm.stolz-marketing.de`
 - Social: `[Rückfrage]`
 - Google-Bewertungen: 5,0 aus 14 (Stand Entwurf)

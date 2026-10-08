@@ -15,6 +15,8 @@ export const firma = {
   telefon: '06251 / 826619-0',
   /** für tel:-Links und JSON-LD */
   telefonLink: '+4962518266190',
+  /** Quelle: Impressum der alten Website (Stand 05.10.2026) */
+  ustId: 'DE362377341',
   domain: 'https://service-gdm.de',
   google: {
     /** Stand Entwurf v4 — bei neuen Bewertungen hier pflegen */

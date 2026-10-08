@@ -290,6 +290,28 @@ gibt es nicht (Absprache 05.10.2026).
   `alt=""`, weil die Quelle daneben schon als Text steht.
 - **Grund:** Herkunft der Bewertung auf einen Blick, mehr Vertrauen.
 
+### 32. Zahlen-Zusagen ohne „[X]“, solange GDM keine Zahl nennt — [Rückfrage]
+- **Vorlage:** „innerhalb von [X] Werktagen“, „[X] Stunden“, „[X] Monaten /
+  [X] Wochen“, „[X] Mio. €“ (Startseite, FAQ, Anfrage).
+- **Umgesetzt:** Alle fünf Werte stehen in `src/data/zusagen.ts`. Ist ein
+  Wert `null`, erscheint der Satz ohne Zahl: „Wir melden uns zeitnah“,
+  „Reklamationen bearbeiten wir umgehend“, „Laufzeit und Kündigungsfrist …
+  stehen vorab im schriftlichen Angebot“, „GDM verfügt über eine
+  Betriebshaftpflichtversicherung“. Mit Zahl wieder genau der Satz der Vorlage.
+- **Grund:** Ein sichtbares „[X]“ darf nicht live gehen; Zahlen erfinden
+  geht nicht. Sobald GDM die Werte liefert, an einer Stelle eintragen.
+
+### 33. Impressum und Datenschutz befüllt (08.10.2026)
+- USt-IdNr., Berufsbezeichnung, Kammer, Versicherer und Bildnachweis aus dem
+  Impressum der alten Website übernommen (USt-IdNr. in `firma.ts`).
+  „Geltungsraum der Versicherung“ fehlt dort — nicht ergänzt.
+- Hosting (Hetzner, Deutschland), Umami-Serverstandort und Web3Forms-Anbieter
+  aus der Datenschutzerklärung von Stolz Marketing (gleicher Server, gleiche
+  Dienste). Die EU-OS-Plattform ist seit 20.07.2025 abgeschaltet und
+  deshalb nicht mehr aufgeführt.
+- **Setzt voraus (Blocker in `docs/GOLIVE.md`):** AV-Vertrag GDM ↔ Stolz
+  Marketing, GA-Datenaufbewahrung auf 14 Monate, rechtliche Prüfung.
+
 ## Was ausdrücklich *nicht* abweicht
 - Alle Texte, Farben, Schriftgrößen, Clamp-Kurven, Abstände und Radien.
 - Schrift-Stack `'Geist', system-ui, sans-serif` exakt wie im Entwurf.

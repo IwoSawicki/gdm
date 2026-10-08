@@ -6,6 +6,7 @@
 import type { AkkordeonEintrag } from '../../components/blocks/Akkordeon.astro';
 import { ablauf } from '../startseite';
 import type { Karte } from './typ';
+import { laufzeitSatz, reklamationSatz, versicherungSatz } from '../zusagen';
 
 /** Eyebrow-Nummern der Sektionen in fester Reihenfolge */
 export const nr = {
@@ -33,9 +34,9 @@ export const ablaufSchritte = ablauf.schritte;
 export const faqStandard = {
   urlaub: { frage: 'Was passiert bei Urlaub oder Krankheit?', antwort: 'Für jedes Objekt gibt es eine eingearbeitete Vertretung aus dem festen Team. Die Arbeit findet wie vereinbart statt.' },
   kosten: { frage: 'Wie setzen sich die Kosten zusammen?', antwort: 'Die Kosten richten sich nach Fläche, Turnus und Leistungsumfang. Sie erhalten ein schriftliches Angebot mit Leistungsverzeichnis und einem festen monatlichen Preis.' },
-  laufzeit: { frage: 'Welche Vertragslaufzeit gilt?', antwort: 'Verträge für laufende Leistungen schließen wir mit einer Laufzeit von [X] Monaten und einer Kündigungsfrist von [X] Wochen ab.' },
-  reklamation: { frage: 'Wie schnell reagieren Sie bei Reklamationen?', antwort: 'Reklamationen bearbeiten wir innerhalb von [X] Stunden. Ihr Ansprechpartner ist direkt erreichbar, ohne Hotline und ohne Ticketsystem.' },
-  versicherung: { frage: 'Sind Sie für Schäden versichert?', antwort: 'GDM verfügt über eine Betriebshaftpflichtversicherung mit einer Deckungssumme von [X] Mio. €. Einen Nachweis senden wir Ihnen auf Anfrage zu.' },
+  laufzeit: { frage: 'Welche Vertragslaufzeit gilt?', antwort: laufzeitSatz('für laufende Leistungen') },
+  reklamation: { frage: 'Wie schnell reagieren Sie bei Reklamationen?', antwort: `${reklamationSatz} Ihr Ansprechpartner ist direkt erreichbar, ohne Hotline und ohne Ticketsystem.` },
+  versicherung: { frage: 'Sind Sie für Schäden versichert?', antwort: versicherungSatz },
 } satisfies Record<string, AkkordeonEintrag>;
 
 export const faqHinweis = 'Ihre Frage ist nicht dabei?';
