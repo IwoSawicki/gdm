@@ -1,5 +1,8 @@
 ---
 import RechtstextLayout from '../layouts/RechtstextLayout.astro';
-import html from '../data/rechtstexte/datenschutz.html?raw';
+import roh from '../data/rechtstexte/datenschutz.html?raw';
+import { eckdatenEinsetzen } from '../data/firma';
+// Eckdaten nur aus firma.ts — im HTML stehen Platzhalter
+const html = eckdatenEinsetzen(roh);
 ---
-<RechtstextLayout title="Datenschutz | GDM Gebäudeservice Lorsch" description="Datenschutzerklärung von GDM Gebäude Dienstleistung Management: Anfrageformular, Reichweitenmessung, Ihre Rechte." h1={'Datenschutz\u00ADerklärung'} html={html} />
+<RechtstextLayout title="Datenschutz | GDM Gebäude Dienstleistung Management" description="Datenschutzerklärung von GDM Gebäude Dienstleistung Management: Anfrageformular, Reichweitenmessung, Ihre Rechte." h1={'Datenschutz\u00ADerklärung'} html={html} />

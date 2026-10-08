@@ -25,6 +25,16 @@ export const firma = {
   },
 } as const;
 
+/** Setzt {{name}}, {{inhaber}}, {{strasse}}, {{plz}}, {{ort}}, {{telefon}},
+ *  {{telefonLink}}, {{email}}, {{ustId}} in Rechtstexte (HTML) ein — damit die
+ *  Eckdaten auch dort nur aus dieser Datei kommen. */
+export const eckdatenEinsetzen = (html: string) =>
+  html.replace(/\{\{(\w+)\}\}/g, (treffer, schluessel: string) => {
+    const wert = (firma as Record<string, unknown>)[schluessel];
+    if (typeof wert !== 'string') throw new Error(`Unbekannter Platzhalter ${treffer} im Rechtstext`);
+    return wert;
+  });
+
 export const adresseEinzeilig = `${firma.strasse}, ${firma.plz} ${firma.ort}`;
 export const telHref = `tel:${firma.telefonLink}`;
 export const mailHref = `mailto:${firma.email}`;

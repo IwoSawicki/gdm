@@ -33,7 +33,7 @@ export const treppenhausreinigung: Leistungsseite = {
     lead: 'Beschwerden über das Treppenhaus landen bei der Hausverwaltung. Damit das nicht passiert, muss die Reinigung einfach laufen.',
     paare: [
       { problem: 'Mieter beschweren sich, und Sie wissen nicht, ob überhaupt gereinigt wurde.', loesung: 'Kontrollen mit Protokoll. Sie sehen, was erledigt ist.' },
-      { problem: 'Jedes Objekt hat einen anderen Dienstleister und andere Absprachen.', loesung: 'Ein Ansprechpartner und ein Leistungsverzeichnis für alle Ihre Objekte.' },
+      { problem: 'Jedes Objekt hat einen anderen Dienstleister und andere Absprachen.', loesung: 'Ein Ansprechpartner und ein Leistungsverzeichnis je Objekt.' },
       { problem: 'Im Urlaub oder bei Krankheit fällt die Reinigung aus.', loesung: 'Eine eingearbeitete Vertretung. Gereinigt wird wie vereinbart.' },
       { problem: 'Kleinigkeiten wie defekte Lampen bleiben wochenlang unbemerkt.', loesung: 'Auf Wunsch kombiniert mit Hausmeisterservice und Kontrollgängen.' },
     ],

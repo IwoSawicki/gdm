@@ -4,7 +4,7 @@
  * Texte: ENTWURF, siehe docs/ABWEICHUNGEN.md.
  */
 import foto from '../../assets/fotos/glasreinigung-team-fenster.jpg';
-import { ablaufSchritte, faqHinweis, faqStandard, nr, versprechenPunkte } from './gemeinsam';
+import { ablaufMitAngebot, faqHinweis, faqStandard, nr, versprechenPunkte } from './gemeinsam';
 import type { Leistungsseite } from './typ';
 
 export const glasreinigung: Leistungsseite = {
@@ -30,7 +30,7 @@ export const glasreinigung: Leistungsseite = {
   vergleich: {
     eyebrow: nr.vergleich,
     titel: 'Kennen Sie das?',
-    lead: 'Saubere Fenster fallen nicht auf — schmutzige schon. Damit es gar nicht so weit kommt, braucht es einen festen Rhythmus.',
+    lead: 'Saubere Fenster fallen nicht auf – schmutzige schon. Damit es gar nicht so weit kommt, braucht es einen festen Rhythmus.',
     paare: [
       { problem: 'Die Fenster werden erst geputzt, wenn es jemand bemerkt.', loesung: 'Ein festes Intervall, im Leistungsverzeichnis vereinbart.' },
       { problem: 'Nach dem Putzen bleiben Streifen und schmutzige Rahmen.', loesung: 'Glas, Rahmen und Falze gehören dazu. Wir kontrollieren das Ergebnis.' },
@@ -44,7 +44,7 @@ export const glasreinigung: Leistungsseite = {
     titel: 'Was zur Glasreinigung gehört',
     lead: 'Welche Glasflächen wie oft gereinigt werden, legen wir gemeinsam fest. Das ist der übliche Rahmen.',
     gruppen: [
-      { titel: 'Fenster', punkte: ['Glas innen und außen', 'Rahmen und Falze', 'Fensterbänke', 'Dachfenster nach Erreichbarkeit'] },
+      { titel: 'Fenster', punkte: ['Glas innen und außen', 'Rahmen und Falze', 'Fensterbänke innen', 'Dachfenster nach Erreichbarkeit'] },
       { titel: 'Glastüren & Trennwände', punkte: ['Eingangstüren und Windfänge', 'Glastrennwände in Büros', 'Vitrinen und Glasflächen', 'Spiegel'] },
       { titel: 'Fassade & Außen', punkte: ['Schaufenster', 'Glasfassaden nach Erreichbarkeit', 'Glasdächer und Vordächer', 'Wintergärten'] },
       { titel: 'Rund ums Glas', punkte: ['Jalousien und Lamellen nach Absprache', 'Fensterbänke außen', 'Hartnäckige Verschmutzungen', 'Erstreinigung nach Bau oder Umbau'] },
@@ -66,7 +66,7 @@ export const glasreinigung: Leistungsseite = {
   zielgruppen: {
     eyebrow: nr.zielgruppen,
     titel: 'Für Büros, Praxen und Wohnanlagen',
-    lead: 'Überall, wo Glas regelmäßig sauber sein muss — einzeln beauftragt oder als Teil Ihrer laufenden Reinigung.',
+    lead: 'Überall, wo Glas regelmäßig sauber sein muss – einzeln beauftragt oder als Teil Ihrer laufenden Reinigung.',
     karten: [
       { titel: 'Büros & Verwaltungen', text: 'Fensterfronten, Glastrennwände und Eingangsbereiche.' },
       { titel: 'Praxen & Kanzleien', text: 'Saubere Fenster und Glastüren für den ersten Eindruck.' },
@@ -76,7 +76,7 @@ export const glasreinigung: Leistungsseite = {
   },
 
   versprechen: { eyebrow: nr.versprechen, titel: 'Klare Sicht, ohne nachzufragen.', punkte: versprechenPunkte },
-  ablauf: { eyebrow: nr.ablauf, titel: 'In vier Schritten zur festen Glasreinigung', cta: 'Anfrage stellen', schritte: ablaufSchritte },
+  ablauf: { eyebrow: nr.ablauf, titel: 'In vier Schritten zur festen Glasreinigung', cta: 'Anfrage stellen', schritte: ablaufMitAngebot('mit Leistungsverzeichnis und festem Preis je Reinigung') },
 
   preis: {
     eyebrow: nr.preis,
@@ -102,7 +102,7 @@ export const glasreinigung: Leistungsseite = {
     eintraege: [
       { frage: 'Reinigen Sie auch die Rahmen?', antwort: 'Ja, wenn es vereinbart ist. Rahmen, Falze und Fensterbänke halten wir im Leistungsverzeichnis fest, damit klar ist, was zur Glasreinigung gehört.' },
       { frage: 'Kann ich die Glasreinigung mit der Unterhaltsreinigung kombinieren?', antwort: 'Ja. Die Glasreinigung läuft dann im selben Vertrag mit, mit demselben Ansprechpartner und einem festen monatlichen Preis.' },
-      faqStandard.kosten,
+      { frage: 'Wie setzen sich die Kosten zusammen?', antwort: 'Die Kosten richten sich nach Glasfläche, Erreichbarkeit und Intervall. Sie erhalten ein schriftliches Angebot mit festem Preis je Reinigung oder als Teil Ihres monatlichen Pauschalpreises.' },
       faqStandard.urlaub,
       faqStandard.versicherung,
     ],

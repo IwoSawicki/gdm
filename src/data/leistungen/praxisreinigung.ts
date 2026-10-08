@@ -19,7 +19,7 @@ export const praxisreinigung: Leistungsseite = {
   hero: {
     eyebrow: 'Gebäudereinigung · Außerhalb der Sprechzeiten',
     zeilen: ['Praxisreinigung', 'in Rhein-Neckar', '& an der Bergstraße.'],
-    text: 'Hygienegerechte Reinigung von Behandlungsräumen, Wartezimmer und Sanitärräumen. Abgestimmt auf Ihre Sprechzeiten, mit festem Team, das Ihre Praxis kennt.',
+    text: 'Hygienegerechte Reinigung von Behandlungsräumen, Wartezimmern und Sanitärräumen. Abgestimmt auf Ihre Sprechzeiten, mit festem Team, das Ihre Praxis kennt.',
     cta: 'Praxisreinigung anfragen',
     bild: foto,
     alt: 'Reinigungskraft desinfiziert die Armlehne eines Behandlungsstuhls in einer Praxis',
@@ -30,7 +30,7 @@ export const praxisreinigung: Leistungsseite = {
   vergleich: {
     eyebrow: nr.vergleich,
     titel: 'Kennen Sie das?',
-    lead: 'In einer Praxis reicht „sieht sauber aus" nicht. Patienten und Team müssen sich darauf verlassen können, dass Hygiene jeden Tag stimmt.',
+    lead: 'In einer Praxis reicht „sieht sauber aus“ nicht. Patienten und Team müssen sich darauf verlassen können, dass Hygiene jeden Tag stimmt.',
     paare: [
       { problem: 'Wechselnde Reinigungskräfte kennen Ihre Hygienevorgaben nicht.', loesung: 'Ein festes Team, eingewiesen in Ihren Hygieneplan und Ihre Räume.' },
       { problem: 'Gereinigt wird, während noch Patienten im Haus sind.', loesung: 'Reinigung außerhalb der Sprechzeiten, abgestimmt auf Ihren Praxisalltag.' },
@@ -46,7 +46,7 @@ export const praxisreinigung: Leistungsseite = {
     gruppen: [
       { titel: 'Behandlungsräume', punkte: ['Böden reinigen und desinfizieren', 'Kontaktflächen, Griffe und Schalter', 'Arbeitsflächen und Ablagen', 'Waschbecken und Spender'] },
       { titel: 'Empfang & Wartezimmer', punkte: ['Empfangstresen und Wartebereich', 'Stühle, Tische und Ablagen', 'Türen und Glasflächen', 'Papierkörbe leeren'] },
-      { titel: 'Sanitärräume', punkte: ['WCs, Waschbecken und Armaturen', 'Spiegel, Fliesen und Trennwände', 'Seife, Desinfektion und Papier auffüllen', 'Desinfektion der Kontaktflächen'] },
+      { titel: 'Sanitärräume', punkte: ['WCs, Waschbecken und Armaturen', 'Spiegel, Fliesen und Trennwände', 'Seife, Desinfektionsmittel und Papier auffüllen', 'Desinfektion der Kontaktflächen'] },
       { titel: 'Personal- & Nebenräume', punkte: ['Teeküche und Aufenthaltsraum', 'Umkleiden', 'Flure und Treppen', 'Lager- und Nebenräume'] },
     ],
   },
@@ -66,11 +66,11 @@ export const praxisreinigung: Leistungsseite = {
   zielgruppen: {
     eyebrow: nr.zielgruppen,
     titel: 'Für Praxen und medizinische Einrichtungen',
-    lead: 'Von der Einzelpraxis bis zum Ärztehaus — mit Reinigung, die zu Ihren Abläufen passt.',
+    lead: 'Von der Einzelpraxis bis zum Ärztehaus – mit Reinigung, die zu Ihren Abläufen passt.',
     karten: [
       { titel: 'Arztpraxen', text: 'Allgemein- und Facharztpraxen mit täglichem Patientenverkehr.' },
       { titel: 'Zahnarztpraxen', text: 'Behandlungszimmer, Wartebereich und Sanitärräume.' },
-      { titel: 'Therapie & Physiotherapie', text: 'Behandlungsräume, Liegen, Umkleiden und Sanitärräume.' },
+      { titel: 'Physio- & Ergotherapie', text: 'Behandlungsräume, Liegen, Umkleiden und Sanitärräume.' },
       { titel: 'MVZ & Ärztehäuser', text: 'Mehrere Praxen und Gemeinschaftsflächen aus einer Hand.' },
     ],
   },

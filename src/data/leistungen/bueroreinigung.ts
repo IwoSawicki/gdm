@@ -35,7 +35,7 @@ export const bueroreinigung: Leistungsseite = {
   vergleich: {
     eyebrow: nr.vergleich,
     titel: 'Kennen Sie das?',
-    lead: 'Die meisten Büros wechseln ihre Reinigung nicht wegen des Preises, sondern weil sie hinterherlaufen müssen. Genau das soll bei uns nicht passieren.',
+    lead: 'Oft wechseln Büros ihre Reinigung nicht wegen des Preises, sondern weil sie hinterherlaufen müssen. Genau das soll bei uns nicht passieren.',
     paare: [
       { problem: 'Jede Woche kommt jemand anderes, und niemand weiß, was zu tun ist.', loesung: 'Ein festes Team, eingearbeitet in Ihr Objekt und Ihr Leistungsverzeichnis.' },
       { problem: 'Bei Urlaub oder Krankheit fällt die Reinigung einfach aus.', loesung: 'Für jedes Objekt gibt es eine eingearbeitete Vertretung. Gereinigt wird wie vereinbart.' },
@@ -74,7 +74,7 @@ export const bueroreinigung: Leistungsseite = {
     lead: 'Wie oft wir kommen, hängt von Fläche, Mitarbeiterzahl und Publikumsverkehr ab. Wir empfehlen nach der Besichtigung einen passenden Turnus.',
     karten: [
       { titel: 'Täglich', text: 'Für Büros mit vielen Arbeitsplätzen, Kundenverkehr oder Empfangsbereich.' },
-      { titel: 'Mehrmals pro Woche', text: 'Der häufigste Rhythmus für mittelgroße Büros und Verwaltungen.' },
+      { titel: 'Mehrmals pro Woche', text: 'Üblich für mittelgroße Büros und Verwaltungen.' },
       { titel: 'Wöchentlich', text: 'Für kleinere Büros und Kanzleien mit wenigen Arbeitsplätzen.' },
       { titel: '14-tägig', text: 'Als Grundpflege, ergänzt um einzelne Leistungen bei Bedarf.' },
     ],

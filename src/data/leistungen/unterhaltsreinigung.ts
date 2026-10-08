@@ -30,7 +30,7 @@ export const unterhaltsreinigung: Leistungsseite = {
   vergleich: {
     eyebrow: nr.vergleich,
     titel: 'Kennen Sie das?',
-    lead: 'Unterhaltsreinigung ist kein Einmalauftrag. Entscheidend ist, dass sie Woche für Woche gleich gut ist — ohne dass Sie sich darum kümmern müssen.',
+    lead: 'Unterhaltsreinigung ist kein Einmalauftrag. Entscheidend ist, dass sie Woche für Woche gleich gut ist – ohne dass Sie sich darum kümmern müssen.',
     paare: [
       { problem: 'Niemand weiß genau, was eigentlich vereinbart ist.', loesung: 'Ein schriftliches Leistungsverzeichnis: welcher Raum, welche Leistung, wie oft.' },
       { problem: 'Die Qualität schwankt von Woche zu Woche.', loesung: 'Ein festes Team im Objekt und regelmäßige Kontrollen mit Protokoll.' },
@@ -71,7 +71,7 @@ export const unterhaltsreinigung: Leistungsseite = {
       { titel: 'Gewerbe & Büro', text: 'Büroflächen, Empfang, Sozial- und Sanitärräume.' },
       { titel: 'Verwaltungen & Einrichtungen', text: 'Öffentliche und private Verwaltungsgebäude mit Publikumsverkehr.' },
       { titel: 'Hausverwaltungen', text: 'Gemeinschaftsflächen, Treppenhäuser und Gewerbeeinheiten im Bestand.' },
-      { titel: 'Praxen & Hotels', text: 'Mit eigenen Anforderungen an Hygiene und Zeiten — siehe Praxis- und Hotelreinigung.' },
+      { titel: 'Praxen & Hotels', text: 'Mit eigenen Anforderungen an Hygiene und Zeiten – siehe Praxisreinigung.' },
     ],
   },
 

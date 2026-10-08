@@ -29,16 +29,23 @@ Stand 08.10.2026. ☐ = offen · ☑ = erledigt
 ## B. GDM (Taha Ali) — bestätigen oder liefern
 
 - ☐ **Impressum bestätigen** (aus der alten Seite übernommen):
-  USt-IdNr. DE362377341 · Berufsbezeichnung „Gebäudereinigung“ ·
-  Handwerkskammer Frankfurt-Rhein-Main · Versicherung über AXA Center
-  Selim Balcioglu, Hattersheim — alles noch aktuell? Geltungsbereich der
-  Versicherung (z. B. Deutschland / EU)?
+  USt-IdNr. DE362377341 · Berufsbezeichnung (alt: „Gebäudereinigung“,
+  korrekt wäre eher „Gebäudereiniger“) · Handwerkskammer Frankfurt-Rhein-Main ·
+  Versicherung: Die alte Seite nennt die Agentur „AXA Center Selim
+  Balcioglu“ — gefragt ist der **Versicherer laut Police** (z. B. AXA
+  Versicherung AG, Köln) und der **Geltungsbereich** (z. B. Deutschland/EU).
 - ☐ **Bildrechte:** Die Fotos der alten Seite stammen laut altem Impressum
   von Shutterstock und Freepik, gekauft vermutlich über AJ Webdesign. Gilt
   die Lizenz für GDM auch auf der neuen Seite? Wenn unklar: eigene Fotos
   oder neue Lizenzen (Liste der verwendeten Fotos: `bildarchiv/README.md`).
 - ☐ **Texte freigeben:** Leistungs- und Übersichtsseiten sind Entwürfe
-  (`docs/ABWEICHUNGEN.md` Nr. 22, 25, 27, 32).
+  (`docs/ABWEICHUNGEN.md` Nr. 22, 25, 27, 32, 34). Dabei fünf kurze Fragen:
+  1. Ansprechpartner für Kunden: Taha Ali selbst oder ein fester Objektleiter?
+  2. Winterdienst: nur im Nahbereich um Lorsch oder im ganzen Gebiet bis
+     Frankfurt/Mainz?
+  3. Baureinigung: gibt es immer eine gemeinsame Begehung und Abnahme?
+  4. H1 „Büroreinigung in Rhein-Neckar“ → lieber „in der Rhein-Neckar-Region“?
+  5. Wortmarke im Footer „GDM Service“ so lassen?
 - ☐ *Optional, kein Blocker:* fünf Zahlen für stärkere Aussagen — Antwortzeit
   auf Anfragen (Werktage), Reklamation (Stunden), Vertragslaufzeit (Monate),
   Kündigungsfrist (Wochen), Deckungssumme der Haftpflicht (Mio. €). Bis
@@ -82,3 +89,4 @@ Stand 08.10.2026. ☐ = offen · ☑ = erledigt
 - ☑ Alle Seiten auf 1440/820/390/320 ohne seitliches Scrollen
 - ☑ Sitemap, robots.txt, Canonical, Open Graph, JSON-LD
 - ☑ Fortschrittsbalken im Hero-Slider wieder sichtbar (08.10.2026)
+- ☑ Lektorat aller Texte: Tippfehler, Widersprüche, unbelegte Aussagen (08.10.2026)

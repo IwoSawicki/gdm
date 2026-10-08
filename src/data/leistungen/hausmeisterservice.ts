@@ -31,7 +31,7 @@ export const hausmeisterservice: Leistungsseite = {
   vergleich: {
     eyebrow: nr.vergleich,
     titel: 'Kennen Sie das?',
-    lead: 'Ein guter Hausmeister ist der, von dem Sie wenig hören — weil Kleinigkeiten erledigt sind, bevor sie zum Problem werden.',
+    lead: 'Ein guter Hausmeister ist der, von dem Sie wenig hören – weil Kleinigkeiten erledigt sind, bevor sie zum Problem werden.',
     paare: [
       { problem: 'Defekte Lampen und klemmende Türen fallen erst auf, wenn Mieter anrufen.', loesung: 'Regelmäßige Kontrollgänge mit Protokoll.' },
       { problem: 'Für jede Kleinigkeit muss ein Handwerker bestellt werden.', loesung: 'Kleinreparaturen erledigt der Hausmeister direkt beim Rundgang.' },

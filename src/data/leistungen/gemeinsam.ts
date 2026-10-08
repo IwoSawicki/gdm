@@ -23,12 +23,17 @@ export const nr = {
 
 export const versprechenPunkte: Karte[] = [
   { titel: 'Festes Team', text: 'Dieselben Kräfte in Ihrem Objekt, eingearbeitet in Ihre Abläufe und Ihr Leistungsverzeichnis.' },
-  { titel: 'Vertretung inklusive', text: 'Für jedes Objekt gibt es eine eingearbeitete Vertretung. Die Arbeit findet wie vereinbart statt.' },
+  { titel: 'Feste Vertretung', text: 'Für jedes Objekt gibt es eine eingearbeitete Vertretung. Die Arbeit findet wie vereinbart statt.' },
   { titel: 'Kontrollen mit Protokoll', text: 'Regelmäßige Qualitätskontrollen im Objekt. Mängel beheben wir, bevor sie Ihnen auffallen.' },
   { titel: 'Ein Ansprechpartner', text: 'Direkt erreichbar, ohne Hotline und ohne Ticketsystem.' },
 ];
 
 export const ablaufSchritte = ablauf.schritte;
+
+/** Ablauf mit eigenem Text für Schritt 02 — für Leistungen ohne festen
+ *  Monatspreis (Glasreinigung je Reinigung, Winterdienst je Saison) */
+export const ablaufMitAngebot = (angebot: string) =>
+  ablaufSchritte.map((s) => (s.n === '02' ? { ...s, text: `Wir sehen uns das Objekt vor Ort an und erstellen ein schriftliches Angebot ${angebot}.` } : s));
 
 /** Standardfragen — jede Seite ergänzt eigene Fragen davor */
 export const faqStandard = {

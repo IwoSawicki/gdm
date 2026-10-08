@@ -5,7 +5,7 @@
  * Schneeverwehungen). Texte: ENTWURF, siehe docs/ABWEICHUNGEN.md.
  */
 import foto from '../../assets/fotos/winterdienst-streuen.jpg';
-import { ablaufSchritte, faqHinweis, faqStandard, nr, versprechenPunkte } from './gemeinsam';
+import { ablaufMitAngebot, faqHinweis, faqStandard, nr, versprechenPunkte } from './gemeinsam';
 import type { Leistungsseite } from './typ';
 
 export const winterdienst: Leistungsseite = {
@@ -31,11 +31,11 @@ export const winterdienst: Leistungsseite = {
   vergleich: {
     eyebrow: nr.vergleich,
     titel: 'Kennen Sie das?',
-    lead: 'Beim Winterdienst zählt der eine Morgen, an dem es glatt ist. Dann muss klar sein, wer räumt — und dass es nachgewiesen ist.',
+    lead: 'Beim Winterdienst zählt der eine Morgen, an dem es glatt ist. Dann muss klar sein, wer räumt – und dass es nachgewiesen ist.',
     paare: [
       { problem: 'Es schneit, und niemand weiß, ob der Dienstleister kommt.', loesung: 'Einsatz nach Wetterlage, ohne dass Sie anrufen müssen.' },
       { problem: 'Nach einem Sturz fehlt der Nachweis, dass geräumt wurde.', loesung: 'Jeder Einsatz wird dokumentiert.' },
-      { problem: 'Für den Winter brauchen Sie extra einen weiteren Dienstleister.', loesung: 'Winterdienst im selben Vertrag wie Reinigung oder Hausmeisterservice.' },
+      { problem: 'Für den Winter brauchen Sie einen weiteren Dienstleister.', loesung: 'Winterdienst im selben Vertrag wie Reinigung oder Hausmeisterservice.' },
       { problem: 'Wer verantwortlich ist, ist unklar.', loesung: 'Klare Vereinbarung über Flächen, Zeiten und Ansprechpartner.' },
     ],
   },
@@ -77,7 +77,7 @@ export const winterdienst: Leistungsseite = {
   },
 
   versprechen: { eyebrow: nr.versprechen, titel: 'Sichere Wege, dokumentiert.', punkte: versprechenPunkte },
-  ablauf: { eyebrow: nr.ablauf, titel: 'In vier Schritten zum Winterdienst', cta: 'Anfrage stellen', schritte: ablaufSchritte },
+  ablauf: { eyebrow: nr.ablauf, titel: 'In vier Schritten zum Winterdienst', cta: 'Anfrage stellen', schritte: ablaufMitAngebot('mit Räumplan und Preis als Saisonpauschale oder nach Einsätzen') },
 
   preis: {
     eyebrow: nr.preis,
@@ -93,7 +93,7 @@ export const winterdienst: Leistungsseite = {
 
   einsatzgebiet: {
     eyebrow: nr.einsatzgebiet,
-    text: 'Winterdienst für Objekte in der Region um Lorsch. Kurze Wege sind beim Winterdienst entscheidend — deshalb betreuen wir Objekte in der Nähe.',
+    text: 'Winterdienst für Objekte in der Region um Lorsch. Kurze Wege sind beim Winterdienst entscheidend – deshalb betreuen wir Objekte in der Nähe.',
   },
 
   faq: {

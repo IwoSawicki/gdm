@@ -14,6 +14,7 @@ import { weichTrennen } from '../../lib/trennen';
 import type { Krume } from '../seo/jsonld';
 import type { Leistungsseite } from '../../data/leistungen/typ';
 import { firma } from '../../data/firma';
+import { rueckmeldung } from '../../data/zusagen';
 
 interface Props {
   hero: Leistungsseite['hero'];
@@ -71,7 +72,7 @@ const zeilenHuelle = '-mt-[0.14em] block overflow-hidden pt-[0.14em] pb-[0.06em]
           <div slot="danke" class="flex flex-col gap-12 py-24">
             <Icon name="check" class="flex size-56 items-center justify-center rounded-pill bg-ink text-24 text-white" />
             <h3 class="mt-8 mb-0 text-24 font-medium tracking-n030">Vielen Dank!</h3>
-            <p class="m-0 text-muted">Wir melden uns in Kürze. Bei Rückfragen: {firma.telefon}.</p>
+            <p class="m-0 text-muted">Wir melden uns {rueckmeldung}. Bei Rückfragen: {firma.telefon}.</p>
           </div>
         </Formular>
       </div>

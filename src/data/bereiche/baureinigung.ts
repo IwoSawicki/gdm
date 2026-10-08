@@ -32,7 +32,7 @@ export const baureinigung: Bereichsseite = {
   vergleich: {
     eyebrow: '01 — Der Unterschied',
     titel: 'Kennen Sie das?',
-    lead: 'Auf der Baustelle zählt der Termin. Wenn die Reinigung nicht sitzt, verschiebt sich die Übergabe — und das kostet.',
+    lead: 'Auf der Baustelle zählt der Termin. Wenn die Reinigung nicht sitzt, verschiebt sich die Übergabe – und das kostet.',
     paare: [
       { problem: 'Die Reinigung passt nicht zum Bauablauf und steht anderen Gewerken im Weg.', loesung: 'Wir richten uns nach Ihrem Bauzeitenplan, Bauphase für Bauphase.' },
       { problem: 'Bei der Abnahme fallen Rückstände auf, und es muss nachgereinigt werden.', loesung: 'Endreinigung bis zum übergabefertigen Zustand, mit gemeinsamer Begehung.' },
@@ -44,11 +44,11 @@ export const baureinigung: Bereichsseite = {
   phasen: {
     eyebrow: '02 — Bauphasen',
     titel: 'Wir reinigen in jeder Bauphase',
-    lead: 'Einzeln beauftragt oder als Paket über den ganzen Bauablauf — abgestimmt auf Ihren Bauzeitenplan.',
+    lead: 'Einzeln beauftragt oder als Paket über den ganzen Bauablauf – abgestimmt auf Ihren Bauzeitenplan.',
     karten: [
       { titel: 'Baugrobreinigung', text: 'Entfernen von Schutt, Staub und Ablagerungen von Böden, Wänden und Flächen während der Rohbau- und Ausbauphase.' },
       { titel: 'Bauzwischenreinigung', text: 'Reinigung zwischen den Gewerken, damit nachfolgende Arbeiten auf sauberem Untergrund starten.' },
-      { titel: 'Baufeinreinigung', text: 'Fenster, Türen, Schalter, Steckdosen und Sanitäranlagen — die Reinigung vor der Abnahme.' },
+      { titel: 'Baufeinreinigung', text: 'Fenster, Türen, Schalter, Steckdosen und Sanitäranlagen – die Reinigung vor der Abnahme.' },
       { titel: 'Bauendreinigung', text: 'Die letzte, gründliche Reinigung aller Bereiche vor Übergabe oder Inbetriebnahme.' },
     ],
   },

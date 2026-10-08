@@ -312,6 +312,32 @@ gibt es nicht (Absprache 05.10.2026).
 - **Setzt voraus (Blocker in `docs/GOLIVE.md`):** AV-Vertrag GDM ↔ Stolz
   Marketing, GA-Datenaufbewahrung auf 14 Monate, rechtliche Prüfung.
 
+### 34. Lektorat aller Texte (08.10.2026)
+- **Korrigiert:** gerade Anführungszeichen („…“), Halbgeviertstrich „–“ im
+  Fließtext (Eyebrows „01 — …“ bleiben wie im Entwurf), Grammatik
+  (Wartezimmern, Desinfektionsmittel), Doppelungen („extra einen weiteren“,
+  „Therapie & Physiotherapie“ → „Physio- & Ergotherapie“, „Fensterbänke innen“).
+- **Widersprüche aufgelöst:** Ablauf-Schritt 02 und Kosten-FAQ auf
+  Glasreinigung (Preis je Reinigung) und Winterdienst (Saisonpauschale oder
+  nach Einsätzen) statt „fester Monatspreis“; Kombi-FAQ Gebäudereinigung
+  „Angebot aus einer Hand“ statt „fester monatlicher Preis“; Treppenhaus
+  „Leistungsverzeichnis je Objekt“; Verweis auf die nicht vorhandene
+  Hotelreinigungsseite entfernt; Kurzformular-Danke nutzt `zusagen.ts`.
+- **Unbelegte Aussagen entschärft:** „Die meisten …“ → „Oft …“, „Der häufigste
+  Rhythmus“ → „Üblich für“, „Vertretung inklusive“ → „Feste Vertretung“.
+- Turnus-Auswahl im Formular um Vierteljährlich, Halbjährlich, Saisonal
+  ergänzt (passend zu Glasreinigung und Winterdienst).
+- Eckdaten in Impressum/Datenschutz jetzt Platzhalter aus `firma.ts`.
+- Startseite unverändert: Ablauf-Text „festem Monatspreis“ bleibt dort wie
+  im Entwurf.
+- **[Rückfrage]** offen: Wer ist Ansprechpartner — Inhaber (Formular,
+  Footer) oder fester Objektleiter (Ablauf)? Beides steht im Entwurf. ·
+  Winterdienst-Gebiet: Text sagt „in der Nähe“, die Ortstabelle reicht bis
+  Frankfurt. · Baureinigung „gemeinsame Begehung/Abnahme“ von GDM bestätigen.
+  · H1 „in Rhein-Neckar“ sprachlich holprig, „in der Rhein-Neckar-Region“
+  wäre sauberer (Keyword bleibt). · Wortmarke „GDM Service“ im Footer
+  (Entwurf) vs. Firmenname.
+
 ## Was ausdrücklich *nicht* abweicht
 - Alle Texte, Farben, Schriftgrößen, Clamp-Kurven, Abstände und Radien.
 - Schrift-Stack `'Geist', system-ui, sans-serif` exakt wie im Entwurf.

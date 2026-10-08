@@ -20,7 +20,7 @@ export const gebaeudereinigung: Bereichsseite = {
   hero: {
     eyebrow: 'Gebäudereinigung & Gebäudeservice',
     zeilen: ['Gebäudereinigung', 'in Rhein-Neckar', '& an der Bergstraße.'],
-    text: 'Laufende Reinigung und Betreuung für Gewerbe, Praxen und Hausverwaltungen. Mit festem Turnus, festem Team und einem Ansprechpartner — aus Lorsch, mitten in der Region.',
+    text: 'Laufende Reinigung und Betreuung für Gewerbe, Praxen und Hausverwaltungen. Mit festem Turnus, festem Team und einem Ansprechpartner – aus Lorsch, mitten in der Region.',
     cta: 'Gebäudereinigung anfragen',
     bild: foto,
     alt: 'Zwei GDM-Mitarbeiter reinigen Fensterfront und Jalousien in einem hellen Raum',
@@ -39,7 +39,7 @@ export const gebaeudereinigung: Bereichsseite = {
   vergleich: {
     eyebrow: '02 — Der Unterschied',
     titel: 'Kennen Sie das?',
-    lead: 'Die meisten wechseln ihre Reinigungsfirma nicht wegen des Preises, sondern weil sie hinterherlaufen müssen. Genau das soll bei uns nicht passieren.',
+    lead: 'Oft wird die Reinigungsfirma nicht wegen des Preises gewechselt, sondern weil sie hinterherlaufen müssen. Genau das soll bei uns nicht passieren.',
     paare: [
       { problem: 'Jede Woche kommt jemand anderes, und niemand weiß, was zu tun ist.', loesung: 'Ein festes Team, eingearbeitet in Ihr Objekt und Ihr Leistungsverzeichnis.' },
       { problem: 'Bei Urlaub oder Krankheit fällt die Reinigung einfach aus.', loesung: 'Für jedes Objekt gibt es eine eingearbeitete Vertretung.' },
@@ -56,7 +56,7 @@ export const gebaeudereinigung: Bereichsseite = {
       { titel: 'Gewerbe & Verwaltung', text: 'Büros, Verwaltungsgebäude und Gewerbeflächen.' },
       { titel: 'Praxen & Einrichtungen', text: 'Arzt-, Zahnarzt- und Therapiepraxen, MVZ und Ärztehäuser.' },
       { titel: 'Hausverwaltungen & Wohnanlagen', text: 'Treppenhäuser, Gemeinschaftsflächen und Außenanlagen.' },
-      { titel: 'Hotels', text: 'Zimmer, Empfang und öffentliche Bereiche — auf Anfrage.' },
+      { titel: 'Hotels', text: 'Zimmer, Empfang und öffentliche Bereiche – auf Anfrage.' },
     ],
   },
 
@@ -75,7 +75,7 @@ export const gebaeudereinigung: Bereichsseite = {
     hinweis: faqHinweis,
     eintraege: [
       { frage: 'In welchem Gebiet sind Sie tätig?', antwort: 'Laufende Gebäudereinigung und Gebäudeservice bieten wir in der Rhein-Neckar-Region und im südlichen Rhein-Main-Gebiet an, unter anderem in Bensheim, Weinheim, Worms, Mannheim, Heidelberg, Darmstadt, Mainz und Frankfurt.' },
-      { frage: 'Kann ich mehrere Leistungen kombinieren?', antwort: 'Ja. Reinigung, Glasreinigung, Hausmeisterservice und Winterdienst laufen auf Wunsch in einem Vertrag, mit einem Ansprechpartner und einem festen monatlichen Preis.' },
+      { frage: 'Kann ich mehrere Leistungen kombinieren?', antwort: 'Ja. Reinigung, Glasreinigung, Hausmeisterservice und Winterdienst laufen auf Wunsch in einem Vertrag, mit einem Ansprechpartner und einem Angebot aus einer Hand.' },
       faqStandard.urlaub,
       faqStandard.kosten,
       faqStandard.laufzeit,
