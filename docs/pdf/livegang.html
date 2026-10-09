@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<title>GDM – Checkliste Livegang service-gdm.de</title>
+<style>
+  /* Quelle für docs/pdf/GDM-Livegang-Checkliste.pdf — Inhalt wie docs/GOLIVE.md */
+  @font-face { font-family: 'Geist'; src: url('../../public/fonts/geist-latin.woff2') format('woff2'); font-weight: 100 900; }
+  @font-face { font-family: 'Geist'; src: url('../../public/fonts/geist-latin-ext.woff2') format('woff2'); font-weight: 100 900; unicode-range: U+0100-024F, U+1E00-1EFF, U+20A0-20CF; }
+  @font-face { font-family: 'Geist Mono'; src: url('../../public/fonts/geist-mono-latin.woff2') format('woff2'); font-weight: 100 900; }
+  @page { size: A4; margin: 0; }
+  :root { --ink: #1a1a19; --muted: #57534c; --label: #6a665e; --gold: #c9a965; --gold-text: #8c6a28; --sand: #f5f3ee; --line: #e7e3da; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; }
+  body { width: 210mm; height: 297mm; padding: 12mm 14mm 10mm; font-family: 'Geist', sans-serif; color: var(--ink); font-size: 9pt; line-height: 1.34; display: flex; flex-direction: column; }
+  header { display: flex; justify-content: space-between; align-items: flex-end; border-bottom: 2px solid var(--ink); padding-bottom: 3.5mm; }
+  .eyebrow { font-family: 'Geist Mono', monospace; font-size: 7.4pt; letter-spacing: .12em; text-transform: uppercase; color: var(--gold-text); }
+  h1 { font-size: 20pt; line-height: 1.05; margin: 1.2mm 0 0; font-weight: 600; letter-spacing: -.01em; }
+  .meta { text-align: right; font-size: 8pt; color: var(--muted); line-height: 1.5; }
+  .meta b { color: var(--ink); font-weight: 600; }
+  .legende { display: flex; gap: 6mm; margin: 3mm 0 0; font-size: 7.8pt; color: var(--muted); }
+  .legende span::before { content: ''; display: inline-block; width: 3mm; height: 3mm; border: 1.2px solid var(--ink); border-radius: .7mm; margin-right: 1.5mm; vertical-align: -.5mm; }
+  .legende .b::before { background: linear-gradient(var(--ink), var(--ink)) left / .9mm 100% no-repeat; }
+  main { display: grid; grid-template-columns: 1fr 1fr; gap: 5mm 7mm; margin-top: 4mm; flex: 1; align-content: start; }
+  section h2 { font-size: 10.5pt; margin: 0 0 2mm; font-weight: 600; display: flex; align-items: baseline; gap: 2mm; }
+  section h2 .nr { font-family: 'Geist Mono', monospace; font-size: 7.4pt; color: var(--gold-text); font-weight: 500; }
+  section h2 .wer { margin-left: auto; font-family: 'Geist Mono', monospace; font-size: 7pt; font-weight: 500; color: var(--label); text-transform: uppercase; letter-spacing: .08em; }
+  ul { list-style: none; margin: 0; padding: 0; }
+  li { display: grid; grid-template-columns: 4.6mm 1fr; gap: 2.2mm; padding: 1.5mm 0; border-top: 1px solid var(--line); break-inside: avoid; }
+  li::before { content: ''; width: 3.8mm; height: 3.8mm; border: 1.2px solid var(--ink); border-radius: .8mm; margin-top: .3mm; }
+  li.blocker::before { background: linear-gradient(var(--ink), var(--ink)) left / 1.1mm 100% no-repeat; }
+  li b { font-weight: 600; }
+  li small { display: block; color: var(--muted); font-size: 8pt; margin-top: .4mm; }
+  .breit { grid-column: 1 / -1; }
+  .fragen { counter-reset: f; margin: .8mm 0 0; padding: 0; }
+  .fragen span { display: block; font-size: 8pt; color: var(--muted); padding-left: 4mm; position: relative; }
+  .fragen span::before { counter-increment: f; content: counter(f) '.'; position: absolute; left: 0; font-family: 'Geist Mono', monospace; font-size: 7pt; color: var(--gold-text); top: .3mm; }
+  .erledigt { background: var(--sand); border-radius: 2.5mm; padding: 3mm 4mm; font-size: 8pt; color: var(--muted); }
+  .erledigt h2 { font-size: 9pt; margin-bottom: 1.2mm; }
+  .erledigt p { margin: 0; }
+  footer { display: flex; justify-content: space-between; border-top: 1px solid var(--line); padding-top: 2.5mm; font-size: 7.4pt; color: var(--label); font-family: 'Geist Mono', monospace; }
+  .notiz { border-bottom: 1px solid var(--line); height: 6mm; }
+</style>
+</head>
+<body>
+  <header>
+    <div>
+      <div class="eyebrow">GDM Gebäude Dienstleistung Management · Neue Website</div>
+      <h1>Checkliste Livegang<br>service-gdm.de</h1>
+    </div>
+    <div class="meta">
+      Stand <b>09.10.2026</b><br>
+      Vorschau: <b>gdm.stolz-marketing.de</b><br>
+      Betreuung: Stolz Marketing
+    </div>
+  </header>
+  <div class="legende"><span class="b">Mit Balken = muss vor dem Livegang erledigt sein</span><span class="o">ohne Balken = optional / danach</span></div>
+
+  <main>
+    <section>
+      <h2><span class="nr">A</span> Technik &amp; Recht <span class="wer">Stolz Marketing</span></h2>
+      <ul>
+        <li class="blocker"><span><b>Formulare aktivieren und testen</b><small>Aktivierungs-Mail von FormSubmit bestätigen, Kurz- und Hauptformular in der Vorschau je einmal absenden.</small></span></li>
+        <li class="blocker"><span><b>Formular-Empfänger auf info@service-gdm.de umstellen</b><small>GDM bestätigt danach einmal die Aktivierungs-Mail (siehe B).</small></span></li>
+        <li class="blocker"><span><b>Auftragsverarbeitungs-Vertrag GDM ↔ Stolz Marketing</b><small>Für Hosting (Hetzner, Deutschland) und Besucherstatistik (Umami).</small></span></li>
+        <li class="blocker"><span><b>Google Analytics: Datenaufbewahrung 14 Monate</b><small>So steht es in der Datenschutzerklärung.</small></span></li>
+        <li class="blocker"><span><b>Impressum und Datenschutz rechtlich prüfen lassen</b></span></li>
+        <li class="blocker"><span><b>Server für service-gdm.de einrichten</b><small>Produktions-App, Domains mit und ohne www.</small></span></li>
+        <li class="blocker"><span><b>DNS umstellen</b><small>Nur Website-Einträge. E-Mail (info@service-gdm.de) bleibt unberührt.</small></span></li>
+        <li class="blocker"><span><b>Freigabe Livegang</b></span></li>
+      </ul>
+    </section>
+
+    <section>
+      <h2><span class="nr">B</span> Angaben &amp; Freigaben <span class="wer">GDM · Taha Ali</span></h2>
+      <ul>
+        <li class="blocker"><span><b>Aktivierungs-Mail von FormSubmit bestätigen</b><small>Kommt an info@service-gdm.de, Betreff „Activate Form“ — einmal auf den Link klicken.</small></span></li>
+        <li class="blocker"><span><b>Impressum bestätigen</b><small>USt-IdNr. DE362377341 · Berufsbezeichnung · Handwerkskammer Frankfurt-Rhein-Main · <b>Versicherer laut Police</b> (nicht die Agentur) und <b>Geltungsbereich</b> der Versicherung.</small></span></li>
+        <li class="blocker"><span><b>Bildrechte klären</b><small>Fotos der alten Website (Shutterstock/Freepik, über die frühere Agentur): Gilt die Lizenz auch für die neue Seite? Sonst eigene Fotos.</small></span></li>
+        <li class="blocker"><span><b>Texte freigeben</b> — dazu fünf kurze Fragen:
+          <span class="fragen">
+            <span>Ansprechpartner für Kunden: Taha Ali selbst oder ein fester Objektleiter?</span>
+            <span>Winterdienst nur im Nahbereich Lorsch oder bis Frankfurt/Mainz?</span>
+            <span>Baureinigung: immer gemeinsame Begehung und Abnahme?</span>
+            <span>Überschrift „in der Rhein-Neckar-Region“ statt „in Rhein-Neckar“?</span>
+            <span>Schriftzug „GDM Service“ unten auf der Seite so lassen?</span>
+          </span></span></li>
+        <li><span><b>Fünf Zahlen für stärkere Aussagen</b> <small>Rückmeldung auf Anfragen (Werktage) · Reklamation (Stunden) · Vertragslaufzeit (Monate) · Kündigungsfrist (Wochen) · Deckungssumme Haftpflicht (Mio. €). Ohne Zahlen stehen die Sätze neutral da.</small></span></li>
+      </ul>
+    </section>
+
+    <section>
+      <h2><span class="nr">C</span> Direkt nach dem Livegang <span class="wer">Stolz · GDM</span></h2>
+      <ul>
+        <li><span><b>Search Console:</b> Sitemap einreichen, alte Adressen abgleichen</span></li>
+        <li><span><b>Echte Testanfrage</b> über die Live-Seite, Eingang bei GDM prüfen</span></li>
+        <li><span><b>Google-Unternehmensprofil:</b> Website-Link auf service-gdm.de</span></li>
+        <li><span><b>Besucherstatistik</b> (Umami, Analytics) kommt an?</span></li>
+        <li><span><b>Google Ads:</b> Anfragen und Anrufe als Conversion</span></li>
+        <li><span><b>Nach 1–2 Wochen:</b> Fehlerseiten prüfen, Umleitungen ergänzen</span></li>
+      </ul>
+    </section>
+
+    <section>
+      <h2><span class="nr">D</span> Notizen</h2>
+      <div class="notiz"></div><div class="notiz"></div><div class="notiz"></div><div class="notiz"></div><div class="notiz"></div><div class="notiz"></div>
+    </section>
+
+    <div class="erledigt breit">
+      <h2>Bereits erledigt</h2>
+      <p>Startseite, 2 Übersichts- und 7 Leistungsseiten (Büro-, Unterhalts-, Treppenhaus-, Praxis-, Glasreinigung, Hausmeisterservice, Winterdienst) · Impressum und Datenschutz befüllt · echte Google- und MyHammer-Bewertungen · alle 29 Adressen der alten Seite umgeleitet und geprüft · Cookie-Banner, Besucherstatistik, Anfrage- und Anruf-Messung · schnelle Ladezeiten (Google-Test 96–100 von 100) · auf Handy, Tablet und Desktop geprüft · Texte lektoriert.</p>
+    </div>
+  </main>
+
+  <footer><span>Stolz Marketing · iwo@stolz-marketing.de</span><span>Bitte erledigte Punkte abhaken und zurücksenden</span></footer>
+</body>
+</html>

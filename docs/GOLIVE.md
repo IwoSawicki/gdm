@@ -1,17 +1,16 @@
 # Livegang service-gdm.de — To-do-Liste
 
-Stand 08.10.2026. ☐ = offen · ☑ = erledigt
+Stand 09.10.2026. ☐ = offen · ☑ = erledigt
 
 ## A. Iwo — Blocker (ohne diese Punkte nicht live)
 
-- ☐ **Formulare auf Staging testen:** auf gdm.stolz-marketing.de je einmal
-  das Kurzformular (oben auf einer Leistungsseite) und das Hauptformular
-  (unten) absenden → Eingang bei iwo@stolz-marketing.de prüfen. Aus der
-  Cloud-Umgebung nicht testbar (Web3Forms sperrt Server-IPs).
-- ☐ **Eigener Web3Forms-Schlüssel für GDM:** auf web3forms.com mit
-  **info@service-gdm.de** erzeugen (kostenlos, nur E-Mail) und an Claude
-  geben → kommt in `src/data/dienste.ts`. Sonst landen Kundenanfragen bei
-  Stolz. Danach ein Testversand an GDM.
+- ☐ **Formulare aktivieren und testen:** FormSubmit hat eine
+  Aktivierungs-Mail an iwo@stolz-marketing.de geschickt („Activate Form“) →
+  bestätigen. Dann auf gdm.stolz-marketing.de Kurzformular (oben auf einer
+  Leistungsseite) und Hauptformular (unten) je einmal absenden, Eingang prüfen.
+- ☐ **Formular auf GDM umstellen:** Claude stellt das Ziel in
+  `src/data/dienste.ts` auf info@service-gdm.de um; GDM bestätigt einmal die
+  Aktivierungs-Mail von FormSubmit. Kein Schlüssel nötig.
 - ☐ **AV-Vertrag GDM ↔ Stolz Marketing** abschließen (Hosting auf Hetzner,
   Umami). Die Datenschutzerklärung sagt bereits, dass er besteht.
 - ☐ **Google Analytics:** Verwaltung → Datenerfassung und -änderung →
@@ -53,8 +52,8 @@ Stand 08.10.2026. ☐ = offen · ☑ = erledigt
 
 ## C. Direkt nach dem Livegang (Iwo)
 
-- ☐ Google Search Console: Domain-Property anlegen/prüfen,
-  `https://service-gdm.de/sitemap-index.xml` einreichen
+- ☐ Google Search Console (beantragt 09.10.): `https://service-gdm.de/sitemap-index.xml`
+  einreichen, Export der Seiten/Suchanfragen an Claude (Abgleich Umleitungen)
 - ☐ Echte Anfrage aus Produktion testen, Eingang bei GDM prüfen
 - ☐ Umami: kommen Seitenaufrufe und Ereignisse `anfrage` / `anruf-klick` an?
 - ☐ Google-Unternehmensprofil: Website-Link auf `https://service-gdm.de`
@@ -79,7 +78,8 @@ Stand 08.10.2026. ☐ = offen · ☑ = erledigt
   Impressum, Datenschutz, 404
 - ☑ Impressum und Datenschutz befüllt (alte Seite + Stolz), keine
   Platzhalter mehr auf der Seite
-- ☑ Formulare nach Stolz-Verfahren (Web3Forms, öffentlicher Schlüssel)
+- ☑ Formulare über FormSubmit.co wie bei Memoria/HEPA Bau (ohne Schlüssel)
+- ☑ Alle 29 Adressen der alten Seite mit nginx geprüft: 301/302/410, jedes Ziel 200, alte Sitemaps → neue
 - ☑ Echte Google-/MyHammer-Bewertungen mit Plattform-Logo
 - ☑ Alle 29 alten Adressen umgeleitet (301/302/410), www → ohne www
 - ☑ Staging `noindex` per Header, Produktion ohne
