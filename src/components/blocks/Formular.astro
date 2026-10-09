@@ -1,6 +1,6 @@
 ---
 /**
- * Formular-Mechanik: Felder per Prop, Honeypot, Versand über Web3Forms,
+ * Formular-Mechanik: Felder per Prop, Honeypot, Versand über FormSubmit.co,
  * Danke-Zustand (Slot „danke") und Fehlermeldung.
  *
  * Links mit `data-vorauswahl="<Wert>"` irgendwo auf der Seite belegen beim
@@ -47,17 +47,20 @@ const feldKlasse = 'h-56 rounded-14 border border-line-strong bg-sand-input px-1
 <div data-formular>
   <form
     class="raster-220 grid gap-x-16 gap-y-20"
-    action={dienste.web3forms.endpunkt}
+    action={`https://formsubmit.co/${dienste.formsubmit.ziel}`}
     method="post"
     data-formular-form
+    data-ziel={dienste.formsubmit.ziel}
     data-vorauswahl-feld={vorauswahlFeld}
   >
-    <!-- Öffentlicher Web3Forms-Schlüssel als Feld, wie bei Stolz Marketing -->
-    <input type="hidden" name="access_key" value={dienste.web3forms.zugangsschluessel} />
-    <input type="hidden" name="subject" value={betreff} />
-    <input type="hidden" name="from_name" value={`Website ${firma.domain.replace('https://', '')}`} />
+    <!-- FormSubmit.co: Betreff, Tabellen-Mail, ohne Captcha-Zwischenseite -->
+    <input type="hidden" name="_subject" value={betreff} />
+    <input type="hidden" name="_template" value="table" />
+    <input type="hidden" name="_captcha" value="false" />
+    <!-- Rücksprung nach klassischem Versand (Fallback), setzt das Skript -->
+    <input type="hidden" name="_next" value="" data-formular-zurueck />
     <!-- Honeypot: bleibt bei Menschen leer -->
-    <input type="checkbox" name="botcheck" class="hidden" tabindex="-1" autocomplete="off" />
+    <input type="text" name="_honey" class="hidden" tabindex="-1" autocomplete="off" aria-hidden="true" />
 
     {versteckte.map((f) => <input type="hidden" name={f.name} value={f.wert} />)}
     {sichtbare.map((f) => (
@@ -100,12 +103,28 @@ const feldKlasse = 'h-56 rounded-14 border border-line-strong bg-sand-input px-1
 </div>
 
 <script>
-  document.querySelectorAll<HTMLElement>('[data-formular]').forEach((huelle) => {
+  const gesendet = new URLSearchParams(location.search).get('gesendet');
+  document.querySelectorAll<HTMLElement>('[data-formular]').forEach((huelle, nr) => {
     const form = huelle.querySelector<HTMLFormElement>('[data-formular-form]');
     const danke = huelle.querySelector<HTMLElement>('[data-formular-danke]');
     const fehler = huelle.querySelector<HTMLElement>('[data-formular-fehler]');
     const absenden = huelle.querySelector<HTMLButtonElement>('[data-formular-absenden]');
     if (!form || !danke || !fehler || !absenden) return;
+
+    const melden = (leistung: string) => {
+      form.hidden = true;
+      danke.hidden = false;
+      // Erfolgsmeldung für die Messung (BaseLayout → Umami, GA generate_lead)
+      document.dispatchEvent(new CustomEvent('gdm:anfrage', { detail: { leistung, formular: form.querySelector<HTMLInputElement>('[name=_subject]')?.value ?? '' } }));
+    };
+
+    // Rücksprung nach klassischem Versand: ?gesendet=<nr> zeigt das Danke dieses Formulars
+    const zurueck = form.querySelector<HTMLInputElement>('[data-formular-zurueck]');
+    if (zurueck) zurueck.value = `${location.origin}${location.pathname}?gesendet=${nr}`;
+    if (gesendet === String(nr)) {
+      melden('');
+      huelle.scrollIntoView({ block: 'center' });
+    }
 
     // Vorauswahl über CTAs der Seite
     const feldName = form.dataset.vorauswahlFeld;
@@ -122,27 +141,27 @@ const feldKlasse = 'h-56 rounded-14 border border-line-strong bg-sand-input px-1
       e.preventDefault();
       fehler.hidden = true;
       absenden.disabled = true;
-      const formdaten = new FormData(form);
-      const daten = Object.fromEntries(formdaten.entries());
+      const daten = Object.fromEntries(new FormData(form).entries());
       try {
-        // FormData statt JSON (wie bei Stolz): kein Content-Type setzen, der
-        // Browser ergänzt die multipart-Grenze selbst.
-        const antwort = await fetch(form.action, {
+        const antwort = await fetch(`https://formsubmit.co/ajax/${encodeURIComponent(form.dataset.ziel ?? '')}`, {
           method: 'POST',
-          headers: { Accept: 'application/json' },
-          body: formdaten,
+          headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+          body: JSON.stringify(daten),
         });
-        const ergebnis = await antwort.json().catch(() => ({}));
-        if (!antwort.ok || !ergebnis.success) throw new Error(ergebnis.message ?? 'Versand fehlgeschlagen');
-        form.hidden = true;
-        danke.hidden = false;
-        // Erfolgsmeldung für die Messung (BaseLayout → Umami, später Ads-Conversion)
-        document.dispatchEvent(new CustomEvent('gdm:anfrage', {
-          detail: { leistung: String(daten.leistung ?? ''), formular: String(daten.subject ?? '') },
-        }));
+        const ergebnis = await antwort.json().catch(() => null);
+        // FormSubmit liefert success als String „true“ oder als Boolean
+        if (ergebnis?.success === true || ergebnis?.success === 'true') {
+          melden(String(daten.leistung ?? ''));
+          absenden.disabled = false;
+          return;
+        }
+        // Noch nicht aktivierte Adresse u. Ä.: klassisch absenden. FormSubmit
+        // zeigt dann seine Seite (bzw. verschickt die Aktivierungs-Mail) und
+        // leitet über _next hierher zurück.
+        form.submit();
       } catch {
+        // Netzwerkfehler: Fehlermeldung mit Telefonnummer statt stiller Abbruch
         fehler.hidden = false;
-      } finally {
         absenden.disabled = false;
       }
     });

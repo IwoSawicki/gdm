@@ -3,16 +3,15 @@
  * Datenschutzerklärung (src/data/rechtstexte/datenschutz.html).
  */
 export const dienste = {
-  /** Formularversand über Web3Forms — dasselbe Verfahren wie bei Stolz
-   *  Marketing. Der Zugangsschlüssel ist ein öffentlicher Formularschlüssel,
-   *  kein Geheimnis: Er steht als verstecktes Feld im HTML und legt nur fest,
-   *  an welche Adresse Web3Forms die Anfrage schickt.
-   *  AKTUELL: Schlüssel von Stolz Marketing (Eingang iwo@stolz-marketing.de)
-   *  für die Testphase. Vor dem Livegang durch einen eigenen GDM-Schlüssel
-   *  (Empfänger info@service-gdm.de) ersetzen — siehe docs/GOLIVE.md. */
-  web3forms: {
-    endpunkt: 'https://api.web3forms.com/submit',
-    zugangsschluessel: 'e1ef8886-9026-40a1-9a3e-d130c209d607',
+  /** Formularversand über FormSubmit.co — wie bei Memoria und HEPA Bau.
+   *  Kein Schlüssel nötig: Beim ersten Absenden an eine neue Adresse schickt
+   *  FormSubmit eine Aktivierungs-Mail, die einmal bestätigt wird. Danach
+   *  kann statt der Adresse der Hash aus der Aktivierungs-Mail stehen (schützt
+   *  die Adresse vor Spam-Bots).
+   *  AKTUELL: Testphase an iwo@stolz-marketing.de. Vor dem Livegang auf
+   *  info@service-gdm.de umstellen und dort aktivieren (docs/GOLIVE.md). */
+  formsubmit: {
+    ziel: 'iwo@stolz-marketing.de',
   },
   /** Google Analytics 4 — NUR nach Einwilligung im Cookie-Banner und nur auf
    *  der Produktionsdomain. Vorher wird kein Skript geladen, kein Cookie gesetzt. */

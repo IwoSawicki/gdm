@@ -20,7 +20,7 @@ Jeder neue Block kommt hierher **und** auf `/styleguide`.
 | `Karussell` | `id?`, `spurId`, `eyebrow`, `titel`, `abstand: 'referenzen' \| 'stimmen'`, `label`, Slot = Karten | Referenzen, Kundenstimmen |
 | `GoogleBewertung` | `variante: 'bento' \| 'karussell'` | Bento (03), Kundenstimmen (07); Werte aus `firma.ts` |
 | `Akkordeon` | `eintraege`, `id`, `offen?` | FAQ |
-| `Formular` | `felder: Feld[]`, `betreff`, `absendenText`, `vorauswahlFeld?`, `datenschutzHref`, Slot `danke` | Anfrage; Web3Forms, Honeypot, Fehler, Danke |
+| `Formular` | `felder: Feld[]`, `betreff`, `absendenText`, `vorauswahlFeld?`, `datenschutzHref`, Slot `danke` | Anfrage; FormSubmit.co (AJAX, Fallback klassisch), Honeypot, Fehler, Danke |
 | `Laufband` | `eintraege` | Startseite unter dem Hero |
 | `Schritte` | `id?`, `eyebrow`, `titel`, `cta?`, `schritte` | Ablauf (Startseite 04, Leistungsseiten) |
 | `Einsatzgebiet` | `eyebrow`, `text?` | Startseite 06, Leistungsseiten; Orte aus `data/einsatzgebiet.ts` |

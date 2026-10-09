@@ -408,7 +408,7 @@ verursacht.
 ---
 
 ## Formulare
-- Ein gemeinsamer Formular-Block (**Web3Forms**, Schlüssel in
+- Ein gemeinsamer Formular-Block (**FormSubmit.co**, kein Schlüssel, Ziel in
   `src/data/dienste.ts`; zum Testen an iwo@stolz-marketing.de) mit Feldern per
   Prop, Honeypot gegen Spam, Statusmeldung nach dem Absenden.
 - **Pflichtfelder bewusst setzen** — Entwürfe markieren oft keines, dann
